@@ -25,7 +25,11 @@
         <activity
             android:name=".View.Tournament.TournamentActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".View.Match.MatchActivity"
+        <activity
+            android:name=".View.Match.MatchActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".View.Team.TeamActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

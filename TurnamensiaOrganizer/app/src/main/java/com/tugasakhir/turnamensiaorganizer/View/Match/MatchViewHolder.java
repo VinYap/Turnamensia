@@ -30,6 +30,8 @@ public class MatchViewHolder extends RecyclerView.ViewHolder {
     private ImageView mRadiantIV;
     private ImageView mDireIV;
     private ImageView mQrCodeIV;
+    private ClickableSpan mClickableSpan;
+    private Context mContext;
 
     private int id;
 
@@ -45,20 +47,29 @@ public class MatchViewHolder extends RecyclerView.ViewHolder {
         mDireIV = (ImageView) itemView.findViewById(R.id.match_dire_image);
         mQrCodeIV = (ImageView) itemView.findViewById(R.id.match_qr_code);
 
-        ClickableSpan clickableSpan = new ClickableSpan() {
+        mContext = itemView.getContext();
+
+        mRadiantTV.setTag("radiant");
+        mDireTV.setTag("dire");
+        mRadiantTV.setMovementMethod(LinkMovementMethod.getInstance());
+        mDireTV.setMovementMethod(LinkMovementMethod.getInstance());
+        mClickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
-                Context context = itemView.getContext();
-                Intent intent = new Intent(context, AuthActivity.class);
-                intent.putExtra(TOURNAMENT_KEY, id);
-                context.startActivity(intent);
+                Intent intent = new Intent(mContext, AuthActivity.class);
+                intent.putExtra(TOURNAMENT_KEY, (String) widget.getTag());
+                mContext.startActivity(intent);
             }
         };
 
-        SpannableString radiantSpanString = new SpannableString(mRadiantTV.getText());
-        radiantSpanString.setSpan(clickableSpan, 0, radiantSpanString.length(), 0);
-        mRadiantTV.setText(radiantSpanString);
-        mRadiantTV.setMovementMethod(LinkMovementMethod.getInstance());
+        mQrCodeIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, AuthActivity.class);
+                intent.putExtra(TOURNAMENT_KEY, "tes");
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     public void bindHolder(Match match, int position) {
@@ -71,5 +82,13 @@ public class MatchViewHolder extends RecyclerView.ViewHolder {
         mRadiantIV.setImageResource(match.getRadiantPhotoId());
         mDireIV.setImageResource(match.getDirePhotoId());
         mQrCodeIV.setImageResource(match.getQrCodeId());
+
+        SpannableString radiantSpanString = new SpannableString(mRadiantTV.getText());
+        radiantSpanString.setSpan(mClickableSpan, 0, radiantSpanString.length(), 0);
+        mRadiantTV.setText(radiantSpanString);
+
+        SpannableString direSpanString = new SpannableString(mDireTV.getText());
+        direSpanString.setSpan(mClickableSpan, 0, direSpanString.length(), 0);
+        mDireTV.setText(direSpanString);
     }
 }

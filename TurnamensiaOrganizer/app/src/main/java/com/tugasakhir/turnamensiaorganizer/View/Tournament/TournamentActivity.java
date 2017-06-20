@@ -11,8 +11,6 @@ import com.tugasakhir.turnamensiaorganizer.View.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tugasakhir.turnamensiaorganizer.R.id.tournament;
-
 public class TournamentActivity extends BaseActivity {
     private RecyclerView mTournamentRV;
 
@@ -23,7 +21,7 @@ public class TournamentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_tournament, mBaseLayout);
 
-        mTournamentRV = (RecyclerView) findViewById(tournament);
+        mTournamentRV = (RecyclerView) findViewById(R.id.tournament);
         mTournamentRV.setLayoutManager(new LinearLayoutManager(this));
         mTournamentRV.setHasFixedSize(true);
 
