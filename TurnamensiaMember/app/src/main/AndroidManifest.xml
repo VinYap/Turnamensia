@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tugasakhir.turnamensiaorganizer">
+    package="com.tugasakhir.turnamensiamember">
 
     <application
         android:allowBackup="true"
@@ -19,21 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".View.Authentication.AuthActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".View.Tournament.TournamentActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".View.Match.MatchActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".View.Team.TeamActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".View.Team.QrCodeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

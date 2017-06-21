@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.tugasakhir.turnamensiaorganizer.Model.Basic.Tournament;
 import com.tugasakhir.turnamensiaorganizer.R;
 import com.tugasakhir.turnamensiaorganizer.View.Match.MatchActivity;
+import com.tugasakhir.turnamensiaorganizer.View.Team.TeamActivity;
 
 /**
  * Created by Asus on 18/06/2017.

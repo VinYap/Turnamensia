@@ -13,7 +13,8 @@ import android.widget.TextView;
 
 import com.tugasakhir.turnamensiaorganizer.Model.Basic.Match;
 import com.tugasakhir.turnamensiaorganizer.R;
-import com.tugasakhir.turnamensiaorganizer.View.Authentication.AuthActivity;
+import com.tugasakhir.turnamensiaorganizer.View.Team.QrCodeActivity;
+import com.tugasakhir.turnamensiaorganizer.View.Team.TeamActivity;
 
 import static com.tugasakhir.turnamensiaorganizer.View.Tournament.TournamentViewHolder.TOURNAMENT_KEY;
 
@@ -56,7 +57,7 @@ public class MatchViewHolder extends RecyclerView.ViewHolder {
         mClickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
-                Intent intent = new Intent(mContext, AuthActivity.class);
+                Intent intent = new Intent(mContext, TeamActivity.class);
                 intent.putExtra(TOURNAMENT_KEY, (String) widget.getTag());
                 mContext.startActivity(intent);
             }
@@ -65,7 +66,7 @@ public class MatchViewHolder extends RecyclerView.ViewHolder {
         mQrCodeIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, AuthActivity.class);
+                Intent intent = new Intent(mContext, QrCodeActivity.class);
                 intent.putExtra(TOURNAMENT_KEY, "tes");
                 mContext.startActivity(intent);
             }
