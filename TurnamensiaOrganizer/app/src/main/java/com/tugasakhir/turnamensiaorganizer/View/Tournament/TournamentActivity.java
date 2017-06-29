@@ -14,7 +14,7 @@ import java.util.List;
 public class TournamentActivity extends BaseActivity {
     private RecyclerView mTournamentRV;
 
-    private List<Tournament> tournaments;
+    private List<Tournament> mTournaments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +27,12 @@ public class TournamentActivity extends BaseActivity {
 
         initializeData();
 
-        TournamentAdapter adapter = new TournamentAdapter(tournaments);
+        TournamentAdapter adapter = new TournamentAdapter(mTournaments);
         mTournamentRV.setAdapter(adapter);
     }
 
     private void initializeData() {
-        tournaments = new ArrayList<>();
+        mTournaments = new ArrayList<>();
 
         for (int i = 0; i < 3; i++) {
             Tournament tournament = new Tournament();
@@ -41,7 +41,7 @@ public class TournamentActivity extends BaseActivity {
             tournament.setRegistration("Registrasi sebelum 12 Mei 2017");
             tournament.setStatus("On Going");
             tournament.setPhotoId(R.drawable.ib);
-            tournaments.add(tournament);
+            mTournaments.add(tournament);
         }
     }
 }

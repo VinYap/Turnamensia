@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tugasakhir.turnamensiaorganizer.View.Authentication.AuthActivity"
+    tools:context="com.tugasakhir.turnamensiamember.View.Authentication.AuthActivity"
     android:id="@+id/layout_auth">
 
 </android.support.constraint.ConstraintLayout>
