@@ -16,16 +16,20 @@ public class AccountPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        if (position == 0) return AccountProfileFragment.newInstance();
+        else if (position == 1) return AccountTeamFragment.newInstance();
         return null;
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return 2;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
+        if (position == 0) return "Profile";
+        else if (position == 1) return "Teams";
         return null;
     }
 }

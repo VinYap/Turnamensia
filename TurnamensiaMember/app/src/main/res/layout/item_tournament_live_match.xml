@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintHeight_default="wrap">
+
+        <TextView
+            android:id="@+id/match_round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Match 1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp" />
+
+        <TextView
+            android:id="@+id/match_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="12 September 2017 23:00"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <ImageView
+            android:id="@+id/match_radiant_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:srcCompat="@drawable/ib"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintLeft_toRightOf="@+id/match_radiant"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/match_round"
+            app:layout_constraintRight_toLeftOf="@+id/textView5" />
+
+        <TextView
+            android:id="@+id/match_radiant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Radiant"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/match_radiant_image"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/match_round"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintVertical_bias="0.512"
+            app:layout_constraintRight_toLeftOf="@+id/match_radiant_image" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="@+id/match_radiant_image"
+            app:layout_constraintLeft_toRightOf="@+id/match_radiant_image"
+            app:layout_constraintRight_toLeftOf="@+id/match_dire_image" />
+
+        <ImageView
+            android:id="@+id/match_dire_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ib"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/match_round"
+            app:layout_constraintLeft_toRightOf="@+id/textView5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintRight_toLeftOf="@+id/match_dire"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/match_dire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dire"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/match_round"
+            app:layout_constraintBottom_toBottomOf="@+id/match_dire_image"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintLeft_toRightOf="@+id/match_dire_image"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView5"
+            app:layout_constraintRight_toLeftOf="@+id/match_dire_image"
+            android:layout_marginRight="8dp"
+            app:layout_constraintLeft_toRightOf="@+id/match_radiant_image"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintHorizontal_bias="0.666" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/match_radiant_image"
+            app:layout_constraintRight_toLeftOf="@+id/match_dire_image"
+            android:layout_marginRight="8dp"
+            app:layout_constraintLeft_toRightOf="@+id/textView5"
+            android:layout_marginLeft="8dp" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="@+id/match_radiant_image"
+            app:layout_constraintLeft_toRightOf="@+id/match_radiant_image"
+            app:layout_constraintRight_toLeftOf="@+id/textView5" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

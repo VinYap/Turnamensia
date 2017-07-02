@@ -28,6 +28,18 @@
         <activity
             android:name=".View.Team.TeamActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".View.Tournament.TournamentActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".View.Schedule.ScheduleActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".View.Registration.RegistrationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".View.LiveMatch.LiveMatchActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -19,6 +19,9 @@ public class AccountTeamFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static AccountTeamFragment newInstance() {
+        return new AccountTeamFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

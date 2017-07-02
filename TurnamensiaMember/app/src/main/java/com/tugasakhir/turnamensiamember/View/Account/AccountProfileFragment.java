@@ -19,6 +19,9 @@ public class AccountProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static AccountProfileFragment newInstance() {
+        return new AccountProfileFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

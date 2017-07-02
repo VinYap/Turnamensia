@@ -1,4 +1,4 @@
-package com.tugasakhir.turnamensiamember.View.Team;
+package com.tugasakhir.turnamensiamember.View.Registration;
 
 
 import android.os.Bundle;
@@ -12,22 +12,19 @@ import com.tugasakhir.turnamensiamember.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TeamProfileFragment extends Fragment {
+public class SelectPlayerFragment extends Fragment {
 
 
-    public TeamProfileFragment() {
+    public SelectPlayerFragment() {
         // Required empty public constructor
     }
 
-    public static TeamProfileFragment newInstance() {
-        return new TeamProfileFragment();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_team_profile, container, false);
+        return inflater.inflate(R.layout.fragment_select_player, container, false);
     }
 
 }

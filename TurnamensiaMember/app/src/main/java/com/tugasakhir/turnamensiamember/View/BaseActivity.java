@@ -1,5 +1,6 @@
 package com.tugasakhir.turnamensiamember.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.tugasakhir.turnamensiamember.R;
+import com.tugasakhir.turnamensiamember.View.Account.AccountActivity;
+import com.tugasakhir.turnamensiamember.View.Authentication.AuthActivity;
+import com.tugasakhir.turnamensiamember.View.Registration.RegistrationActivity;
+import com.tugasakhir.turnamensiamember.View.Tournament.TournamentActivity;
 
 import static com.tugasakhir.turnamensiamember.R.id.toolbar;
 
@@ -115,9 +120,22 @@ public abstract class BaseActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.my_tournaments) {
-            // Handle the camera action
-        } else if (id == R.id.sign_out) {
+        if (id == R.id.login_register) {
+            startActivity(new Intent(this, AuthActivity.class));
+        }
+        else if (id == R.id.my_account) {
+            startActivity(new Intent(this, AccountActivity.class));
+        }
+        else if (id == R.id.my_tournament) {
+            startActivity(new Intent(this, TournamentActivity.class));
+        }
+        else if (id == R.id.registration) {
+            startActivity(new Intent(this, RegistrationActivity.class));
+        }
+        else if (id == R.id.notification) {
+
+        }
+        else if (id == R.id.sign_out) {
 
         }
 

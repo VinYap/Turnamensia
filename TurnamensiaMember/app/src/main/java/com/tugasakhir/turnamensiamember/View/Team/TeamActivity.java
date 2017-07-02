@@ -14,11 +14,16 @@ public class TeamActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_account, mBaseLayout);
+        getLayoutInflater().inflate(R.layout.activity_team, mBaseLayout);
 
         showUpCaretMenu();
 
         mTabLayout = (TabLayout) findViewById(R.id.team_tab_layout);
         mViewPager = (ViewPager) findViewById(R.id.team_pager);
+
+        TeamPagerAdapter adapter = new TeamPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(adapter);
+
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 }

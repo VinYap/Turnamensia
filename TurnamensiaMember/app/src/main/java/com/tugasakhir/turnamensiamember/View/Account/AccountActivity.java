@@ -21,6 +21,9 @@ public class AccountActivity extends BaseActivity {
         mTabLayout = (TabLayout) findViewById(R.id.account_tab_layout);
         mViewPager = (ViewPager) findViewById(R.id.account_pager);
 
+        AccountPagerAdapter adapter = new AccountPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(adapter);
 
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 }

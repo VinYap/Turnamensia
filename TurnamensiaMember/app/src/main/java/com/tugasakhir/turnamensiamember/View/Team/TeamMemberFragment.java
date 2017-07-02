@@ -19,6 +19,9 @@ public class TeamMemberFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static TeamMemberFragment newInstance() {
+        return new TeamMemberFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
