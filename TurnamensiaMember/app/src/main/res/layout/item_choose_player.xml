@@ -5,21 +5,22 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/player_image"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/ic_menu_gallery" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/player_name"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:gravity="center_vertical"
+        android:text="Player Name" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/player_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1" />

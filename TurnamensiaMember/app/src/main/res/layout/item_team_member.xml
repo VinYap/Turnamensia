@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
@@ -11,7 +12,7 @@
         app:layout_constraintHeight_default="wrap">
 
         <ImageView
-            android:id="@+id/main_tournament_image"
+            android:id="@+id/member_image"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_marginBottom="16dp"
@@ -24,35 +25,57 @@
             app:srcCompat="@drawable/ib" />
 
         <TextView
-            android:id="@+id/main_tournament_name"
+            android:id="@+id/member_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="20dp"
             android:text="TextView"
             android:textSize="18sp"
-            app:layout_constraintLeft_toRightOf="@+id/main_tournament_image"
+            app:layout_constraintLeft_toRightOf="@+id/member_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/main_tournament_date"
+            android:id="@+id/member_steam_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:text="TextView"
-            app:layout_constraintLeft_toRightOf="@+id/main_tournament_image"
-            app:layout_constraintTop_toBottomOf="@+id/main_tournament_name" />
+            app:layout_constraintLeft_toRightOf="@+id/member_image"
+            app:layout_constraintTop_toBottomOf="@+id/member_name" />
 
         <TextView
-            android:id="@+id/main_tournament_registration"
+            android:id="@+id/member_joined_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:text="TextView"
-            app:layout_constraintLeft_toRightOf="@+id/main_tournament_image"
-            app:layout_constraintTop_toBottomOf="@+id/main_tournament_date" />
+            app:layout_constraintLeft_toRightOf="@+id/member_image"
+            app:layout_constraintTop_toBottomOf="@+id/member_steam_id" />
+
+        <ImageView
+            android:id="@+id/member_delete"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitXY"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_menu_share" />
+
+        <ImageView
+            android:id="@+id/change_captain"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitXY"
+            app:layout_constraintRight_toLeftOf="@+id/member_delete"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_menu_send" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

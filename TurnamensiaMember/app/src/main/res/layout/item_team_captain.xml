@@ -11,7 +11,7 @@
         app:layout_constraintHeight_default="wrap">
 
         <ImageView
-            android:id="@+id/main_tournament_image"
+            android:id="@+id/captain_image"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_marginBottom="16dp"
@@ -24,44 +24,44 @@
             app:srcCompat="@drawable/ib" />
 
         <TextView
-            android:id="@+id/main_tournament_name"
+            android:id="@+id/captain_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="20dp"
-            android:text="TextView"
+            android:text="Captain Name"
             android:textSize="18sp"
-            app:layout_constraintLeft_toRightOf="@+id/main_tournament_image"
+            app:layout_constraintLeft_toRightOf="@+id/captain_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/main_tournament_date"
+            android:id="@+id/captain_steam_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
-            android:text="TextView"
-            app:layout_constraintLeft_toRightOf="@+id/main_tournament_image"
-            app:layout_constraintTop_toBottomOf="@+id/main_tournament_name" />
+            android:text="Steam id"
+            app:layout_constraintLeft_toRightOf="@+id/captain_image"
+            app:layout_constraintTop_toBottomOf="@+id/captain_name" />
 
         <TextView
-            android:id="@+id/main_tournament_registration"
+            android:id="@+id/captain_joined_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
-            android:text="TextView"
-            app:layout_constraintLeft_toRightOf="@+id/main_tournament_image"
-            app:layout_constraintTop_toBottomOf="@+id/main_tournament_date" />
+            android:text="Joined on 24 July 2017"
+            app:layout_constraintLeft_toRightOf="@+id/captain_image"
+            app:layout_constraintTop_toBottomOf="@+id/captain_steam_id" />
 
         <TextView
-            android:id="@+id/main_tournament_status"
+            android:id="@+id/captain_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="16dp"
-            android:text="TextView"
+            android:text="captain"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

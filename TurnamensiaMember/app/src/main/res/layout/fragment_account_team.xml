@@ -15,10 +15,10 @@
     </android.support.v7.widget.RecyclerView>
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/create_team"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:text="Button" />
+        android:text="Create Team" />
 
 </LinearLayout>

@@ -12,11 +12,12 @@
         android:layout_weight="0">
 
         <TextView
-            android:id="@+id/textView19"
-            android:layout_width="wrap_content"
+            android:id="@+id/first_action"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="Select Your Team"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView18"
@@ -26,14 +27,16 @@
             android:text="&gt;" />
 
         <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
+            android:id="@+id/second_action"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="Select Your Player"
+            android:textAlignment="center" />
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/content_registration"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
@@ -41,9 +44,9 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/next_action"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:text="Button" />
+        android:text="Next" />
 </LinearLayout>
