@@ -1,4 +1,4 @@
-package com.tugasakhir.turnamensiamember.View.Registration;
+package com.tugasakhir.turnamensiamember.View.LiveMatch;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.tugasakhir.turnamensiamember.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RegisterBaseFragment extends Fragment {
+public class PickBanFragment extends Fragment {
 
 
-    public RegisterBaseFragment() {
+    public PickBanFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class RegisterBaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register_base, container, false);
+        return inflater.inflate(R.layout.fragment_pick_ban, container, false);
     }
 
 }
