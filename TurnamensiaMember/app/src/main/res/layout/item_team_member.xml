@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="20dp"
-            android:text="TextView"
+            android:text="Member Name"
             android:textSize="18sp"
             app:layout_constraintLeft_toRightOf="@+id/member_image"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
-            android:text="TextView"
+            android:text="steam id"
             app:layout_constraintLeft_toRightOf="@+id/member_image"
             app:layout_constraintTop_toBottomOf="@+id/member_name" />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
-            android:text="TextView"
+            android:text="joined on 28 July 2017"
             app:layout_constraintLeft_toRightOf="@+id/member_image"
             app:layout_constraintTop_toBottomOf="@+id/member_steam_id" />
 

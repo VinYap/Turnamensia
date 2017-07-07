@@ -21,7 +21,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_main, mBaseLayout);
 
-        mTournamentRV = (RecyclerView)findViewById(R.id.main_tournament);
+        mTournamentRV = (RecyclerView) findViewById(R.id.main_tournament);
         mTournamentRV.setLayoutManager(new LinearLayoutManager(this));
         mTournamentRV.setHasFixedSize(true);
 

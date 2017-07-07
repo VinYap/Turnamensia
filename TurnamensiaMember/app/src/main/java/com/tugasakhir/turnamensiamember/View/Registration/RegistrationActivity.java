@@ -12,6 +12,6 @@ public class RegistrationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_registration, mBaseLayout);
 
-        showUpCaretMenu();
+//        showUpCaretMenu();
     }
 }

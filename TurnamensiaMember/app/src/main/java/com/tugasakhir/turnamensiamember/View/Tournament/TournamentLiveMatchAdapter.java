@@ -5,16 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tugasakhir.turnamensiamember.Model.Basic.Tournament;
 import com.tugasakhir.turnamensiamember.R;
+
+import java.util.List;
 
 /**
  * Created by Asus on 02/07/2017.
  */
 
 public class TournamentLiveMatchAdapter extends RecyclerView.Adapter<TournamentLiveMatchViewHolder> {
+    private List<Tournament> mTournaments;
 
-    public TournamentLiveMatchAdapter() {
-
+    public TournamentLiveMatchAdapter(List<Tournament> tournaments) {
+        this.mTournaments = tournaments;
     }
 
     @Override
@@ -30,6 +34,6 @@ public class TournamentLiveMatchAdapter extends RecyclerView.Adapter<TournamentL
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mTournaments.size();
     }
 }

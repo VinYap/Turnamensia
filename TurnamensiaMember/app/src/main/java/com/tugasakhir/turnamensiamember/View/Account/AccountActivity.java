@@ -16,7 +16,7 @@ public class AccountActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_account, mBaseLayout);
 
-        showUpCaretMenu();
+//        showUpCaretMenu();
 
         mTabLayout = (TabLayout) findViewById(R.id.account_tab_layout);
         mViewPager = (ViewPager) findViewById(R.id.account_pager);

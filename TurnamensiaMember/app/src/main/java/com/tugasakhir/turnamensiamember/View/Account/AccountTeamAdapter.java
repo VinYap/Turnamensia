@@ -5,16 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tugasakhir.turnamensiamember.Model.Basic.Team;
 import com.tugasakhir.turnamensiamember.R;
+
+import java.util.List;
 
 /**
  * Created by Asus on 02/07/2017.
  */
 
 public class AccountTeamAdapter extends RecyclerView.Adapter<AccountTeamViewHolder> {
+    private List<Team> mTeams;
 
-    public AccountTeamAdapter() {
-
+    public AccountTeamAdapter(List<Team> teams) {
+        this.mTeams = teams;
     }
 
     @Override
@@ -25,11 +29,12 @@ public class AccountTeamAdapter extends RecyclerView.Adapter<AccountTeamViewHold
 
     @Override
     public void onBindViewHolder(AccountTeamViewHolder holder, int position) {
-
+        Team team = mTeams.get(position);
+        holder.bindHolder(team, position);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mTeams.size();
     }
 }
