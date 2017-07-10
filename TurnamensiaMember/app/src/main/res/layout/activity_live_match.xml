@@ -27,8 +27,8 @@
         android:layout_weight="1"/>
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Comment" />
 </LinearLayout>
