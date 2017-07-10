@@ -26,16 +26,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="Radiant" />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/radiant_player_stat_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         </android.support.v7.widget.RecyclerView>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/radiant_player_stat_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -57,16 +59,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="Dire" />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/dire_player_stat_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         </android.support.v7.widget.RecyclerView>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/dire_player_stat_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
