@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.tugasakhir.turnamensiamember.Model.Basic.User;
+import com.tugasakhir.turnamensiamember.Model.SessionManager;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.Account.AccountActivity;
 import com.tugasakhir.turnamensiamember.View.Authentication.AuthActivity;
@@ -29,6 +31,9 @@ public abstract class BaseActivity extends AppCompatActivity
     protected ActionBarDrawerToggle mDrawerToggle;
     protected FrameLayout mBaseLayout;
     protected NavigationView mNavigationView;
+    private Menu mNavigationMenu;
+
+    private SessionManager mSessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,9 @@ public abstract class BaseActivity extends AppCompatActivity
         mNavigationView.setNavigationItemSelectedListener(this);
 
         mBaseLayout = (FrameLayout) findViewById(R.id.layout_base);
+        mNavigationMenu = mNavigationView.getMenu();
+
+        mSessionManager = new SessionManager(getApplicationContext());
 
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
@@ -114,6 +122,13 @@ public abstract class BaseActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        doUserLogin(mSessionManager.isUserLoggedIn());
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -126,7 +141,7 @@ public abstract class BaseActivity extends AppCompatActivity
         else if (id == R.id.my_account) {
             startActivity(new Intent(this, AccountActivity.class));
         }
-        else if (id == R.id.my_tournament) {
+        else if (id == R.id.my_tournament_participant) {
             startActivity(new Intent(this, TournamentActivity.class));
         }
         else if (id == R.id.registration) {
@@ -136,10 +151,26 @@ public abstract class BaseActivity extends AppCompatActivity
 
         }
         else if (id == R.id.sign_out) {
-
+            mSessionManager.doClearSession();
+            doUserLogin(mSessionManager.isUserLoggedIn());
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void doUserLogin(Boolean isLogin) {
+        User user = null;
+        if (isLogin) {
+            user = mSessionManager.getUserLoggedIn();
+        }
+        else {
+
+        }
+
+        mNavigationMenu.setGroupVisible(R.id.group_auth, !isLogin);
+        mNavigationMenu.setGroupVisible(R.id.group_participant, user != null && user.getMember_type() == 1);
+        mNavigationMenu.setGroupVisible(R.id.group_organizer, user != null && user.getMember_type() == 2);
+        mNavigationMenu.setGroupVisible(R.id.group_sign_out, isLogin);
     }
 }

@@ -19,6 +19,9 @@ public class RegistrationConfirmFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static RegistrationConfirmFragment newInstance() {
+        return new RegistrationConfirmFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
