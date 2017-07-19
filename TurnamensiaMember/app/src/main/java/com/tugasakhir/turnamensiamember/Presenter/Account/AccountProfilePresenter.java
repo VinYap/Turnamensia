@@ -2,6 +2,7 @@ package com.tugasakhir.turnamensiamember.Presenter.Account;
 
 import com.tugasakhir.turnamensiamember.Model.API.ConnectionAPI;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
+import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 
@@ -54,6 +55,34 @@ public class AccountProfilePresenter {
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
+                iAccountProfileResponse.doConnectionError(R.string.connection_error);
+            }
+        });
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     */
+    public void doGetParticipantAccountProfile(String token) {
+        ConnectionAPI.getInstance().getAPIModel().doGetParticipantAccountProfile(token).enqueue(new Callback<AccountProfileResponse>() {
+            @Override
+            public void onResponse(Call<AccountProfileResponse> call, retrofit2.Response<AccountProfileResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iAccountProfileResponse.doSuccess(response.body());
+                    } else {
+                        iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    iAccountProfileResponse.doFail(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AccountProfileResponse> call, Throwable t) {
                 iAccountProfileResponse.doConnectionError(R.string.connection_error);
             }
         });

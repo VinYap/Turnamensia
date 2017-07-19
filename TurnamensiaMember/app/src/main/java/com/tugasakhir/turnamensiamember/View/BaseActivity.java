@@ -19,6 +19,7 @@ import com.tugasakhir.turnamensiamember.Model.SessionManager;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.Account.AccountActivity;
 import com.tugasakhir.turnamensiamember.View.Authentication.AuthActivity;
+import com.tugasakhir.turnamensiamember.View.Main.MainActivity;
 import com.tugasakhir.turnamensiamember.View.Registration.RegistrationActivity;
 import com.tugasakhir.turnamensiamember.View.Tournament.TournamentActivity;
 
@@ -123,7 +124,7 @@ public abstract class BaseActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         doUserLogin(mSessionManager.isUserLoggedIn());
@@ -152,14 +153,14 @@ public abstract class BaseActivity extends AppCompatActivity
         }
         else if (id == R.id.sign_out) {
             mSessionManager.doClearSession();
-            doUserLogin(mSessionManager.isUserLoggedIn());
+            startActivity(new Intent(this, MainActivity.class));
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    public void doUserLogin(Boolean isLogin) {
+    protected void doUserLogin(Boolean isLogin) {
         User user = null;
         if (isLogin) {
             user = mSessionManager.getUserLoggedIn();
@@ -172,5 +173,9 @@ public abstract class BaseActivity extends AppCompatActivity
         mNavigationMenu.setGroupVisible(R.id.group_participant, user != null && user.getMember_type() == 1);
         mNavigationMenu.setGroupVisible(R.id.group_organizer, user != null && user.getMember_type() == 2);
         mNavigationMenu.setGroupVisible(R.id.group_sign_out, isLogin);
+    }
+
+    protected void setTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 }

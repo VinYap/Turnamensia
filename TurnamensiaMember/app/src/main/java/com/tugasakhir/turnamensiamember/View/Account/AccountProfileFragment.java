@@ -14,6 +14,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
+import com.tugasakhir.turnamensiamember.Model.Basic.User;
+import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
+import com.tugasakhir.turnamensiamember.Model.SessionManager;
+import com.tugasakhir.turnamensiamember.Presenter.Account.AccountProfilePresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 
@@ -32,6 +36,11 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
     private Button mIdentityB;
 
     private ProgressDialog mProgressDialog;
+
+    private AccountProfilePresenter mAccountProfilePresenter;
+    private SessionManager mSessionManager;
+
+    private Integer mStatus;
 
     public AccountProfileFragment() {
         // Required empty public constructor
@@ -61,6 +70,9 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
 
+        mAccountProfilePresenter = new AccountProfilePresenter(this);
+        mSessionManager = new SessionManager(getContext());
+
         mUpdateB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +85,7 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
                 }
                 else {
                     mProgressDialog.show();
-
+                    mStatus = 1;
                 }
             }
         });
@@ -92,23 +104,45 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
             }
         });
 
+        this.getUser();
+
         return view;
     }
 
     @Override
     public void doSuccess(Response response) {
-
+        if (mStatus == 0) {
+            mSessionManager.doChangeUserData(((AccountProfileResponse) response).getUser());
+            mProgressDialog.dismiss();
+            setUser();
+        }
     }
 
     @Override
     public void doFail(String message) {
         mProgressDialog.dismiss();
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        if (mStatus == 0) setUser();
+        else Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void doConnectionError(int message) {
         mProgressDialog.dismiss();
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        if (mStatus == 0) setUser();
+        else Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void getUser() {
+        mStatus = 0;
+        String token = mSessionManager.getTokenLoggedIn();
+        mAccountProfilePresenter.doGetParticipantAccountProfile(token);
+    }
+
+    private void setUser() {
+        User user = mSessionManager.getUserLoggedIn();
+
+        mNameET.setText(user.getName());
+        mEmailET.setText(user.getEmail());
+        mSteamIdET.setText(user.getSteam32_id());
     }
 }

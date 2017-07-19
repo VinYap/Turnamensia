@@ -9,6 +9,7 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
@@ -27,7 +28,7 @@ public interface APIModel {
     Call<Response> doParticipantRegister(@Body Map<String, String> data);
 
     @GET("/api/participant/profile")
-    Call<AccountProfileResponse> doGetParticipantAccountProfile(@Body Map<String, String> data);
+    Call<AccountProfileResponse> doGetParticipantAccountProfile(@Header("Authorization") String Authorization);
 
     @PUT("/api/participant/profile")
     Call<Response> doUpdateParticipantAccountProfile(@Body Map<String, String> data);
