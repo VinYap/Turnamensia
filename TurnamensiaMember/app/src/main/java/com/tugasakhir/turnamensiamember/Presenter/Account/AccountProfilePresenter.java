@@ -35,13 +35,14 @@ public class AccountProfilePresenter {
      * @param email
      * @param steamId
      */
-    public void doUpdateParticipantAccountProfile(String name, String email, String steamId) {
+    public void doUpdateParticipantAccountProfile(String token, String name, String email, String steamId) {
+        String authorization = "Bearer " + token;
         Map<String, String> data = new HashMap<>();
         data.put("name", name);
         data.put("email", email);
         data.put("steam32_id", steamId);
 
-        ConnectionAPI.getInstance().getAPIModel().doUpdateParticipantAccountProfile(data).enqueue(new Callback<Response>() {
+        ConnectionAPI.getInstance().getAPIModel().doUpdateParticipantAccountProfile(authorization, data).enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.isSuccessful()) {
@@ -66,7 +67,9 @@ public class AccountProfilePresenter {
      * @param token
      */
     public void doGetParticipantAccountProfile(String token) {
-        ConnectionAPI.getInstance().getAPIModel().doGetParticipantAccountProfile(token).enqueue(new Callback<AccountProfileResponse>() {
+        String authorization = "Bearer " + token;
+
+        ConnectionAPI.getInstance().getAPIModel().doGetParticipantAccountProfile(authorization).enqueue(new Callback<AccountProfileResponse>() {
             @Override
             public void onResponse(Call<AccountProfileResponse> call, retrofit2.Response<AccountProfileResponse> response) {
                 if (response.isSuccessful()) {

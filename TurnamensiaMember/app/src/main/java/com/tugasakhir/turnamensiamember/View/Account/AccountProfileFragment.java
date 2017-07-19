@@ -25,9 +25,9 @@ import com.tugasakhir.turnamensiamember.R;
  * A simple {@link Fragment} subclass.
  */
 public class AccountProfileFragment extends Fragment implements iPresenterResponse {
-    private ImageView mProfileIV;
-    private ImageView mChangeProfileIV;
-    private ImageView mDeleteProfileIV;
+    private ImageView mImageIV;
+    private ImageView mChangeImageIV;
+    private ImageView mDeleteImageIV;
     private EditText mNameET;
     private EditText mEmailET;
     private EditText mSteamIdET;
@@ -56,9 +56,9 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account_profile, container, false);
 
-        mProfileIV = (ImageView) view.findViewById(R.id.account_profile_image);
-        mChangeProfileIV = (ImageView) view.findViewById(R.id.account_profile_change_image);
-        mDeleteProfileIV = (ImageView) view.findViewById(R.id.account_profile_delete_image);
+        mImageIV = (ImageView) view.findViewById(R.id.account_profile_image);
+        mChangeImageIV = (ImageView) view.findViewById(R.id.account_profile_change_image);
+        mDeleteImageIV = (ImageView) view.findViewById(R.id.account_profile_delete_image);
         mNameET = (EditText) view.findViewById(R.id.account_profile_name);
         mEmailET = (EditText) view.findViewById(R.id.account_profile_email);
         mSteamIdET = (EditText) view.findViewById(R.id.account_profile_steam_id);
@@ -79,6 +79,7 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
                 String name = mNameET.getText().toString();
                 String email = mEmailET.getText().toString();
                 String steamId = mSteamIdET.getText().toString();
+                String token = mSessionManager.getTokenLoggedIn();
 
                 if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email)) {
                     Toast.makeText(getContext(), "Please fill name and email", Toast.LENGTH_SHORT).show();
@@ -86,6 +87,7 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
                 else {
                     mProgressDialog.show();
                     mStatus = 1;
+                    mAccountProfilePresenter.doUpdateParticipantAccountProfile(token, name, email, steamId);
                 }
             }
         });
@@ -115,6 +117,15 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
             mSessionManager.doChangeUserData(((AccountProfileResponse) response).getUser());
             mProgressDialog.dismiss();
             setUser();
+        }
+        else {
+            User user = new User();
+            user.setName(mNameET.getText().toString());
+            user.setEmail(mEmailET.getText().toString());
+            user.setSteam32_id(mSteamIdET.getText().toString());
+            mSessionManager.doChangeUserData(user);
+            mProgressDialog.dismiss();
+            Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
         }
     }
 

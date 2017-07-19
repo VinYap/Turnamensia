@@ -31,7 +31,7 @@ public interface APIModel {
     Call<AccountProfileResponse> doGetParticipantAccountProfile(@Header("Authorization") String Authorization);
 
     @PUT("/api/participant/profile")
-    Call<Response> doUpdateParticipantAccountProfile(@Body Map<String, String> data);
+    Call<Response> doUpdateParticipantAccountProfile(@Header("Authorization") String Authorization, @Body Map<String, String> data);
 
     @POST("/api/organizer/login")
     Call<LoginResponse> doOrganizerLogin(@Body Map<String, String> data);
