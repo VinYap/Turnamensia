@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.tugasakhir.turnamensiamember.Model.Basic.Tournament;
 import com.tugasakhir.turnamensiamember.R;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Created by Asus on 26/06/2017.
  */
@@ -36,10 +38,9 @@ public class MainViewHolder extends RecyclerView.ViewHolder {
         id = position;
 
         mNameTV.setText(tournament.getName());
-        mDateTV.setText(tournament.getDate());
-        mRegistrationTV.setText(tournament.getRegistration());
+        mDateTV.setText(new SimpleDateFormat("dd MMMM").format(tournament.getStart_date()) + " - " + new SimpleDateFormat("dd MMMM").format(tournament.getEnd_date()));
+        mRegistrationTV.setText("Registration before " + new SimpleDateFormat("dd MMMM").format(tournament.getRegistration_closed()));
+        mPriceTV.setText(tournament.getEntry_fee());
         mStatusTV.setText(tournament.getStatus());
-        mPriceTV.setText(tournament.getPrice());
-        mPhotoIV.setImageResource(tournament.getPhotoId());
     }
 }

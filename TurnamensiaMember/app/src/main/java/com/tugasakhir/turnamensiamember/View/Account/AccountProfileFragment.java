@@ -123,6 +123,7 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
             user.setName(mNameET.getText().toString());
             user.setEmail(mEmailET.getText().toString());
             user.setSteam32_id(mSteamIdET.getText().toString());
+            user.setMember_type(mSessionManager.getUserLoggedIn().getMember_type());
             mSessionManager.doChangeUserData(user);
             mProgressDialog.dismiss();
             Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();

@@ -1,0 +1,61 @@
+package com.tugasakhir.turnamensiamember.Presenter.Tournament;
+
+import com.tugasakhir.turnamensiamember.Model.API.ConnectionAPI;
+import com.tugasakhir.turnamensiamember.Model.Response.TournamentResponse;
+import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+
+/**
+ * Created by Asus on 19/07/2017.
+ */
+
+public class TournamentPresenter {
+    iPresenterResponse iTournamentPresenter;
+
+    /**
+     * For Communicating Between View and Presenter
+     *
+     * @param iTournamentPresenter
+     */
+    public TournamentPresenter(iPresenterResponse iTournamentPresenter) {
+        this.iTournamentPresenter = iTournamentPresenter;
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     */
+    public void doGetParticipantTournament() {
+        Map<String, Object> data = new HashMap<>();
+//        data.put("name", null);
+//        data.put("status", null);
+//        data.put("order", null);
+//        data.put("price", null);
+//        data.put("start_date", null);
+//        data.put("city", null);
+
+        ConnectionAPI.getInstance().getAPIModel().doGetParticipantTournament(data).enqueue(new Callback<TournamentResponse>() {
+            @Override
+            public void onResponse(Call<TournamentResponse> call, retrofit2.Response<TournamentResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iTournamentPresenter.doSuccess(response.body());
+                    } else {
+                        iTournamentPresenter.doFail(response.body().getMessage()[0]);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TournamentResponse> call, Throwable t) {
+//                iTournamentPresenter.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+}

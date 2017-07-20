@@ -1,16 +1,36 @@
 package com.tugasakhir.turnamensiamember.Model.Basic;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Asus on 26/06/2017.
  */
 
 public class Tournament {
+    private BigDecimal id;
+    private String image;
     private String name;
-    private String date;
-    private String registration;
+    private Integer start_date;
+    private Integer end_date;
+    private Integer registration_closed;
+    private String entry_fee;
     private String status;
-    private String price;
-    private Integer photoId;
+
+    public BigDecimal getId() {
+        return id;
+    }
+
+    public void setId(BigDecimal id) {
+        this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getName() {
         return name;
@@ -20,20 +40,36 @@ public class Tournament {
         this.name = name;
     }
 
-    public String getDate() {
-        return date;
+    public Integer getStart_date() {
+        return start_date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setStart_date(Integer start_date) {
+        this.start_date = start_date;
     }
 
-    public String getRegistration() {
-        return registration;
+    public Integer getEnd_date() {
+        return end_date;
     }
 
-    public void setRegistration(String registration) {
-        this.registration = registration;
+    public void setEnd_date(Integer end_date) {
+        this.end_date = end_date;
+    }
+
+    public Integer getRegistration_closed() {
+        return registration_closed;
+    }
+
+    public void setRegistration_closed(Integer registration_closed) {
+        this.registration_closed = registration_closed;
+    }
+
+    public String getEntry_fee() {
+        return entry_fee;
+    }
+
+    public void setEntry_fee(String entry_fee) {
+        this.entry_fee = entry_fee;
     }
 
     public String getStatus() {
@@ -42,21 +78,5 @@ public class Tournament {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public Integer getPhotoId() {
-        return photoId;
-    }
-
-    public void setPhotoId(Integer photoId) {
-        this.photoId = photoId;
     }
 }

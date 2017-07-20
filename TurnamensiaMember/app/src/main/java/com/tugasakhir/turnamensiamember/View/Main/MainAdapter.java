@@ -35,6 +35,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mTournaments.size();
+        if (mTournaments != null) return mTournaments.size();
+        return 0;
+    }
+
+    public void setTournaments(List<Tournament> tournaments) {
+        this.mTournaments = tournaments;
     }
 }
