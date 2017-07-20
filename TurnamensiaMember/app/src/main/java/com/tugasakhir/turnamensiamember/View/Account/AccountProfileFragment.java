@@ -2,7 +2,10 @@ package com.tugasakhir.turnamensiamember.View.Account;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Basic.User;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
@@ -20,6 +24,8 @@ import com.tugasakhir.turnamensiamember.Model.SessionManager;
 import com.tugasakhir.turnamensiamember.Presenter.Account.AccountProfilePresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,6 +79,13 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
         mAccountProfilePresenter = new AccountProfilePresenter(this);
         mSessionManager = new SessionManager(getContext());
 
+        mChangeImageIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI), 0);
+            }
+        });
+
         mUpdateB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +108,11 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
         mChangePasswordB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ((AccountActivity)getActivity()).getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.layout_account_profile, ChangePasswordFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -106,9 +123,26 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
             }
         });
 
-        this.getUser();
+//        this.getUser();
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0 && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            Picasso.with(getContext()).load(selectedImage).into(mImageIV);
+//            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+//            Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+//            cursor.moveToFirst();
+//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//            String picturePath = cursor.getString(columnIndex);
+//            cursor.close();
+//            ImageView imageView = (ImageView) findViewById(R.id.imgView);
+//            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+        }
     }
 
     @Override
@@ -156,5 +190,6 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
         mNameET.setText(user.getName());
         mEmailET.setText(user.getEmail());
         mSteamIdET.setText(user.getSteam32_id());
+        Picasso.with(getContext()).load(user.getImage()).into(mImageIV);
     }
 }

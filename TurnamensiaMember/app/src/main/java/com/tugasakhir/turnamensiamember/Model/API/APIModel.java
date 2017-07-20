@@ -1,9 +1,12 @@
 package com.tugasakhir.turnamensiamember.Model.API;
 
+import android.graphics.Bitmap;
+
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.LoginResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.ProfilePictureResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TournamentResponse;
 
@@ -12,6 +15,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -41,6 +45,15 @@ public interface APIModel {
 
     @PUT("/api/participant/profile")
     Call<Response> doUpdateParticipantAccountProfile(@Header("Authorization") String authorization, @Body Map<String, String> data);
+
+    @PUT("/api/participant/password")
+    Call<Response> doUpdateParticipantPassword(@Header("Authorization") String authorization, @Body Map<String, String> data);
+
+    @POST("/api/participant/profile-picture")
+    Call<ProfilePictureResponse> doUpdateParticipantProfilePicture(@Header("Authorization") String authorization, @Body Map<String, Bitmap> data);
+
+    @DELETE("/api/participant/profile-picture")
+    Call<ProfilePictureResponse> doDeleteParticipantProfilePicture(@Header("Authorization") String authorization);
 
     @GET("/api/participant/my-team")
     Call<AccountTeamResponse> doGetParticipantAccountTeam(@Header("Authorization") String authorization);

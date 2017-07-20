@@ -40,8 +40,8 @@ public class MainActivity extends BaseActivity implements iPresenterResponse {
 
         mTournamentPresenter = new TournamentPresenter(this);
 
-        mProgressDialog.show();
-        mTournamentPresenter.doGetParticipantTournament();
+//        mProgressDialog.show();
+//        mTournamentPresenter.doGetParticipantTournament();
 
         mAdapter = new MainAdapter(mTournaments);
         mTournamentRV.setAdapter(mAdapter);
@@ -52,9 +52,6 @@ public class MainActivity extends BaseActivity implements iPresenterResponse {
         mProgressDialog.dismiss();
         Toast.makeText(this, response.getMessage()[0], Toast.LENGTH_SHORT).show();
         mTournaments = ((TournamentResponse) response).getTournaments();
-//        mAdapter = new MainAdapter(mTournaments);
-//        mTournamentRV.setAdapter(mAdapter);
-//        mTournamentRV.invalidate();
         mAdapter.setTournaments(mTournaments);
         mAdapter.notifyDataSetChanged();
     }

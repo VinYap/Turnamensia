@@ -36,13 +36,12 @@ public class AccountProfilePresenter {
      * @param steamId
      */
     public void doUpdateParticipantAccountProfile(String token, String name, String email, String steamId) {
-        String authorization = "Bearer " + token;
         Map<String, String> data = new HashMap<>();
         data.put("name", name);
         data.put("email", email);
         data.put("steam32_id", steamId);
 
-        ConnectionAPI.getInstance().getAPIModel().doUpdateParticipantAccountProfile(authorization, data).enqueue(new Callback<Response>() {
+        ConnectionAPI.getInstance().getAPIModel().doUpdateParticipantAccountProfile(token, data).enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.isSuccessful()) {
@@ -67,9 +66,7 @@ public class AccountProfilePresenter {
      * @param token
      */
     public void doGetParticipantAccountProfile(String token) {
-        String authorization = "Bearer " + token;
-
-        ConnectionAPI.getInstance().getAPIModel().doGetParticipantAccountProfile(authorization).enqueue(new Callback<AccountProfileResponse>() {
+        ConnectionAPI.getInstance().getAPIModel().doGetParticipantAccountProfile(token).enqueue(new Callback<AccountProfileResponse>() {
             @Override
             public void onResponse(Call<AccountProfileResponse> call, retrofit2.Response<AccountProfileResponse> response) {
                 if (response.isSuccessful()) {
@@ -86,6 +83,39 @@ public class AccountProfilePresenter {
 
             @Override
             public void onFailure(Call<AccountProfileResponse> call, Throwable t) {
+                iAccountProfileResponse.doConnectionError(R.string.connection_error);
+            }
+        });
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     * @param oldPassword
+     * @param newPassword
+     * @param newConfirmPassword
+     */
+    public void doUpdateParticipantPassword(String token, String oldPassword, String newPassword, String newConfirmPassword) {
+        Map<String, String> data = new HashMap<>();
+        data.put("old_password", oldPassword);
+        data.put("new_password", newPassword);
+        data.put("new_password_confirmation", newConfirmPassword);
+
+        ConnectionAPI.getInstance().getAPIModel().doUpdateParticipantPassword(token, data).enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iAccountProfileResponse.doSuccess(response.body());
+                    } else {
+                        iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
                 iAccountProfileResponse.doConnectionError(R.string.connection_error);
             }
         });

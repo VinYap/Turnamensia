@@ -173,6 +173,8 @@ public abstract class BaseActivity extends AppCompatActivity
         mNavigationMenu.setGroupVisible(R.id.group_participant, user != null && user.getMember_type() == 1);
         mNavigationMenu.setGroupVisible(R.id.group_organizer, user != null && user.getMember_type() == 2);
         mNavigationMenu.setGroupVisible(R.id.group_sign_out, isLogin);
+
+        mNavigationMenu.setGroupVisible(R.id.group_participant,true);
     }
 
     protected void setTitle(String title) {

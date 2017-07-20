@@ -62,17 +62,17 @@ public class RegisterFragment extends Fragment implements iPresenterResponse {
                 String name = mNameET.getText().toString();
                 String email = mEmailET.getText().toString();
                 String password = mPasswordET.getText().toString();
-                String passwordConfirmation = mConfirmPasswordET.getText().toString();
+                String confirmPassword = mConfirmPasswordET.getText().toString();
 
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(passwordConfirmation)) {
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
                     Toast.makeText(getContext(), "Please fill the blank fields.", Toast.LENGTH_SHORT).show();
                 }
-                else if (!password.equals(passwordConfirmation)) {
-                    Toast.makeText(getContext(), "Password and Password Confirmatrion doesn't match", Toast.LENGTH_SHORT).show();
+                else if (!password.equals(confirmPassword)) {
+                    Toast.makeText(getContext(), "Password and Confirm Password doesn't match", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     mProgressDialog.show();
-                    mRegisterPresenter.doParticipantRegister(name, email, password, passwordConfirmation);
+                    mRegisterPresenter.doParticipantRegister(name, email, password, confirmPassword);
                 }
             }
         });

@@ -6,7 +6,6 @@ import android.support.v4.view.ViewPager;
 
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
-import com.tugasakhir.turnamensiamember.View.Team.TeamPagerAdapter;
 
 public class ScheduleActivity extends BaseActivity {
     private TabLayout mTabLayout;
