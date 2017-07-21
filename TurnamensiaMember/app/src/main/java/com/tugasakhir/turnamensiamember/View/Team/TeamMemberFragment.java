@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import com.tugasakhir.turnamensiamember.Model.Basic.Member;
 import com.tugasakhir.turnamensiamember.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,8 +26,10 @@ public class TeamMemberFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static TeamMemberFragment newInstance() {
-        return new TeamMemberFragment();
+    public static TeamMemberFragment newInstance(List<Member> members) {
+        TeamMemberFragment fragment = new TeamMemberFragment();
+        fragment.mMembers = members;
+        return fragment;
     }
 
     @Override
@@ -41,20 +42,9 @@ public class TeamMemberFragment extends Fragment {
         mMemberRV.setLayoutManager(new LinearLayoutManager(getContext()));
         mMemberRV.setHasFixedSize(true);
 
-        initializeData();
-
         TeamMemberAdapter adapter = new TeamMemberAdapter(mMembers);
         mMemberRV.setAdapter(adapter);
 
         return view;
-    }
-
-    private void initializeData() {
-        mMembers = new ArrayList<>();
-
-        for (int i = 0; i < 5; i++) {
-            Member member = new Member();
-            mMembers.add(member);
-        }
     }
 }

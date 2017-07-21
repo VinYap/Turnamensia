@@ -30,7 +30,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
     @Override
     public void onBindViewHolder(MainViewHolder holder, int position) {
         Tournament tournament = mTournaments.get(position);
-        holder.bindHolder(tournament, position);
+        holder.bindHolder(tournament);
     }
 
     @Override

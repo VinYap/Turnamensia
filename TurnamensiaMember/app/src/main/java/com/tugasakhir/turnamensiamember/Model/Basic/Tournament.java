@@ -1,26 +1,24 @@
 package com.tugasakhir.turnamensiamember.Model.Basic;
 
-import java.math.BigDecimal;
-
 /**
  * Created by Asus on 26/06/2017.
  */
 
 public class Tournament {
-    private BigDecimal id;
+    private Long id;
     private String image;
     private String name;
     private Integer start_date;
     private Integer end_date;
     private Integer registration_closed;
-    private String entry_fee;
+    private Integer entry_fee;
     private String status;
 
-    public BigDecimal getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -64,11 +62,11 @@ public class Tournament {
         this.registration_closed = registration_closed;
     }
 
-    public String getEntry_fee() {
+    public Integer getEntry_fee() {
         return entry_fee;
     }
 
-    public void setEntry_fee(String entry_fee) {
+    public void setEntry_fee(Integer entry_fee) {
         this.entry_fee = entry_fee;
     }
 

@@ -1,7 +1,7 @@
 package com.tugasakhir.turnamensiamember.View.Account;
 
 
-import android.content.Intent;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,22 +10,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Basic.Team;
+import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
+import com.tugasakhir.turnamensiamember.Model.SessionManager;
+import com.tugasakhir.turnamensiamember.Presenter.Account.AccountTeamPresenter;
+import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
-import com.tugasakhir.turnamensiamember.View.Team.TeamActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AccountTeamFragment extends Fragment {
+public class AccountTeamFragment extends Fragment implements iPresenterResponse {
     private RecyclerView mTeamRV;
     private Button mCreateTeamB;
 
     private List<Team> mTeams;
+
+    private SessionManager mSessionManager;
+    private ProgressDialog mProgressDialog;
+    private AccountTeamPresenter mAccountTeamPresenter;
+    private AccountTeamAdapter mAdapter;
 
     public AccountTeamFragment() {
         // Required empty public constructor
@@ -47,27 +56,47 @@ public class AccountTeamFragment extends Fragment {
         mCreateTeamB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AccountActivity)getActivity()).startActivity(new Intent(getContext(), TeamActivity.class));
+//                ((AccountActivity)getActivity()).startActivity(new Intent(getContext(), TeamActivity.class));
             }
         });
 
         mTeamRV.setLayoutManager(new LinearLayoutManager(getContext()));
         mTeamRV.setHasFixedSize(true);
 
-        initializeData();
+        mProgressDialog = new ProgressDialog(getContext());
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
 
-        AccountTeamAdapter adapter = new AccountTeamAdapter(mTeams);
-        mTeamRV.setAdapter(adapter);
+        mAccountTeamPresenter = new AccountTeamPresenter(this);
+        mSessionManager = new SessionManager(getContext());
+
+        mProgressDialog.show();
+        String token = mSessionManager.getTokenLoggedIn();
+        mAccountTeamPresenter.doGetParticipantAccountTeam(token);
+
+        mAdapter = new AccountTeamAdapter(mTeams);
+        mTeamRV.setAdapter(mAdapter);
 
         return view;
     }
 
-    private void initializeData() {
-        mTeams = new ArrayList<>();
+    @Override
+    public void doSuccess(Response response) {
+        mProgressDialog.dismiss();
+        mTeams = ((AccountTeamResponse) response).getTeams();
+        mAdapter.setTeams(mTeams);
+        mAdapter.notifyDataSetChanged();
+    }
 
-        for (int i = 0; i < 3; i++) {
-            Team team = new Team();
-            mTeams.add(team);
-        }
+    @Override
+    public void doFail(String message) {
+        mProgressDialog.dismiss();
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void doConnectionError(int message) {
+        mProgressDialog.dismiss();
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

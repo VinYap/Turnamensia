@@ -61,7 +61,7 @@ public interface APIModel {
     Call<AccountTeamResponse> doGetParticipantAccountTeam(@Header("Authorization") String authorization);
 
     @GET("/api/participant/my-team/{id}")
-    Call<TeamResponse> doGetParticipantTeamProfile(@Header("Authorization") String authorization, @Path("id") BigDecimal id);
+    Call<TeamResponse> doGetParticipantTeamDetail(@Header("Authorization") String authorization, @Path("id") Long id);
 
     @PUT("/api/participant/team/{id}")
     Call<Response> doUpdateParticipantTeamProfile(@Header("Authorization") String authorization, @Body Map<String, String> data, @Path("id") BigDecimal id);

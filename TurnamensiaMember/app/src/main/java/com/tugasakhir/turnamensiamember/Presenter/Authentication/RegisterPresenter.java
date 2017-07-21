@@ -52,11 +52,16 @@ public class RegisterPresenter {
                         iRegisterResponse.doFail(response.body().getMessage()[0]);
                     }
                 }
+                else {
+                    if (response.body() != null) iRegisterResponse.doFail(response.body().getMessage()[0]);
+                    else iRegisterResponse.doConnectionError(R.string.connection_error);
+                }
             }
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
                 iRegisterResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
             }
         });
     }

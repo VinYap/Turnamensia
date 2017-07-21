@@ -50,7 +50,6 @@ public class MainActivity extends BaseActivity implements iPresenterResponse {
     @Override
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
-        Toast.makeText(this, response.getMessage()[0], Toast.LENGTH_SHORT).show();
         mTournaments = ((TournamentResponse) response).getTournaments();
         mAdapter.setTournaments(mTournaments);
         mAdapter.notifyDataSetChanged();

@@ -54,11 +54,16 @@ public class AccountProfilePresenter {
                         iAccountProfileResponse.doFail(response.body().getMessage()[0]);
                     }
                 }
+                else {
+                    if (response.body() != null) iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    else iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                }
             }
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
                 iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
             }
         });
     }
@@ -80,13 +85,15 @@ public class AccountProfilePresenter {
                     }
                 }
                 else {
-                    iAccountProfileResponse.doFail(null);
+                    if (response.body() != null) iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    else iAccountProfileResponse.doConnectionError(R.string.connection_error);
                 }
             }
 
             @Override
             public void onFailure(Call<AccountProfileResponse> call, Throwable t) {
                 iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
             }
         });
     }
@@ -115,11 +122,16 @@ public class AccountProfilePresenter {
                         iAccountProfileResponse.doFail(response.body().getMessage()[0]);
                     }
                 }
+                else {
+                    if (response.body() != null) iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    else iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                }
             }
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
                 iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
             }
         });
     }
@@ -131,7 +143,6 @@ public class AccountProfilePresenter {
      * @param image
      */
     public void doUpdateParticipantProfilePicture(String token, MultipartBody.Part image) {
-
         ConnectionAPI.getInstance().getAPIModel().doUpdateParticipantProfilePicture(token, image).enqueue(new Callback<ProfilePictureResponse>() {
             @Override
             public void onResponse(Call<ProfilePictureResponse> call, retrofit2.Response<ProfilePictureResponse> response) {
@@ -142,11 +153,46 @@ public class AccountProfilePresenter {
                         iAccountProfileResponse.doFail(response.body().getMessage()[0]);
                     }
                 }
+                else {
+                    if (response.body() != null) iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    else iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                }
             }
 
             @Override
             public void onFailure(Call<ProfilePictureResponse> call, Throwable t) {
                 iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     */
+    public void doDeleteParticipantProfilePicture(String token) {
+        ConnectionAPI.getInstance().getAPIModel().doDeleteParticipantProfilePicture(token).enqueue(new Callback<ProfilePictureResponse>() {
+            @Override
+            public void onResponse(Call<ProfilePictureResponse> call, retrofit2.Response<ProfilePictureResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iAccountProfileResponse.doSuccess(response.body());
+                    } else {
+                        iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    if (response.body() != null) iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    else iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfilePictureResponse> call, Throwable t) {
+                iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
             }
         });
     }

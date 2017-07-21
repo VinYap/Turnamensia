@@ -50,7 +50,8 @@ public class LoginPresenter {
                     }
                 }
                 else {
-                    iLoginResponse.doConnectionError(R.string.connection_error);
+                    if (response.body() != null) iLoginResponse.doFail(response.body().getMessage()[0]);
+                    else iLoginResponse.doConnectionError(R.string.connection_error);
                 }
             }
 
@@ -83,6 +84,10 @@ public class LoginPresenter {
                     } else {
                         iLoginResponse.doFail(response.body().getMessage()[0]);
                     }
+                }
+                else {
+                    if (response.body() != null) iLoginResponse.doFail(response.body().getMessage()[0]);
+                    else iLoginResponse.doConnectionError(R.string.connection_error);
                 }
             }
 

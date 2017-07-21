@@ -14,9 +14,9 @@ import java.util.List;
  * Created by Asus on 02/07/2017.
  */
 
-public class TeamMemberAdapter extends RecyclerView.Adapter<TeamMemberViewHolder> {
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_ITEM = 1;
+public class TeamMemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final int TYPE_CAPTAIN = 0;
+    private static final int TYPE_MEMBER = 1;
 
     private List<Member> mMembers;
 
@@ -25,21 +25,31 @@ public class TeamMemberAdapter extends RecyclerView.Adapter<TeamMemberViewHolder
     }
 
     @Override
-    public TeamMemberViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
-        if (viewType == TYPE_HEADER) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_team_captain, parent, false);
+        switch (viewType) {
+            case TYPE_CAPTAIN :
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_team_captain, parent, false);
+                return new TeamCaptainViewHolder(view);
+            case TYPE_MEMBER :
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_team_member, parent, false);
+                return new TeamMemberViewHolder(view);
+            default :
+                return null;
         }
-        else if (viewType == TYPE_ITEM) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_team_member, parent, false);
-        }
-        return new TeamMemberViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(TeamMemberViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Member member = mMembers.get(position);
-
+        switch (holder.getItemViewType()) {
+            case TYPE_CAPTAIN :
+                ((TeamCaptainViewHolder) holder).bindHolder(member);
+                break;
+            case TYPE_MEMBER :
+                ((TeamMemberViewHolder) holder).bindHolder(member);
+                break;
+        }
     }
 
     @Override
@@ -49,7 +59,7 @@ public class TeamMemberAdapter extends RecyclerView.Adapter<TeamMemberViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) return TYPE_HEADER;
-        return TYPE_ITEM;
+        if (position == 0) return TYPE_CAPTAIN;
+        return TYPE_MEMBER;
     }
 }

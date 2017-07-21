@@ -1,24 +1,22 @@
 package com.tugasakhir.turnamensiamember.Model.Basic;
 
-import java.math.BigDecimal;
-
 /**
  * Created by Asus on 12/07/2017.
  */
 
 public class User {
-    private BigDecimal id;
+    private Long id;
     private String email;
     private String name;
     private String steam32_id;
     private String image;
     private Integer member_type;
 
-    public BigDecimal getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

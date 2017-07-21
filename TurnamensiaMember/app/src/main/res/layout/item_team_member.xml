@@ -66,16 +66,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_menu_share" />
 
-        <ImageView
-            android:id="@+id/change_captain"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:scaleType="fitXY"
-            app:layout_constraintRight_toLeftOf="@+id/member_delete"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_menu_send" />
-
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

@@ -13,7 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
+import com.tugasakhir.turnamensiamember.Model.Basic.Team;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
@@ -33,13 +35,20 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
 
     private SessionManager mSessionManager;
 
+    private static final String TEAM_DETAIL = "TEAM_DETAIL";
+    private static final String IS_LEADER = "IS_LEADER";
 
     public TeamProfileFragment() {
         // Required empty public constructor
     }
 
-    public static TeamProfileFragment newInstance() {
-        return new TeamProfileFragment();
+    public static TeamProfileFragment newInstance(Team team, Boolean isLeader) {
+        Bundle args = new Bundle();
+        args.putSerializable(TEAM_DETAIL, team);
+        args.putBoolean(IS_LEADER, isLeader);
+        TeamProfileFragment fragment = new TeamProfileFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -76,6 +85,8 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
             }
         });
 
+        initializedData((Team) getArguments().getSerializable(TEAM_DETAIL));
+
         return view;
     }
 
@@ -92,5 +103,11 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
     @Override
     public void doConnectionError(int message) {
         mProgressDialog.dismiss();
+    }
+
+    private void initializedData(Team team) {
+        mNameET.setText(team.getName());
+        mJoinCodeET.setText(team.getJoin_code());
+        Picasso.with(getContext()).load(team.getImage()).into(mImageIV);
     }
 }

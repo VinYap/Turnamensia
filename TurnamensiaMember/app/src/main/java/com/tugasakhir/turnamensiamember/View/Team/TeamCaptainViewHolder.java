@@ -13,25 +13,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Asus on 02/07/2017.
+ * Created by alvin on 7/21/2017.
  */
 
-public class TeamMemberViewHolder extends RecyclerView.ViewHolder {
+public class TeamCaptainViewHolder extends RecyclerView.ViewHolder {
     private ImageView mImageIV;
     private TextView mNameTV;
     private TextView mSteamIdTV;
     private TextView mJoinedDateTV;
-    private ImageView mDeleteB;
     private Long id;
 
-    public TeamMemberViewHolder(View itemView) {
+    public TeamCaptainViewHolder(View itemView) {
         super(itemView);
 
-        mImageIV = (ImageView) itemView.findViewById(R.id.member_image);
-        mNameTV = (TextView) itemView.findViewById(R.id.member_name);
-        mSteamIdTV = (TextView) itemView.findViewById(R.id.member_steam_id);
-        mJoinedDateTV = (TextView) itemView.findViewById(R.id.member_joined_date);
-        mDeleteB = (ImageView) itemView.findViewById(R.id.member_delete);
+        mImageIV = (ImageView) itemView.findViewById(R.id.captain_image);
+        mNameTV = (TextView) itemView.findViewById(R.id.captain_name);
+        mSteamIdTV = (TextView) itemView.findViewById(R.id.captain_steam_id);
+        mJoinedDateTV = (TextView) itemView.findViewById(R.id.captain_joined_date);
     }
 
     public void bindHolder(Member member) {

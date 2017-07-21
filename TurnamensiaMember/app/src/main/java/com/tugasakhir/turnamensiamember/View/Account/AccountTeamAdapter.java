@@ -30,11 +30,16 @@ public class AccountTeamAdapter extends RecyclerView.Adapter<AccountTeamViewHold
     @Override
     public void onBindViewHolder(AccountTeamViewHolder holder, int position) {
         Team team = mTeams.get(position);
-        holder.bindHolder(team, position);
+        holder.bindHolder(team);
     }
 
     @Override
     public int getItemCount() {
-        return mTeams.size();
+        if (mTeams != null) return mTeams.size();
+        return 0;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.mTeams = teams;
     }
 }

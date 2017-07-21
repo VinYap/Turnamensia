@@ -5,10 +5,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.tugasakhir.turnamensiamember.Model.Basic.Tournament;
 import com.tugasakhir.turnamensiamember.R;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Asus on 26/06/2017.
@@ -21,7 +23,7 @@ public class MainViewHolder extends RecyclerView.ViewHolder {
     private TextView mStatusTV;
     private TextView mPriceTV;
     private ImageView mPhotoIV;
-    private int id;
+    private Long id;
 
     public MainViewHolder(View itemView) {
         super(itemView);
@@ -34,13 +36,17 @@ public class MainViewHolder extends RecyclerView.ViewHolder {
         mPhotoIV = (ImageView) itemView.findViewById(R.id.main_tournament_image);
     }
 
-    public void bindHolder(Tournament tournament, int position) {
-        id = position;
+    public void bindHolder(Tournament tournament) {
+        Date startDate = new Date(Long.parseLong(String.valueOf(tournament.getStart_date())) * 1000);
+        Date endDate = new Date(Long.parseLong(String.valueOf(tournament.getEnd_date())) * 1000);
+        Date registrationClosed = new Date(Long.parseLong(String.valueOf(tournament.getRegistration_closed())) * 1000);
 
+        id = tournament.getId();
         mNameTV.setText(tournament.getName());
-        mDateTV.setText(new SimpleDateFormat("dd MMMM").format(tournament.getStart_date()) + " - " + new SimpleDateFormat("dd MMMM").format(tournament.getEnd_date()));
-        mRegistrationTV.setText("Registration before " + new SimpleDateFormat("dd MMMM").format(tournament.getRegistration_closed()));
-        mPriceTV.setText(tournament.getEntry_fee());
+        mDateTV.setText(new SimpleDateFormat("dd MMMM").format(startDate) + " - " + new SimpleDateFormat("dd MMMM").format(endDate));
+        mRegistrationTV.setText("Registration before " + new SimpleDateFormat("dd MMMM").format(registrationClosed));
+        mPriceTV.setText("Rp ".concat(String.format("%,d", tournament.getEntry_fee().toString())));
         mStatusTV.setText(tournament.getStatus());
+        Picasso.with(itemView.getContext()).load(tournament.getImage()).into(mPhotoIV);
     }
 }

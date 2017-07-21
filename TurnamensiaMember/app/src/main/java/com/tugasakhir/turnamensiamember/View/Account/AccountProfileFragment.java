@@ -57,6 +57,8 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
 
     private Integer mStatus;
 
+    private static final Integer IMAGE_CODE = 0;
+
     public AccountProfileFragment() {
         // Required empty public constructor
     }
@@ -91,7 +93,17 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
         mChangeImageIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI), 0);
+                startActivityForResult(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI), IMAGE_CODE);
+            }
+        });
+
+        mDeleteImageIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mProgressDialog.show();
+                mStatus = 2;
+                String token = mSessionManager.getTokenLoggedIn();
+                mAccountProfilePresenter.doDeleteParticipantProfilePicture(token);
             }
         });
 
@@ -140,7 +152,7 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && resultCode == RESULT_OK && null != data) {
+        if (requestCode == IMAGE_CODE && resultCode == RESULT_OK && data != null) {
             mProgressDialog.show();
             mStatus = 2;
             Uri selectedImage = data.getData();
