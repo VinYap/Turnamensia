@@ -23,6 +23,7 @@ import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.Account.AccountActivity;
 import com.tugasakhir.turnamensiamember.View.Authentication.AuthActivity;
 import com.tugasakhir.turnamensiamember.View.Main.MainActivity;
+import com.tugasakhir.turnamensiamember.View.Organizer.Tournament.OTournamentActivity;
 import com.tugasakhir.turnamensiamember.View.Registration.RegistrationActivity;
 import com.tugasakhir.turnamensiamember.View.Tournament.TournamentActivity;
 
@@ -161,6 +162,9 @@ public abstract class BaseActivity extends AppCompatActivity
         }
         else if (id == R.id.notification) {
 
+        }
+        else if (id == R.id.my_tournament_organizer) {
+            startActivity(new Intent(this, OTournamentActivity.class));
         }
         else if (id == R.id.sign_out) {
             mSessionManager.doClearSession();

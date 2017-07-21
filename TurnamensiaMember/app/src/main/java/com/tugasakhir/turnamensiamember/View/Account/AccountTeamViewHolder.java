@@ -20,6 +20,7 @@ public class AccountTeamViewHolder extends RecyclerView.ViewHolder implements Vi
     private TextView mNameTV;
     private TextView mMemberTV;
     private ImageView mImageIV;
+
     private Long id;
 
     public static final String TEAM_KEY = "TEAM_KEY";

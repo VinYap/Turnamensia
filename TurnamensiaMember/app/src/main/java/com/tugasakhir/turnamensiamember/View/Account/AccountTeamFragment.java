@@ -56,7 +56,7 @@ public class AccountTeamFragment extends Fragment implements iPresenterResponse 
         mCreateTeamB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ((AccountActivity)getActivity()).startActivity(new Intent(getContext(), TeamActivity.class));
+//                ((AccountActivity)getActivity()).startActivity(new Intent(getContext(), OTeamActivity.class));
             }
         });
 

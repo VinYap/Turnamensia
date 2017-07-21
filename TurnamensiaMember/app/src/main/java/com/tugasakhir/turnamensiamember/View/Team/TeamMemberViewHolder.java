@@ -22,6 +22,7 @@ public class TeamMemberViewHolder extends RecyclerView.ViewHolder {
     private TextView mSteamIdTV;
     private TextView mJoinedDateTV;
     private ImageView mDeleteB;
+
     private Long id;
 
     public TeamMemberViewHolder(View itemView) {
