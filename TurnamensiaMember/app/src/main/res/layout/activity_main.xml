@@ -7,7 +7,15 @@
     tools:context="com.tugasakhir.turnamensiamember.View.Main.MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/main_tournament" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/main_tournament"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="0dp" />
 </android.support.constraint.ConstraintLayout>

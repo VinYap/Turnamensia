@@ -2,7 +2,9 @@ package com.tugasakhir.turnamensiamember.View.Account;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,10 +22,17 @@ import com.squareup.picasso.Picasso;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Basic.User;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.ProfilePictureResponse;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
 import com.tugasakhir.turnamensiamember.Presenter.Account.AccountProfilePresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
+
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -123,7 +132,7 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
             }
         });
 
-//        this.getUser();
+        this.getUser();
 
         return view;
     }
@@ -132,16 +141,14 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0 && resultCode == RESULT_OK && null != data) {
+            mProgressDialog.show();
+            mStatus = 2;
             Uri selectedImage = data.getData();
-            Picasso.with(getContext()).load(selectedImage).into(mImageIV);
-//            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-//            Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
-//            cursor.moveToFirst();
-//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//            String picturePath = cursor.getString(columnIndex);
-//            cursor.close();
-//            ImageView imageView = (ImageView) findViewById(R.id.imgView);
-//            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            File file = new File(getRealPathFromURI(getContext(), selectedImage));
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            MultipartBody.Part image = MultipartBody.Part.createFormData("profile_picture", file.getName(), requestFile);
+            String token = mSessionManager.getTokenLoggedIn();
+            mAccountProfilePresenter.doUpdateParticipantProfilePicture(token, image);
         }
     }
 
@@ -152,14 +159,21 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
             mProgressDialog.dismiss();
             setUser();
         }
-        else {
+        else if (mStatus == 1){
             User user = new User();
             user.setName(mNameET.getText().toString());
             user.setEmail(mEmailET.getText().toString());
             user.setSteam32_id(mSteamIdET.getText().toString());
-            user.setMember_type(mSessionManager.getUserLoggedIn().getMember_type());
             mSessionManager.doChangeUserData(user);
             mProgressDialog.dismiss();
+            Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
+        }
+        else if (mStatus == 2) {
+            User user = new User();
+            user.setImage(((ProfilePictureResponse) response).getFile_path());
+            mSessionManager.doChangeUserData(user);
+            mProgressDialog.dismiss();
+            Picasso.with(getContext()).load(user.getImage()).into(mImageIV);
             Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
         }
     }
@@ -191,5 +205,20 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
         mEmailET.setText(user.getEmail());
         mSteamIdET.setText(user.getSteam32_id());
         Picasso.with(getContext()).load(user.getImage()).into(mImageIV);
+    }
+
+    private String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
     }
 }

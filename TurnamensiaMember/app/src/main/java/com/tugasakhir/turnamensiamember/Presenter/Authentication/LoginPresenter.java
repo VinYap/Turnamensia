@@ -49,11 +49,15 @@ public class LoginPresenter {
                         iLoginResponse.doFail(response.body().getMessage()[0]);
                     }
                 }
+                else {
+                    iLoginResponse.doConnectionError(R.string.connection_error);
+                }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 iLoginResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
             }
         });
     }
@@ -85,6 +89,7 @@ public class LoginPresenter {
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 iLoginResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
             }
         });
     }

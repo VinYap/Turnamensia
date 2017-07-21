@@ -40,8 +40,8 @@ public class MainActivity extends BaseActivity implements iPresenterResponse {
 
         mTournamentPresenter = new TournamentPresenter(this);
 
-//        mProgressDialog.show();
-//        mTournamentPresenter.doGetParticipantTournament();
+        mProgressDialog.show();
+        mTournamentPresenter.doGetParticipantTournament();
 
         mAdapter = new MainAdapter(mTournaments);
         mTournamentRV.setAdapter(mAdapter);

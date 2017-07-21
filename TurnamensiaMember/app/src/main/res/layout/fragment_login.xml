@@ -6,7 +6,7 @@
     tools:context="com.tugasakhir.turnamensiamember.View.Authentication.LoginFragment">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/user_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="fitXY"
@@ -18,7 +18,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/item_margin"
@@ -28,7 +28,7 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/user_image" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="0dp"
@@ -36,7 +36,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/container_margin"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/user_email"
         android:layout_marginLeft="@dimen/container_margin"
         android:layout_marginRight="@dimen/container_margin"
         android:layout_marginStart="@dimen/container_margin"

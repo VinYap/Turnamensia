@@ -3,12 +3,14 @@ package com.tugasakhir.turnamensiamember.Presenter.Account;
 import com.tugasakhir.turnamensiamember.Model.API.ConnectionAPI;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.ProfilePictureResponse;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -31,6 +33,7 @@ public class AccountProfilePresenter {
     /**
      * For Communicating Between Apps and API
      *
+     * @param token
      * @param name
      * @param email
      * @param steamId
@@ -116,6 +119,33 @@ public class AccountProfilePresenter {
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
+                iAccountProfileResponse.doConnectionError(R.string.connection_error);
+            }
+        });
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     * @param image
+     */
+    public void doUpdateParticipantProfilePicture(String token, MultipartBody.Part image) {
+
+        ConnectionAPI.getInstance().getAPIModel().doUpdateParticipantProfilePicture(token, image).enqueue(new Callback<ProfilePictureResponse>() {
+            @Override
+            public void onResponse(Call<ProfilePictureResponse> call, retrofit2.Response<ProfilePictureResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iAccountProfileResponse.doSuccess(response.body());
+                    } else {
+                        iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfilePictureResponse> call, Throwable t) {
                 iAccountProfileResponse.doConnectionError(R.string.connection_error);
             }
         });

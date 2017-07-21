@@ -1,7 +1,5 @@
 package com.tugasakhir.turnamensiamember.Model.API;
 
-import android.graphics.Bitmap;
-
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
@@ -13,13 +11,16 @@ import com.tugasakhir.turnamensiamember.Model.Response.TournamentResponse;
 import java.math.BigDecimal;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
@@ -49,8 +50,9 @@ public interface APIModel {
     @PUT("/api/participant/password")
     Call<Response> doUpdateParticipantPassword(@Header("Authorization") String authorization, @Body Map<String, String> data);
 
+    @Multipart
     @POST("/api/participant/profile-picture")
-    Call<ProfilePictureResponse> doUpdateParticipantProfilePicture(@Header("Authorization") String authorization, @Body Map<String, Bitmap> data);
+    Call<ProfilePictureResponse> doUpdateParticipantProfilePicture(@Header("Authorization") String authorization, @Part MultipartBody.Part image);
 
     @DELETE("/api/participant/profile-picture")
     Call<ProfilePictureResponse> doDeleteParticipantProfilePicture(@Header("Authorization") String authorization);

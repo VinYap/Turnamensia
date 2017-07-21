@@ -39,6 +39,8 @@ public class LoginFragment extends Fragment implements iPresenterResponse {
     private LoginPresenter mLoginPresenter;
     private SessionManager mSessionManager;
 
+    private Integer mMemberType;
+
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -95,9 +97,11 @@ public class LoginFragment extends Fragment implements iPresenterResponse {
                 else {
                     mProgressDialog.show();
                     if (isOrganizer) {
+                        mMemberType = 2;
                         mLoginPresenter.doOrganizerLogin(email, password);
                     }
                     else {
+                        mMemberType = 1;
                         mLoginPresenter.doParticipantLogin(email, password);
                     }
                 }
@@ -109,6 +113,7 @@ public class LoginFragment extends Fragment implements iPresenterResponse {
 
     @Override
     public void doSuccess(Response response) {
+        ((LoginResponse) response).getUser().setMember_type(mMemberType);
         mSessionManager.doCreateSession((LoginResponse) response);
         mProgressDialog.dismiss();
         Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();

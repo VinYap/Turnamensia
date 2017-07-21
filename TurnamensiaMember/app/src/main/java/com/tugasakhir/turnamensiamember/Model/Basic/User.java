@@ -7,12 +7,12 @@ import java.math.BigDecimal;
  */
 
 public class User {
-    BigDecimal id;
-    String email;
-    String name;
-    String steam32_id;
-    String image;
-    int member_type;
+    private BigDecimal id;
+    private String email;
+    private String name;
+    private String steam32_id;
+    private String image;
+    private Integer member_type;
 
     public BigDecimal getId() {
         return id;
@@ -54,11 +54,11 @@ public class User {
         this.image = image;
     }
 
-    public int getMember_type() {
+    public Integer getMember_type() {
         return member_type;
     }
 
-    public void setMember_type(int member_type) {
+    public void setMember_type(Integer member_type) {
         this.member_type = member_type;
     }
 }

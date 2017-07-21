@@ -43,6 +43,15 @@ public class SessionManager {
     }
 
     public void doChangeUserData(User user) {
+        User oldUser = this.getUserLoggedIn();
+        if (oldUser != null) {
+            user.setId(oldUser.getId());
+            if (user.getName() == null) user.setName(oldUser.getName());
+            if (user.getEmail() == null) user.setEmail(oldUser.getEmail());
+            if (user.getSteam32_id() == null) user.setSteam32_id(oldUser.getSteam32_id());
+            if (user.getImage() == null) user.setImage(oldUser.getImage());
+            if (user.getMember_type() == null) user.setMember_type(oldUser.getMember_type());
+        }
         editor.putString(KEY_USER_DATA, new Gson().toJson(user));
         editor.commit();
     }

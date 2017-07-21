@@ -13,7 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.tugasakhir.turnamensiamember.Model.Basic.User;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
 import com.tugasakhir.turnamensiamember.R;
@@ -33,6 +36,9 @@ public abstract class BaseActivity extends AppCompatActivity
     protected FrameLayout mBaseLayout;
     protected NavigationView mNavigationView;
     private Menu mNavigationMenu;
+    private TextView mUserNameTV;
+    private TextView mUserEmailTV;
+    private ImageView mUserImageIV;
 
     private SessionManager mSessionManager;
 
@@ -54,6 +60,11 @@ public abstract class BaseActivity extends AppCompatActivity
 
         mBaseLayout = (FrameLayout) findViewById(R.id.layout_base);
         mNavigationMenu = mNavigationView.getMenu();
+
+        View navigationHeader = mNavigationView.getHeaderView(0);
+        mUserNameTV = (TextView) navigationHeader.findViewById(R.id.user_name);
+        mUserEmailTV = (TextView) navigationHeader.findViewById(R.id.user_email);
+        mUserImageIV = (ImageView) navigationHeader.findViewById(R.id.user_image);
 
         mSessionManager = new SessionManager(getApplicationContext());
 
@@ -164,9 +175,13 @@ public abstract class BaseActivity extends AppCompatActivity
         User user = null;
         if (isLogin) {
             user = mSessionManager.getUserLoggedIn();
+            mUserNameTV.setText(user.getName());
+            mUserEmailTV.setText(user.getEmail());
+            Picasso.with(this).load(user.getImage()).into(mUserImageIV);
         }
         else {
-
+            mUserNameTV.setText("Guest");
+            mUserEmailTV.setText("Login your account");
         }
 
         mNavigationMenu.setGroupVisible(R.id.group_auth, !isLogin);
@@ -174,7 +189,7 @@ public abstract class BaseActivity extends AppCompatActivity
         mNavigationMenu.setGroupVisible(R.id.group_organizer, user != null && user.getMember_type() == 2);
         mNavigationMenu.setGroupVisible(R.id.group_sign_out, isLogin);
 
-        mNavigationMenu.setGroupVisible(R.id.group_participant,true);
+//        mNavigationMenu.setGroupVisible(R.id.group_participant,true);
     }
 
     protected void setTitle(String title) {
