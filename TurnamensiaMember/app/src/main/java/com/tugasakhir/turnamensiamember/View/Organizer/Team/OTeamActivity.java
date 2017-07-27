@@ -1,19 +1,54 @@
 package com.tugasakhir.turnamensiamember.View.Organizer.Team;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+import com.tugasakhir.turnamensiamember.Model.Basic.Member;
+import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Basic.Team;
+import com.tugasakhir.turnamensiamember.Model.Basic.Tournament;
+import com.tugasakhir.turnamensiamember.Model.Basic.TournamentRegistration;
+import com.tugasakhir.turnamensiamember.Model.Response.MatchTeamAttendanceResponse;
+import com.tugasakhir.turnamensiamember.Model.SessionManager;
+import com.tugasakhir.turnamensiamember.Presenter.Tournament.TournamentPresenter;
+import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static com.tugasakhir.turnamensiamember.View.Organizer.Match.OMatchViewHolder.MATCH_KEY;
+import static com.tugasakhir.turnamensiamember.View.Organizer.Match.OMatchViewHolder.MATCH_TEAM_ATTENDANCE_TITLE_KEY;
+import static com.tugasakhir.turnamensiamember.View.Organizer.Match.OMatchViewHolder.TOURNAMENT_REGISTRATION_KEY;
 
 public class OTeamActivity extends BaseActivity {
     private ListView mTeamLV;
-    private List<Team> teams;
+    private ImageView mTeamIV;
+    private TextView mTeamNameTV;
+    private TextView mTournamentNameTV;
+    private TextView mTournamentRegistrationDateTV;
+
+    private ProgressDialog mProgressDialog;
+
+    private SessionManager mSessionManager;
+    private String token;
+    private Long match_id;
+    private Long tournament_registration_id;
+    private Tournament tournament;
+    private TournamentRegistration tournament_registration;
+    private Team team;
+    private List<Member> members;
+
+    private TournamentPresenter mTournamentPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,28 +57,66 @@ public class OTeamActivity extends BaseActivity {
 
         showUpCaretMenu();
 
+        setTitle(getIntent().getExtras().getString(MATCH_TEAM_ATTENDANCE_TITLE_KEY, ""));
+
         mTeamLV = (ListView) findViewById(R.id.team_list_view);
-        View header = getLayoutInflater().inflate(R.layout.item_organizer_team_header, null);
-        mTeamLV.addHeaderView(header);
+        mTeamIV = (ImageView) findViewById(R.id.team_image);
+        mTeamNameTV = (TextView) findViewById(R.id.team_name);
+        mTournamentNameTV = (TextView) findViewById(R.id.team_league_name);
+        mTournamentRegistrationDateTV = (TextView) findViewById(R.id.team_registration);
 
-        initializeData();
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
 
-        OTeamAdapter adapter = new OTeamAdapter(this, teams);
-        mTeamLV.setAdapter(adapter);
+        mTournamentPresenter = new TournamentPresenter(new iPresenterResponse() {
+            @Override
+            public void doSuccess(Response response) {
+                mProgressDialog.dismiss();
+
+                tournament = ((MatchTeamAttendanceResponse) response).getTournament();
+                tournament_registration = ((MatchTeamAttendanceResponse) response).getTournament_registration();
+                team = ((MatchTeamAttendanceResponse) response).getTeam();
+                members = ((MatchTeamAttendanceResponse) response).getMembers();
+
+                OTeamAdapter adapter = new OTeamAdapter(getApplicationContext(), members);
+                mTeamLV.setAdapter(adapter);
+
+                Picasso.with(getApplicationContext()).load(team.getImage()).into(mTeamIV);
+                mTeamNameTV.setText(team.getName());
+                mTournamentNameTV.setText(tournament.getName());
+                mTournamentRegistrationDateTV.setText(new SimpleDateFormat("d MMM yyyy HH:mm:ss").format(new Date(tournament_registration.getRegister_at() * 1000)));
+            }
+
+            @Override
+            public void doFail(String message) {
+                mProgressDialog.dismiss();
+            }
+
+            @Override
+            public void doConnectionError(int message) {
+                mProgressDialog.dismiss();
+            }
+        });
+
+        mSessionManager = new SessionManager(this);
+        token = mSessionManager.getTokenLoggedIn();
+        match_id = getIntent().getExtras().getLong(MATCH_KEY);
+        tournament_registration_id = getIntent().getExtras().getLong(TOURNAMENT_REGISTRATION_KEY);
+
+        fetchMatchTeamAttendanceData();
     }
 
-    private void initializeData() {
-        teams = new ArrayList<Team>();
+    public void fetchMatchTeamAttendanceData() {
+        mProgressDialog.show();
+        mTournamentPresenter.doGetMatchTeamAttendance(token, match_id, tournament_registration_id);
+    }
 
-        for (int i = 0; i < 9; i++) {
-            Team team = new Team();
-
-//            team.setUserPhoto(R.drawable.ib);
-//            team.setUsername("User Name ke-" + i);
-//            team.setUserProfile(R.drawable.ic_menu_share);
-//            team.setUserStatus(R.drawable.ic_menu_camera);
-
-            teams.add(team);
-        }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem mActionSettings = menu.findItem(R.id.action_settings);
+        mActionSettings.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+        return true;
     }
 }

@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tugasakhir.turnamensiamember.Model.Basic.Match;
+import com.tugasakhir.turnamensiamember.Model.Basic.OrganizerMatch;
 import com.tugasakhir.turnamensiamember.R;
 
 import java.util.List;
@@ -15,9 +15,9 @@ import java.util.List;
  */
 
 public class OMatchAdapter extends RecyclerView.Adapter<OMatchViewHolder> {
-    private List<Match> mMatchs;
+    private List<OrganizerMatch> mMatchs;
 
-    public OMatchAdapter(List<Match> match) {
+    public OMatchAdapter(List<OrganizerMatch> match) {
         this.mMatchs = match;
     }
 
@@ -29,8 +29,8 @@ public class OMatchAdapter extends RecyclerView.Adapter<OMatchViewHolder> {
 
     @Override
     public void onBindViewHolder(OMatchViewHolder holder, int position) {
-        Match match = mMatchs.get(position);
-        holder.bindHolder(match);
+        OrganizerMatch match = mMatchs.get(position);
+        holder.bindHolder(position, match);
     }
 
     @Override

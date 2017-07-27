@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#292E3A</color>
+    <color name="colorPrimaryDark">#5f6471</color>
+    <color name="colorAccent">#000000</color>
+    <color name="colorNavBarBackground">#272A33</color>
+    <color name="colorNavBarText">#E3E3E3</color>
+    <color name="colorBackground">#272A33</color>
+    <color name="colorBorderOne">#5F6471</color>
+    <color name="colorViewHolder">#2F313A</color>
+    <color name="colorViewHolderHeaderText">#FFFFFF</color>
+    <color name="colorViewHolderText">#E3E3E3</color>
+    <color name="colorViewHolderTextDark">#5F6472</color>
+    <color name="colorTabLayoutBackground">#363B49</color>
+    <color name="colorTabLayoutIndicator">#5F6472</color>
+    <color name="colorTabLayoutTextDefault">#D8D8D8</color>
+    <color name="colorTabLayoutTextSelected">#FFFFFF</color>
+    <color name="colorOrganizerTeamHeader">#363B49</color>
+    <color name="colorTextDefault">#E3E3E3</color>
+    <color name="colorButtonApprove">#1F872B</color>
+    <color name="colorTextLight">#FFFFFF</color>
+    <color name="colorTextHint">#AFAEAC</color>
+    <color name="colorBorderHint">#AFAEAC</color>
 </resources>

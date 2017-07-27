@@ -57,6 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity
         mDrawerToggle.syncState();
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mNavigationView.setItemIconTintList(null);
         mNavigationView.setNavigationItemSelectedListener(this);
 
         mBaseLayout = (FrameLayout) findViewById(R.id.layout_base);
@@ -69,19 +70,20 @@ public abstract class BaseActivity extends AppCompatActivity
 
         mSessionManager = new SessionManager(getApplicationContext());
 
-        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                    showUpCaretMenu();
-                } else {
-                    showHamburgerMenu();
-                }
-            }
-        });
+//        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+//            @Override
+//            public void onBackStackChanged() {
+//                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+//                    showUpCaretMenu();
+//                } else {
+//                    showHamburgerMenu();
+//                }
+//            }
+//        });
     }
 
     protected void showUpCaretMenu() {
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         mDrawerToggle.setDrawerIndicatorEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -163,12 +165,16 @@ public abstract class BaseActivity extends AppCompatActivity
         else if (id == R.id.notification) {
 
         }
-        else if (id == R.id.my_tournament_organizer) {
-            startActivity(new Intent(this, OTournamentActivity.class));
-        }
+//        else if (id == R.id.my_tournament_organizer) {
+//            startActivity(new Intent(this, OTournamentActivity.class));
+//        }
         else if (id == R.id.sign_out) {
             mSessionManager.doClearSession();
-            startActivity(new Intent(this, MainActivity.class));
+            if (this.getClass() == MainActivity.class) {
+                onResume();
+            } else {
+                startActivity(new Intent(this, MainActivity.class));
+            }
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -184,13 +190,14 @@ public abstract class BaseActivity extends AppCompatActivity
             Picasso.with(this).load(user.getImage()).into(mUserImageIV);
         }
         else {
+            mUserImageIV.setImageResource(R.drawable.default_profile);
             mUserNameTV.setText("Guest");
             mUserEmailTV.setText("Login your account");
         }
 
         mNavigationMenu.setGroupVisible(R.id.group_auth, !isLogin);
         mNavigationMenu.setGroupVisible(R.id.group_participant, user != null && user.getMember_type() == 1);
-        mNavigationMenu.setGroupVisible(R.id.group_organizer, user != null && user.getMember_type() == 2);
+//        mNavigationMenu.setGroupVisible(R.id.group_organizer, user != null && user.getMember_type() == 2);
         mNavigationMenu.setGroupVisible(R.id.group_sign_out, isLogin);
 
 //        mNavigationMenu.setGroupVisible(R.id.group_participant,true);

@@ -8,7 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tugasakhir.turnamensiamember.Model.Basic.Team;
+import com.squareup.picasso.Picasso;
+import com.tugasakhir.turnamensiamember.Model.Basic.Member;
 import com.tugasakhir.turnamensiamember.R;
 
 import java.util.List;
@@ -19,23 +20,23 @@ import java.util.List;
 
 public class OTeamAdapter extends BaseAdapter {
     private Context mContext;
-    private List<Team> teams;
+    private List<Member> members;
     private LayoutInflater mInflater;
 
-    public OTeamAdapter(Context context, List<Team> teams) {
+    public OTeamAdapter(Context context, List<Member> members) {
         this.mContext = context;
-        this.teams = teams;
+        this.members = members;
         this.mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return teams.size();
+        return members.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return teams.get(position);
+        return members.get(position);
     }
 
     @Override
@@ -49,15 +50,17 @@ public class OTeamAdapter extends BaseAdapter {
 
         ImageView userPhoto = (ImageView) view.findViewById(R.id.team_user_image);
         TextView username = (TextView) view.findViewById(R.id.team_username);
-        ImageView userProfile = (ImageView) view.findViewById(R.id.team_user_profile);
         ImageView userStatus = (ImageView) view.findViewById(R.id.team_user_status);
 
-        Team team = (Team) getItem(position);
+        Member member = (Member) getItem(position);
 
-//        userPhoto.setImageResource(team.getUserPhoto());
-//        username.setText(team.getUsername());
-//        userProfile.setImageResource(team.getUserProfile());
-//        userStatus.setImageResource(team.getUserStatus());
+        Picasso.with(view.getContext()).load(member.getImage()).into(userPhoto);
+        username.setText(member.getName());
+        if (member.getAttendances_status() == 1) {
+            userStatus.setImageResource(R.drawable.ic_check_green_32dp);
+        } else {
+            userStatus.setImageResource(R.drawable.ic_access_time_blue_32dp);
+        }
 
         return view;
     }

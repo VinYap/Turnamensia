@@ -1,16 +1,21 @@
 package com.tugasakhir.turnamensiamember.Model.Basic;
 
+import org.parceler.Parcel;
+
 /**
  * Created by alvin on 7/7/2017.
  */
 
+@Parcel
 public class Member {
     private Long id;
     private String name;
     private String steam32_id;
     private String image;
+    private String identification_image;
     private String status;
     private Integer joined_at;
+    private Integer attendances_status;
 
     public Long getId() {
         return id;
@@ -44,6 +49,14 @@ public class Member {
         this.image = image;
     }
 
+    public String getIdentification_image() {
+        return identification_image;
+    }
+
+    public void setIdentification_image(String identification_image) {
+        this.identification_image = identification_image;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -58,5 +71,13 @@ public class Member {
 
     public void setJoined_at(Integer joined_at) {
         this.joined_at = joined_at;
+    }
+
+    public Integer getAttendances_status() {
+        return attendances_status;
+    }
+
+    public void setAttendances_status(Integer attendances_status) {
+        this.attendances_status = attendances_status;
     }
 }

@@ -1,9 +1,12 @@
 package com.tugasakhir.turnamensiamember.Model.Basic;
 
+import org.parceler.Parcel;
+
 /**
  * Created by Asus on 26/06/2017.
  */
 
+@Parcel
 public class Tournament {
     private Long id;
     private String image;

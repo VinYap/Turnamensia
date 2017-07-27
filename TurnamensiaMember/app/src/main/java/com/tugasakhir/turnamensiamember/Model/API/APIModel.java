@@ -4,7 +4,10 @@ import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.LoginResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.MatchTeamAttendanceResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.OrganizerTournamentDetailResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.ProfilePictureResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.QRScannerResultResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TournamentResponse;
 
@@ -68,4 +71,19 @@ public interface APIModel {
 
     @POST("/api/organizer/login")
     Call<LoginResponse> doOrganizerLogin(@Body Map<String, String> data);
+
+    @GET("/api/organizer/my-tournament")
+    Call<TournamentResponse> doGetOrganizerTournament(@Header("Authorization") String authorization);
+
+    @GET("/api/organizer/my-tournament/{id}")
+    Call<OrganizerTournamentDetailResponse> doGetOrganizerTournamentDetail(@Header("Authorization") String authorization, @Path("id") Long tournament_id);
+
+    @GET("api/organizer/match/{id}/team-attendance")
+    Call<MatchTeamAttendanceResponse> doGetMatchTeamAttendance(@Header("Authorization") String authorization, @Path("id") Long match_id, @QueryMap Map<String, Long> data);
+
+    @GET("api/organizer/match/{id}/attendance")
+    Call<QRScannerResultResponse> doGetMatchAttendance(@Header("Authorization") String authorization, @Path("id") Long match_id, @QueryMap Map<String, String> data);
+
+    @POST("api/organizer/match/{id}/attendance")
+    Call<Response> doPostMatchAttendance(@Header("Authorization") String authorization, @Path("id") Long match_id, @Body Map<String, String> data);
 }

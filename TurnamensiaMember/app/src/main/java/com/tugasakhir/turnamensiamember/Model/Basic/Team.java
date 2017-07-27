@@ -1,11 +1,14 @@
 package com.tugasakhir.turnamensiamember.Model.Basic;
 
+import org.parceler.Parcel;
+
 import java.io.Serializable;
 
 /**
  * Created by alvin on 7/7/2017.
  */
 
+@Parcel
 public class Team implements Serializable {
     private Long id;
     private String name;

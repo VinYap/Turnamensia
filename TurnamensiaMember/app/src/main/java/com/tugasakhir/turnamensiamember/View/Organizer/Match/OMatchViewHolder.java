@@ -1,28 +1,37 @@
 package com.tugasakhir.turnamensiamember.View.Organizer.Match;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.tugasakhir.turnamensiamember.Model.Basic.Match;
+import com.squareup.picasso.Picasso;
+import com.tugasakhir.turnamensiamember.Model.Basic.OrganizerMatch;
 import com.tugasakhir.turnamensiamember.R;
-import com.tugasakhir.turnamensiamember.View.Organizer.Team.OQrCodeResultActivity;
+import com.tugasakhir.turnamensiamember.View.Organizer.QRScanner.QRScannerActivity;
 import com.tugasakhir.turnamensiamember.View.Organizer.Team.OTeamActivity;
 
-import static com.tugasakhir.turnamensiamember.View.Organizer.Tournament.OTournamentViewHolder.TOURNAMENT_KEY;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Asus on 18/06/2017.
  */
 
-public class OMatchViewHolder extends RecyclerView.ViewHolder {
+public class OMatchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static final String MATCH_KEY = "OMatchID";
+    public static final String TOURNAMENT_REGISTRATION_KEY = "OMatchTournamentRegistrationID";
+    public static final String MATCH_TEAM_ATTENDANCE_TITLE_KEY = "OMatchTeamAttendanceTitle";
+
     private CardView mMatchCV;
     private TextView mMatchRoundTV;
     private TextView mMatchDateTV;
@@ -30,14 +39,18 @@ public class OMatchViewHolder extends RecyclerView.ViewHolder {
     private TextView mDireTV;
     private ImageView mRadiantIV;
     private ImageView mDireIV;
-    private ImageView mQrCodeIV;
-    private ClickableSpan mClickableSpan;
+    private ClickableSpan mClickableSpanRadiant;
+    private ClickableSpan mClickableSpanDire;
+
     private Context mContext;
 
-    private Long id;
+    private Long match_id;
+    private Long radiant_tournament_registration_id;
+    private Long dire_tournament_registration_id;
+    private String team_attendance_title;
 
-    public OMatchViewHolder(View view) {
-        super(view);
+    public OMatchViewHolder(View itemView) {
+        super(itemView);
 
         mMatchCV = (CardView) itemView.findViewById(R.id.match_cardview);
         mMatchRoundTV = (TextView) itemView.findViewById(R.id.match_round);
@@ -46,48 +59,58 @@ public class OMatchViewHolder extends RecyclerView.ViewHolder {
         mDireTV = (TextView) itemView.findViewById(R.id.match_dire);
         mRadiantIV = (ImageView) itemView.findViewById(R.id.match_radiant_image);
         mDireIV = (ImageView) itemView.findViewById(R.id.match_dire_image);
-        mQrCodeIV = (ImageView) itemView.findViewById(R.id.match_qr_code);
 
         mContext = itemView.getContext();
 
-        mRadiantTV.setTag("radiant");
-        mDireTV.setTag("dire");
-        mRadiantTV.setMovementMethod(LinkMovementMethod.getInstance());
-        mDireTV.setMovementMethod(LinkMovementMethod.getInstance());
-        mClickableSpan = new ClickableSpan() {
-            @Override
-            public void onClick(View widget) {
-                Intent intent = new Intent(mContext, OTeamActivity.class);
-                intent.putExtra(TOURNAMENT_KEY, (String) widget.getTag());
-                mContext.startActivity(intent);
-            }
-        };
-
-        mQrCodeIV.setOnClickListener(new View.OnClickListener() {
+        mRadiantTV.setPaintFlags(mRadiantTV.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mRadiantTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, OQrCodeResultActivity.class);
-                intent.putExtra(TOURNAMENT_KEY, "tes");
+                Intent intent = new Intent(mContext, OTeamActivity.class);
+                intent.putExtra(MATCH_KEY, match_id);
+                intent.putExtra(TOURNAMENT_REGISTRATION_KEY, radiant_tournament_registration_id);
+                intent.putExtra(MATCH_TEAM_ATTENDANCE_TITLE_KEY, team_attendance_title);
                 mContext.startActivity(intent);
             }
         });
+        mDireTV.setPaintFlags(mDireTV.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mDireTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, OTeamActivity.class);
+                intent.putExtra(MATCH_KEY, match_id);
+                intent.putExtra(TOURNAMENT_REGISTRATION_KEY, dire_tournament_registration_id);
+                intent.putExtra(MATCH_TEAM_ATTENDANCE_TITLE_KEY, team_attendance_title);
+                mContext.startActivity(intent);
+            }
+        });
+
+        itemView.setOnClickListener(this);
     }
 
-    public void bindHolder(Match match) {
-//        mMatchRoundTV.setText(match.getMatchRound());
-//        mMatchDateTV.setText(match.getMatchDate());
-//        mRadiantTV.setText(match.getRadiant());
-//        mDireTV.setText(match.getDire());
-//        mRadiantIV.setImageResource(match.getRadiantPhotoId());
-//        mDireIV.setImageResource(match.getDirePhotoId());
-//        mQrCodeIV.setImageResource(match.getQrCodeId());
+    public void bindHolder(int position, OrganizerMatch match) {
+        match_id = match.getId();
+        radiant_tournament_registration_id = match.getPlayer_1_id();
+        dire_tournament_registration_id = match.getPlayer_2_id();
+        team_attendance_title = match.getPlayer_1() + " VS " + match.getPlayer_2();
 
-        SpannableString radiantSpanString = new SpannableString(mRadiantTV.getText());
-        radiantSpanString.setSpan(mClickableSpan, 0, radiantSpanString.length(), 0);
-        mRadiantTV.setText(radiantSpanString);
+        mMatchRoundTV.setText("Match " + (position + 1));
+        mMatchDateTV.setText(new SimpleDateFormat("d MMM yyyy HH:mm:ss").format(new Date(match.getScheduled_date() * 1000)));
+        mRadiantTV.setText(match.getPlayer_1());
+        mDireTV.setText(match.getPlayer_2());
+        Picasso.with(itemView.getContext()).load(match.getPlayer_1_image()).into(mRadiantIV);
+        Picasso.with(itemView.getContext()).load(match.getPlayer_2_image()).into(mDireIV);
+    }
 
-        SpannableString direSpanString = new SpannableString(mDireTV.getText());
-        direSpanString.setSpan(mClickableSpan, 0, direSpanString.length(), 0);
-        mDireTV.setText(direSpanString);
+    @Override
+    public void onClick(View v) {
+        if (ContextCompat.checkSelfPermission(v.getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(v.getContext(), "Please grant camera permission to use the QR Scanner", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(v.getContext(), QRScannerActivity.class);
+            intent.putExtra(MATCH_KEY, match_id);
+            intent.putExtra(MATCH_TEAM_ATTENDANCE_TITLE_KEY, team_attendance_title);
+            v.getContext().startActivity(intent);
+        }
     }
 }
