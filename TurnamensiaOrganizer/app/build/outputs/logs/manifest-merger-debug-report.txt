@@ -1,0 +1,132 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:2:1-39:12
+	package
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:3:5-50
+		INJECTED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml
+application
+ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:5:5-37:19
+MERGED from [com.android.support:design:25.3.1] C:\Users\Asus\.android\build-cache\3076fce0e2e6ec1f028e6241b039a922f613aed0\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\Asus\.android\build-cache\342217e49fc88f1a373c64ffc35150974b8d2ca6\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\Asus\.android\build-cache\9441959a53add8f3d3e38fd096840e7ae7eb2afb\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\Asus\.android\build-cache\d6dbb5bea9869e73b505657ed1f7e5325d732f90\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:transition:25.3.1] C:\Users\Asus\.android\build-cache\b432f99cb454e65c7bffe4603cf2f12c99423457\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Asus\.android\build-cache\574201feb44f5edda838915458f6e6d8029e8419\output\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\Asus\.android\build-cache\5498913f5cef3c570392f6fb926861927bef8b51\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\Asus\.android\build-cache\d2b05487a4611fe03d01a49e2134a9eccb41b392\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\Asus\.android\build-cache\076d3c278700d8fc4e935e9b50b9fde3876880da\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\Asus\.android\build-cache\6763fea8bb06b1b6f6040501f9e373a146795ec1\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:cardview-v7:25.3.1] C:\Users\Asus\.android\build-cache\5cafee7b412143073492f2dc979ec294a55e1468\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\Asus\.android\build-cache\073659ca1a76ad498e332d14c7775f9211b8fa5d\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\Asus\.android\build-cache\a14944440cbddb05c9b6b55874c180cd66f91920\output\AndroidManifest.xml:29:5-20
+	android:label
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:8:9-41
+	android:supportsRtl
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:10:9-35
+	android:roundIcon
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:9:9-54
+	android:allowBackup
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:6:9-35
+	android:icon
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:7:9-43
+	android:theme
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:11:9-40
+activity#com.tugasakhir.turnamensiaorganizer.View.Main.MainActivity
+ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:12:9-21:20
+	android:label
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:14:13-45
+	android:theme
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:15:13-56
+	android:name
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:13:13-51
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:16:13-20:29
+action#android.intent.action.MAIN
+ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:17:17-69
+	android:name
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:17:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:19:17-77
+	android:name
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:19:27-74
+activity#com.tugasakhir.turnamensiaorganizer.View.Authentication.AuthActivity
+ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:22:9-24:59
+	android:theme
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:24:13-56
+	android:name
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:23:13-61
+activity#com.tugasakhir.turnamensiaorganizer.View.Tournament.TournamentActivity
+ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:25:9-27:59
+	android:theme
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:27:13-56
+	android:name
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:26:13-63
+activity#com.tugasakhir.turnamensiaorganizer.View.Match.MatchActivity
+ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:28:9-30:59
+	android:theme
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:30:13-56
+	android:name
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:29:13-53
+activity#com.tugasakhir.turnamensiaorganizer.View.Team.TeamActivity
+ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:31:9-33:59
+	android:theme
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:33:13-56
+	android:name
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:32:13-51
+activity#com.tugasakhir.turnamensiaorganizer.View.Team.QrCodeActivity
+ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:34:9-36:59
+	android:theme
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:36:13-56
+	android:name
+		ADDED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml:35:13-53
+uses-sdk
+INJECTED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:design:25.3.1] C:\Users\Asus\.android\build-cache\3076fce0e2e6ec1f028e6241b039a922f613aed0\output\AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\Asus\.android\build-cache\342217e49fc88f1a373c64ffc35150974b8d2ca6\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\Asus\.android\build-cache\9441959a53add8f3d3e38fd096840e7ae7eb2afb\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\Asus\.android\build-cache\d6dbb5bea9869e73b505657ed1f7e5325d732f90\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:transition:25.3.1] C:\Users\Asus\.android\build-cache\b432f99cb454e65c7bffe4603cf2f12c99423457\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Asus\.android\build-cache\574201feb44f5edda838915458f6e6d8029e8419\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\Asus\.android\build-cache\5498913f5cef3c570392f6fb926861927bef8b51\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\Asus\.android\build-cache\d2b05487a4611fe03d01a49e2134a9eccb41b392\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\Asus\.android\build-cache\076d3c278700d8fc4e935e9b50b9fde3876880da\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\Asus\.android\build-cache\6763fea8bb06b1b6f6040501f9e373a146795ec1\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:cardview-v7:25.3.1] C:\Users\Asus\.android\build-cache\5cafee7b412143073492f2dc979ec294a55e1468\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\Asus\.android\build-cache\d31bad4e764a14a671443e56a397829c9a2dacaa\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\Asus\.android\build-cache\073659ca1a76ad498e332d14c7775f9211b8fa5d\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\Asus\.android\build-cache\a14944440cbddb05c9b6b55874c180cd66f91920\output\AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:25.3.1] C:\Users\Asus\.android\build-cache\3076fce0e2e6ec1f028e6241b039a922f613aed0\output\AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Turnamensia\TurnamensiaOrganizer\app\src\main\AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:25.3.1] C:\Users\Asus\.android\build-cache\3076fce0e2e6ec1f028e6241b039a922f613aed0\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\Asus\.android\build-cache\342217e49fc88f1a373c64ffc35150974b8d2ca6\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\Asus\.android\build-cache\9441959a53add8f3d3e38fd096840e7ae7eb2afb\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\Asus\.android\build-cache\d6dbb5bea9869e73b505657ed1f7e5325d732f90\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:transition:25.3.1] C:\Users\Asus\.android\build-cache\b432f99cb454e65c7bffe4603cf2f12c99423457\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\Asus\.android\build-cache\5498913f5cef3c570392f6fb926861927bef8b51\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\Asus\.android\build-cache\d2b05487a4611fe03d01a49e2134a9eccb41b392\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\Asus\.android\build-cache\076d3c278700d8fc4e935e9b50b9fde3876880da\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\Asus\.android\build-cache\6763fea8bb06b1b6f6040501f9e373a146795ec1\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:cardview-v7:25.3.1] C:\Users\Asus\.android\build-cache\5cafee7b412143073492f2dc979ec294a55e1468\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\Asus\.android\build-cache\d31bad4e764a14a671443e56a397829c9a2dacaa\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\Asus\.android\build-cache\073659ca1a76ad498e332d14c7775f9211b8fa5d\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\Asus\.android\build-cache\a14944440cbddb05c9b6b55874c180cd66f91920\output\AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:design:25.3.1] C:\Users\Asus\.android\build-cache\3076fce0e2e6ec1f028e6241b039a922f613aed0\output\AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:design:25.3.1] C:\Users\Asus\.android\build-cache\3076fce0e2e6ec1f028e6241b039a922f613aed0\output\AndroidManifest.xml:26:9-47

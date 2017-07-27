@@ -15,8 +15,6 @@ import com.tugasakhir.turnamensiamember.View.Tournament.TournamentActivity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.tugasakhir.turnamensiamember.View.Account.AccountTeamViewHolder.TEAM_KEY;
-
 /**
  * Created by Asus on 26/06/2017.
  */
@@ -30,6 +28,8 @@ public class MainViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private ImageView mPhotoIV;
 
     private Long id;
+
+    public static final String TOURNAMENT_KEY = "TOURNAMENT_KEY";
 
     public MainViewHolder(View itemView) {
         super(itemView);
@@ -62,7 +62,7 @@ public class MainViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public void onClick(View v) {
         Context context = itemView.getContext();
         Intent intent = new Intent(context, TournamentActivity.class);
-        intent.putExtra(TEAM_KEY, id);
+        intent.putExtra(TOURNAMENT_KEY, id);
         context.startActivity(intent);
     }
 }

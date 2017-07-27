@@ -19,9 +19,13 @@ public class TeamMemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static final int TYPE_MEMBER = 1;
 
     private List<Member> mMembers;
+    private Long mTeamId;
+    private Boolean mIsLeader;
 
-    public TeamMemberAdapter(List<Member> members) {
+    public TeamMemberAdapter(List<Member> members, Long teamId, Boolean isLeader) {
         this.mMembers = members;
+        this.mTeamId = teamId;
+        this.mIsLeader = isLeader;
     }
 
     @Override
@@ -33,7 +37,7 @@ public class TeamMemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 return new TeamCaptainViewHolder(view);
             case TYPE_MEMBER :
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_team_member, parent, false);
-                return new TeamMemberViewHolder(view);
+                return new TeamMemberViewHolder(view, this, mTeamId, mIsLeader);
             default :
                 return null;
         }
@@ -47,7 +51,7 @@ public class TeamMemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 ((TeamCaptainViewHolder) holder).bindHolder(member);
                 break;
             case TYPE_MEMBER :
-                ((TeamMemberViewHolder) holder).bindHolder(member);
+                ((TeamMemberViewHolder) holder).bindHolder(member, position);
                 break;
         }
     }
@@ -61,5 +65,11 @@ public class TeamMemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public int getItemViewType(int position) {
         if (position == 0) return TYPE_CAPTAIN;
         return TYPE_MEMBER;
+    }
+
+    public void removeAt(int position) {
+        mMembers.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mMembers.size());
     }
 }

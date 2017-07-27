@@ -4,11 +4,11 @@ import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.LoginResponse;
-import com.tugasakhir.turnamensiamember.Model.Response.ProfilePictureResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TeamResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.TournamentDetailResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TournamentResponse;
 
-import java.math.BigDecimal;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -41,6 +41,9 @@ public interface APIModel {
     @GET("/api/participant/tournament")
     Call<TournamentResponse> doGetParticipantTournament(@QueryMap Map<String, Object> data);
 
+    @GET("/api/participant/tournament/{id}/detail")
+    Call<TournamentDetailResponse> doGetParticipantTournamentDetail(@Path("id") Long id);
+
     @GET("/api/participant/profile")
     Call<AccountProfileResponse> doGetParticipantAccountProfile(@Header("Authorization") String authorization);
 
@@ -52,19 +55,39 @@ public interface APIModel {
 
     @Multipart
     @POST("/api/participant/profile-picture")
-    Call<ProfilePictureResponse> doUpdateParticipantProfilePicture(@Header("Authorization") String authorization, @Part MultipartBody.Part image);
+    Call<PictureResponse> doUpdateParticipantProfilePicture(@Header("Authorization") String authorization, @Part MultipartBody.Part image);
 
     @DELETE("/api/participant/profile-picture")
-    Call<ProfilePictureResponse> doDeleteParticipantProfilePicture(@Header("Authorization") String authorization);
+    Call<PictureResponse> doDeleteParticipantProfilePicture(@Header("Authorization") String authorization);
+
+    @GET("/api/participant/my-identification")
+    Call<PictureResponse> doGetParticipantIdentification(@Header("Authorization") String authorization);
+
+    @Multipart
+    @POST("/api/participant/identification")
+    Call<PictureResponse> doUpdateParticipantIdentification(@Header("Authorization") String authorization, @Part MultipartBody.Part image);
 
     @GET("/api/participant/my-team")
     Call<AccountTeamResponse> doGetParticipantAccountTeam(@Header("Authorization") String authorization);
+
+    @POST("/api/participant/team")
+    Call<TeamResponse> doCreateParticipantTeam(@Header("Authorization") String authorization, @Body Map<String, Object> data);
 
     @GET("/api/participant/my-team/{id}")
     Call<TeamResponse> doGetParticipantTeamDetail(@Header("Authorization") String authorization, @Path("id") Long id);
 
     @PUT("/api/participant/team/{id}")
-    Call<Response> doUpdateParticipantTeamProfile(@Header("Authorization") String authorization, @Body Map<String, String> data, @Path("id") BigDecimal id);
+    Call<Response> doUpdateParticipantTeamProfile(@Header("Authorization") String authorization, @Path("id") Long id, @Body Map<String, Object> data);
+
+    @Multipart
+    @POST("/api/participant/team/{id}/picture")
+    Call<PictureResponse> doUpdateParticipantTeamPicture(@Header("Authorization") String authorization, @Path("id") Long id, @Part MultipartBody.Part image);
+
+    @DELETE("/api/participant/team/{id}/picture")
+    Call<PictureResponse> doDeleteParticipantTeamPicture(@Header("Authorization") String authorization, @Path("id") Long id);
+
+    @DELETE("/api/participant/team/{id}/kick-member/{member_id}")
+    Call<Response> doDeleteParticipantTeamMember(@Header("Authorization") String authorization, @Path("id") Long id, @Path("member_id") Long memberId);
 
     @POST("/api/organizer/login")
     Call<LoginResponse> doOrganizerLogin(@Body Map<String, String> data);

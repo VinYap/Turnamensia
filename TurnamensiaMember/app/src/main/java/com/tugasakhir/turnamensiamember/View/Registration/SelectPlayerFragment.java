@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.tugasakhir.turnamensiamember.R;
 
@@ -20,6 +21,8 @@ public class SelectPlayerFragment extends Fragment {
     private RecyclerView mPlayerRV;
     private GridView mSelectedGV;
     private Button mActionB;
+    private TextView mLeftActionTV;
+    private TextView mRightActionTV;
 
     public SelectPlayerFragment() {
         // Required empty public constructor
@@ -38,6 +41,11 @@ public class SelectPlayerFragment extends Fragment {
         mPlayerRV = (RecyclerView) view.findViewById(R.id.select_player);
         mSelectedGV = (GridView) view.findViewById(R.id.selected_player);
         mActionB = (Button) view.findViewById(R.id.next_action);
+        mLeftActionTV = (TextView) view.findViewById(R.id.left_action);
+        mRightActionTV = (TextView) view.findViewById(R.id.right_action);
+
+        mLeftActionTV.setText("Choose Your Player");
+        mRightActionTV.setText("Finish");
 
         mPlayerRV.setLayoutManager(new LinearLayoutManager(getContext()));
         mPlayerRV.setHasFixedSize(true);

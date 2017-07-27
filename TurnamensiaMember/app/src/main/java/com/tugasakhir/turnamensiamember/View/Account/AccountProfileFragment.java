@@ -22,7 +22,7 @@ import com.squareup.picasso.Picasso;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Basic.User;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
-import com.tugasakhir.turnamensiamember.Model.Response.ProfilePictureResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
 import com.tugasakhir.turnamensiamember.Presenter.Account.AccountProfilePresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
@@ -113,7 +113,6 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
                 String name = mNameET.getText().toString();
                 String email = mEmailET.getText().toString();
                 String steamId = mSteamIdET.getText().toString();
-                String token = mSessionManager.getTokenLoggedIn();
 
                 if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email)) {
                     Toast.makeText(getContext(), "Please fill name and email", Toast.LENGTH_SHORT).show();
@@ -121,6 +120,7 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
                 else {
                     mProgressDialog.show();
                     mStatus = 1;
+                    String token = mSessionManager.getTokenLoggedIn();
                     mAccountProfilePresenter.doUpdateParticipantAccountProfile(token, name, email, steamId);
                 }
             }
@@ -140,7 +140,11 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
         mIdentityB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ((AccountActivity)getActivity()).getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.layout_account_profile, IdentityFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -182,7 +186,7 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
         }
         else if (mStatus == 2) {
             User user = new User();
-            user.setImage(((ProfilePictureResponse) response).getFile_path());
+            user.setImage(((PictureResponse) response).getFile_path());
             mSessionManager.doChangeUserData(user);
             mProgressDialog.dismiss();
             Picasso.with(getContext()).load(user.getImage()).into(mImageIV);

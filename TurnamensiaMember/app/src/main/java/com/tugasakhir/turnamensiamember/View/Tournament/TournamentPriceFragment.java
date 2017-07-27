@@ -6,28 +6,30 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.TextView;
 
-import com.tugasakhir.turnamensiamember.Model.Basic.TournamentPrice;
+import com.tugasakhir.turnamensiamember.Model.Basic.Tournament;
 import com.tugasakhir.turnamensiamember.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TournamentPriceFragment extends Fragment {
-    private ListView mPriceLV;
+    private TextView mPrice1stTV;
+    private TextView mPrice2ndTV;
+    private TextView mPrice3rdTV;
+    private TextView mPriceOtherTV;
 
-    private List<TournamentPrice> mPrices;
+    private Tournament mTournament;
 
     public TournamentPriceFragment() {
         // Required empty public constructor
     }
 
-    public static TournamentPriceFragment newInstance() {
-        return new TournamentPriceFragment();
+    public static TournamentPriceFragment newInstance(Tournament tournament) {
+        TournamentPriceFragment fragment = new TournamentPriceFragment();
+        fragment.mTournament = tournament;
+        return fragment;
     }
 
     @Override
@@ -36,23 +38,17 @@ public class TournamentPriceFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tournament_price, container, false);
 
-        mPriceLV = (ListView) view.findViewById(R.id.tournament_price_lv);
+        mPrice1stTV = (TextView) view.findViewById(R.id.price_1st);
+        mPrice2ndTV = (TextView) view.findViewById(R.id.price_2nd);
+        mPrice3rdTV = (TextView) view.findViewById(R.id.price_3rd);
+        mPriceOtherTV = (TextView) view.findViewById(R.id.price_other);
 
-        initializeData();
-
-        TournamentPriceAdapter adapter = new TournamentPriceAdapter(getContext(), mPrices);
-        mPriceLV.setAdapter(adapter);
+        mPrice1stTV.setText(mTournament.getPrize_1st());
+        mPrice2ndTV.setText(mTournament.getPrize_2nd());
+        mPrice3rdTV.setText(mTournament.getPrize_3rd());
+        mPriceOtherTV.setText(mTournament.getPrize_other());
 
         return view;
     }
 
-    private void initializeData() {
-        mPrices = new ArrayList<>();
-
-        for (int i = 0; i < 3; i++) {
-            TournamentPrice price = new TournamentPrice();
-
-            mPrices.add(price);
-        }
-    }
 }

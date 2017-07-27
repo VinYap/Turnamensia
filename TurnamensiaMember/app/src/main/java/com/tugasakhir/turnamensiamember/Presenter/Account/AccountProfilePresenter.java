@@ -3,7 +3,7 @@ package com.tugasakhir.turnamensiamember.Presenter.Account;
 import com.tugasakhir.turnamensiamember.Model.API.ConnectionAPI;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
-import com.tugasakhir.turnamensiamember.Model.Response.ProfilePictureResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 
@@ -143,9 +143,9 @@ public class AccountProfilePresenter {
      * @param image
      */
     public void doUpdateParticipantProfilePicture(String token, MultipartBody.Part image) {
-        ConnectionAPI.getInstance().getAPIModel().doUpdateParticipantProfilePicture(token, image).enqueue(new Callback<ProfilePictureResponse>() {
+        ConnectionAPI.getInstance().getAPIModel().doUpdateParticipantProfilePicture(token, image).enqueue(new Callback<PictureResponse>() {
             @Override
-            public void onResponse(Call<ProfilePictureResponse> call, retrofit2.Response<ProfilePictureResponse> response) {
+            public void onResponse(Call<PictureResponse> call, retrofit2.Response<PictureResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
                         iAccountProfileResponse.doSuccess(response.body());
@@ -160,7 +160,7 @@ public class AccountProfilePresenter {
             }
 
             @Override
-            public void onFailure(Call<ProfilePictureResponse> call, Throwable t) {
+            public void onFailure(Call<PictureResponse> call, Throwable t) {
                 iAccountProfileResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }
@@ -173,9 +173,9 @@ public class AccountProfilePresenter {
      * @param token
      */
     public void doDeleteParticipantProfilePicture(String token) {
-        ConnectionAPI.getInstance().getAPIModel().doDeleteParticipantProfilePicture(token).enqueue(new Callback<ProfilePictureResponse>() {
+        ConnectionAPI.getInstance().getAPIModel().doDeleteParticipantProfilePicture(token).enqueue(new Callback<PictureResponse>() {
             @Override
-            public void onResponse(Call<ProfilePictureResponse> call, retrofit2.Response<ProfilePictureResponse> response) {
+            public void onResponse(Call<PictureResponse> call, retrofit2.Response<PictureResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
                         iAccountProfileResponse.doSuccess(response.body());
@@ -190,7 +190,68 @@ public class AccountProfilePresenter {
             }
 
             @Override
-            public void onFailure(Call<ProfilePictureResponse> call, Throwable t) {
+            public void onFailure(Call<PictureResponse> call, Throwable t) {
+                iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     */
+    public void doGetParticipantIdentification(String token) {
+        ConnectionAPI.getInstance().getAPIModel().doGetParticipantIdentification(token).enqueue(new Callback<PictureResponse>() {
+            @Override
+            public void onResponse(Call<PictureResponse> call, retrofit2.Response<PictureResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iAccountProfileResponse.doSuccess(response.body());
+                    } else {
+                        iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    if (response.body() != null) iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    else iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PictureResponse> call, Throwable t) {
+                iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     * @param image
+     */
+    public void doUpdateParticipantIdentification(String token, MultipartBody.Part image) {
+        ConnectionAPI.getInstance().getAPIModel().doUpdateParticipantIdentification(token, image).enqueue(new Callback<PictureResponse>() {
+            @Override
+            public void onResponse(Call<PictureResponse> call, retrofit2.Response<PictureResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iAccountProfileResponse.doSuccess(response.body());
+                    } else {
+                        iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    if (response.body() != null) iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    else iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PictureResponse> call, Throwable t) {
                 iAccountProfileResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }
