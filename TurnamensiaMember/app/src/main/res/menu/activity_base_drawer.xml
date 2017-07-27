@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group
         android:checkableBehavior="none"
         android:visible="true"
         android:id="@+id/group_auth">
         <item
             android:id="@+id/login_register"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_vpn_key_gray_32dp"
             android:title="Sign In / Sign Up" />
     </group>
 
@@ -17,31 +16,31 @@
         android:id="@+id/group_participant">
         <item
             android:id="@+id/my_account"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_person_gray_32dp"
             android:title="My Account" />
         <item
             android:id="@+id/my_tournament_participant"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_device_hub_gray_32dp"
             android:title="My Tournament" />
         <item
             android:id="@+id/registration"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_attach_money_gray_32dp"
             android:title="Registration" />
         <item
             android:id="@+id/notification"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_info_gray_32dp"
             android:title="Notification" />
     </group>
 
-    <group
-        android:checkableBehavior="none"
-        android:visible="false"
-        android:id="@+id/group_organizer">
-        <item
-            android:id="@+id/my_tournament_organizer"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="My Tournament" />
-    </group>
+    <!--<group-->
+        <!--android:checkableBehavior="none"-->
+        <!--android:visible="false"-->
+        <!--android:id="@+id/group_organizer">-->
+        <!--<item-->
+            <!--android:id="@+id/my_tournament_organizer"-->
+            <!--android:icon="@drawable/ic_menu_camera"-->
+            <!--android:title="My Tournament" />-->
+    <!--</group>-->
 
     <group
         android:checkableBehavior="none"
@@ -49,7 +48,7 @@
         android:id="@+id/group_sign_out">
         <item
             android:id="@+id/sign_out"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_exit_to_app_gray_32dp"
             android:title="Sign Out" />
     </group>
 </menu>

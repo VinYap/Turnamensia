@@ -44,6 +44,8 @@ public class RegisterFragment extends Fragment implements iPresenterResponse {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
+        ((AuthActivity) getActivity()).setTitle("Register");
+
         mNameET = (EditText) view.findViewById(R.id.new_name);
         mEmailET = (EditText) view.findViewById(R.id.new_email);
         mPasswordET = (EditText) view.findViewById(R.id.new_password);

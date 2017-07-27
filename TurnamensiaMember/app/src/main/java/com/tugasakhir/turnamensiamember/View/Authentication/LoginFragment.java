@@ -1,13 +1,10 @@
 package com.tugasakhir.turnamensiamember.View.Authentication;
 
-
 import android.app.ProgressDialog;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +52,8 @@ public class LoginFragment extends Fragment implements iPresenterResponse {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
+        ((AuthActivity) getActivity()).setTitle("Login");
+
         mEmailET = (EditText) view.findViewById(R.id.email);
         mPasswordET = (EditText) view.findViewById(R.id.password);
         mSignUpTV = (TextView) view.findViewById(R.id.new_user);
@@ -68,21 +67,17 @@ public class LoginFragment extends Fragment implements iPresenterResponse {
         mLoginPresenter = new LoginPresenter(this);
         mSessionManager = new SessionManager(getContext());
 
-        ClickableSpan clickableSpan = new ClickableSpan() {
+        mSignUpTV.setPaintFlags(mSignUpTV.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        mSignUpTV.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View widget) {
-                ((AuthActivity)getActivity()).getSupportFragmentManager()
+            public void onClick(View v) {
+                ((AuthActivity) getActivity()).getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.layout_auth, RegisterFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
             }
-        };
-
-        SpannableString spannableString = new SpannableString(mSignUpTV.getText());
-        spannableString.setSpan(clickableSpan, 22, 29, 0);
-        mSignUpTV.setText(spannableString);
-        mSignUpTV.setMovementMethod(LinkMovementMethod.getInstance());
+        });
 
         mSignInB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,14 +88,12 @@ public class LoginFragment extends Fragment implements iPresenterResponse {
 
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                     Toast.makeText(getContext(), "Please fill the username and password fields.", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     mProgressDialog.show();
                     if (isOrganizer) {
                         mMemberType = 2;
                         mLoginPresenter.doOrganizerLogin(email, password);
-                    }
-                    else {
+                    } else {
                         mMemberType = 1;
                         mLoginPresenter.doParticipantLogin(email, password);
                     }
