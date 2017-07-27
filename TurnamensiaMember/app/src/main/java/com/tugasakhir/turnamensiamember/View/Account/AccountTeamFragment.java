@@ -4,6 +4,7 @@ package com.tugasakhir.turnamensiamember.View.Account;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -56,7 +57,12 @@ public class AccountTeamFragment extends Fragment implements iPresenterResponse 
         mCreateTeamB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ((AccountActivity)getActivity()).startActivity(new Intent(getContext(), OTeamActivity.class));
+                mCreateTeamB.setVisibility(View.GONE);
+                ((AccountActivity)getActivity()).getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.layout_account_team, CreateTeamFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -76,6 +82,18 @@ public class AccountTeamFragment extends Fragment implements iPresenterResponse 
 
         mAdapter = new AccountTeamAdapter(mTeams);
         mTeamRV.setAdapter(mAdapter);
+
+        getActivity().getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                    mProgressDialog.show();
+                    String token = mSessionManager.getTokenLoggedIn();
+                    mCreateTeamB.setVisibility(View.VISIBLE);
+                    mAccountTeamPresenter.doGetParticipantAccountTeam(token);
+                }
+            }
+        });
 
         return view;
     }

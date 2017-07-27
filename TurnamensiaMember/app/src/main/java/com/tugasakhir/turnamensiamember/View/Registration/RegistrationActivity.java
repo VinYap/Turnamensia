@@ -12,6 +12,15 @@ public class RegistrationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_registration, mBaseLayout);
 
-//        showUpCaretMenu();
+        showUpCaretMenu();
+
+        if (savedInstanceState !=  null) {
+            return;
+        }
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.layout_registration, SelectTeamFragment.newInstance())
+                .commit();
     }
 }

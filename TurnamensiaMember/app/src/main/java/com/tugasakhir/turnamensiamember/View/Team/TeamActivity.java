@@ -12,8 +12,9 @@ import com.tugasakhir.turnamensiamember.Model.SessionManager;
 import com.tugasakhir.turnamensiamember.Presenter.Team.TeamDetailPresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
-import com.tugasakhir.turnamensiamember.View.Account.AccountTeamViewHolder;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
+
+import static com.tugasakhir.turnamensiamember.View.Account.AccountTeamViewHolder.TEAM_KEY;
 
 public class TeamActivity extends BaseActivity implements iPresenterResponse {
     private TabLayout mTabLayout;
@@ -40,7 +41,7 @@ public class TeamActivity extends BaseActivity implements iPresenterResponse {
         mSessionManager = new SessionManager(this);
         mTeamDetailPresenter = new TeamDetailPresenter(this);
 
-        Long teamId = getIntent().getLongExtra(AccountTeamViewHolder.TEAM_KEY, -1);
+        Long teamId = getIntent().getLongExtra(TEAM_KEY, -1);
         String token = mSessionManager.getTokenLoggedIn();
 
         mProgressDialog.show();

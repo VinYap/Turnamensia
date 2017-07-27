@@ -27,6 +27,7 @@ public class AccountTeamViewHolder extends RecyclerView.ViewHolder implements Vi
 
     public AccountTeamViewHolder(View itemView) {
         super(itemView);
+
         mNameTV = (TextView) itemView.findViewById(R.id.team_name);
         mMemberTV = (TextView) itemView.findViewById(R.id.team_member);
         mImageIV = (ImageView) itemView.findViewById(R.id.team_image);

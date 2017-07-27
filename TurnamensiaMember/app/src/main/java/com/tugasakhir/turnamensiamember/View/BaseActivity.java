@@ -70,6 +70,13 @@ public abstract class BaseActivity extends AppCompatActivity
 
         mSessionManager = new SessionManager(getApplicationContext());
 
+        mUserImageIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
+
 //        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
 //            @Override
 //            public void onBackStackChanged() {

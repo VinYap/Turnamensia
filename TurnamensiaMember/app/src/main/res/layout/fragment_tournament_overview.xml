@@ -1,0 +1,11 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tugasakhir.turnamensiamember.View.Tournament.TournamentOverviewFragment">
+
+    <TextView
+        android:id="@+id/tournament_overview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</ScrollView>

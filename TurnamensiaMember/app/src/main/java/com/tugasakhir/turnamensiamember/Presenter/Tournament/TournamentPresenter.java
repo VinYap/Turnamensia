@@ -5,6 +5,7 @@ import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.MatchTeamAttendanceResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.OrganizerTournamentDetailResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.QRScannerResultResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.TournamentDetailResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TournamentResponse;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
@@ -195,6 +196,35 @@ public class TournamentPresenter {
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
+                iTournamentResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+
+    /**
+     * For Communicating Between Apps and API
+     */
+    public void doGetParticipantTournamentDetail(Long id) {
+        ConnectionAPI.getInstance().getAPIModel().doGetParticipantTournamentDetail(id).enqueue(new Callback<TournamentDetailResponse>() {
+            @Override
+            public void onResponse(Call<TournamentDetailResponse> call, retrofit2.Response<TournamentDetailResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iTournamentResponse.doSuccess(response.body());
+                    } else {
+                        iTournamentResponse.doFail(response.body().getMessage()[0]);
+                    }
+                } else {
+                    if (response.body() != null)
+                        iTournamentResponse.doFail(response.body().getMessage()[0]);
+                    else iTournamentResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TournamentDetailResponse> call, Throwable t) {
                 iTournamentResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }

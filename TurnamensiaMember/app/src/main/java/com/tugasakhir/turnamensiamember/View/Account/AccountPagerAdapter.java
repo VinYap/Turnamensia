@@ -2,13 +2,13 @@ package com.tugasakhir.turnamensiamember.View.Account;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
 /**
  * Created by Asus on 26/06/2017.
  */
 
-public class AccountPagerAdapter extends FragmentStatePagerAdapter {
+public class AccountPagerAdapter extends FragmentPagerAdapter {
 
     public AccountPagerAdapter(FragmentManager fm) {
         super(fm);

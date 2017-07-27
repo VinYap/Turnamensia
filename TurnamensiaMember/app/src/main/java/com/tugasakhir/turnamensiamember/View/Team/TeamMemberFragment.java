@@ -21,14 +21,18 @@ public class TeamMemberFragment extends Fragment {
     private RecyclerView mMemberRV;
 
     private List<Member> mMembers;
+    private Long mTeamId;
+    private Boolean mIsLeader;
 
     public TeamMemberFragment() {
         // Required empty public constructor
     }
 
-    public static TeamMemberFragment newInstance(List<Member> members) {
+    public static TeamMemberFragment newInstance(List<Member> members, Long mTeamId, Boolean isLeader) {
         TeamMemberFragment fragment = new TeamMemberFragment();
         fragment.mMembers = members;
+        fragment.mTeamId = mTeamId;
+        fragment.mIsLeader = isLeader;
         return fragment;
     }
 
@@ -42,7 +46,7 @@ public class TeamMemberFragment extends Fragment {
         mMemberRV.setLayoutManager(new LinearLayoutManager(getContext()));
         mMemberRV.setHasFixedSize(true);
 
-        TeamMemberAdapter adapter = new TeamMemberAdapter(mMembers);
+        TeamMemberAdapter adapter = new TeamMemberAdapter(mMembers, mTeamId, mIsLeader);
         mMemberRV.setAdapter(adapter);
 
         return view;
