@@ -9,10 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tugasakhir.turnamensiamember.Model.Basic.Tournament;
+import com.tugasakhir.turnamensiamember.Model.Basic.LiveMatch;
 import com.tugasakhir.turnamensiamember.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,14 +20,16 @@ import java.util.List;
 public class TournamentLiveMatchFragment extends Fragment {
     private RecyclerView mLiveMatchRV;
 
-    private List<Tournament> mTournaments;
+    private List<LiveMatch> mLiveMatches;
 
     public TournamentLiveMatchFragment() {
         // Required empty public constructor
     }
 
-    public static TournamentLiveMatchFragment newInstance() {
-        return new TournamentLiveMatchFragment();
+    public static TournamentLiveMatchFragment newInstance(List<LiveMatch> liveMatches) {
+        TournamentLiveMatchFragment fragment = new TournamentLiveMatchFragment();
+        fragment.mLiveMatches = liveMatches;
+        return fragment;
     }
 
     @Override
@@ -41,20 +42,9 @@ public class TournamentLiveMatchFragment extends Fragment {
         mLiveMatchRV.setLayoutManager(new LinearLayoutManager(getContext()));
         mLiveMatchRV.setHasFixedSize(true);
 
-        initializeData();
-
-        TournamentLiveMatchAdapter adapter = new TournamentLiveMatchAdapter(mTournaments);
+        TournamentLiveMatchAdapter adapter = new TournamentLiveMatchAdapter(mLiveMatches);
         mLiveMatchRV.setAdapter(adapter);
 
         return view;
-    }
-
-    private void initializeData() {
-        mTournaments = new ArrayList<>();
-
-        for (int i = 0; i < 3; i++) {
-            Tournament tournament = new Tournament();
-            mTournaments.add(tournament);
-        }
     }
 }

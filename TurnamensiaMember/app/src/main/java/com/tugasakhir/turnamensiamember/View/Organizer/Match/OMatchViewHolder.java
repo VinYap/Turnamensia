@@ -40,7 +40,7 @@ public class OMatchViewHolder extends RecyclerView.ViewHolder {
         super(view);
 
         mMatchCV = (CardView) itemView.findViewById(R.id.match_cardview);
-        mMatchRoundTV = (TextView) itemView.findViewById(R.id.match_round);
+        mMatchRoundTV = (TextView) itemView.findViewById(R.id.match_id);
         mMatchDateTV = (TextView) itemView.findViewById(R.id.match_date);
         mRadiantTV = (TextView) itemView.findViewById(R.id.match_radiant);
         mDireTV = (TextView) itemView.findViewById(R.id.match_dire);

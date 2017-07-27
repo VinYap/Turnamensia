@@ -1,5 +1,6 @@
 package com.tugasakhir.turnamensiamember.Model.Response;
 
+import com.tugasakhir.turnamensiamember.Model.Basic.LiveMatch;
 import com.tugasakhir.turnamensiamember.Model.Basic.Match;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Basic.Tournament;
@@ -14,6 +15,7 @@ import java.util.Map;
 public class TournamentDetailResponse extends Response {
     private Tournament tournament;
     private Map<String, List<Match>> matches;
+    private List<LiveMatch> live_matches_json;
 
     public Tournament getTournament() {
         return tournament;
@@ -29,5 +31,13 @@ public class TournamentDetailResponse extends Response {
 
     public void setMatches(Map<String, List<Match>> matches) {
         this.matches = matches;
+    }
+
+    public List<LiveMatch> getLive_matches_json() {
+        return live_matches_json;
+    }
+
+    public void setLive_matches_json(List<LiveMatch> live_matches_json) {
+        this.live_matches_json = live_matches_json;
     }
 }

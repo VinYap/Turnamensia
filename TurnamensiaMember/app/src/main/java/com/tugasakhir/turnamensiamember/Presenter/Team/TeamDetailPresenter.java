@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.tugasakhir.turnamensiamember.Model.API.ConnectionAPI;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
+import com.tugasakhir.turnamensiamember.Model.Response.MemberResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TeamResponse;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
@@ -227,6 +228,37 @@ public class TeamDetailPresenter {
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
+                iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     * @param teamId
+     */
+    public void doGetParticipantTeamMember(String token, Long teamId) {
+        ConnectionAPI.getInstance().getAPIModel().doGetParticipantTeamMember(token, teamId).enqueue(new Callback<MemberResponse>() {
+            @Override
+            public void onResponse(Call<MemberResponse> call, retrofit2.Response<MemberResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iTeamDetailResponse.doSuccess(response.body());
+                    } else {
+                        iTeamDetailResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    if (response.body() != null) iTeamDetailResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MemberResponse> call, Throwable t) {
                 iTeamDetailResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }

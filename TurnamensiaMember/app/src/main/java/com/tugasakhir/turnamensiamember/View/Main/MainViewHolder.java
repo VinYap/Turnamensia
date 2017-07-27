@@ -28,8 +28,10 @@ public class MainViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private ImageView mPhotoIV;
 
     private Long id;
+    private Boolean isOpen;
 
     public static final String TOURNAMENT_KEY = "TOURNAMENT_KEY";
+    public static final String IS_OPEN = "IS_OPEN";
 
     public MainViewHolder(View itemView) {
         super(itemView);
@@ -56,6 +58,9 @@ public class MainViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         mPriceTV.setText("Rp ".concat(String.format("%,d", tournament.getEntry_fee())));
         mStatusTV.setText(tournament.getStatus());
         Picasso.with(itemView.getContext()).load(tournament.getImage()).into(mPhotoIV);
+
+        if (registrationClosed.compareTo(new Date()) < 0) isOpen = false;
+        else isOpen = true;
     }
 
     @Override
@@ -63,6 +68,7 @@ public class MainViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         Context context = itemView.getContext();
         Intent intent = new Intent(context, TournamentActivity.class);
         intent.putExtra(TOURNAMENT_KEY, id);
+        intent.putExtra(IS_OPEN, isOpen);
         context.startActivity(intent);
     }
 }

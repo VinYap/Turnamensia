@@ -4,6 +4,7 @@ import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.LoginResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.MemberResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TournamentDetailResponse;
@@ -67,6 +68,9 @@ public interface APIModel {
     @POST("/api/participant/identification")
     Call<PictureResponse> doUpdateParticipantIdentification(@Header("Authorization") String authorization, @Part MultipartBody.Part image);
 
+    @GET("/api/participant/my-tournament")
+    Call<Response> doGetParticipantMyTournament(@Header("Authorization") String authorization);
+
     @GET("/api/participant/my-team")
     Call<AccountTeamResponse> doGetParticipantAccountTeam(@Header("Authorization") String authorization);
 
@@ -88,6 +92,9 @@ public interface APIModel {
 
     @DELETE("/api/participant/team/{id}/kick-member/{member_id}")
     Call<Response> doDeleteParticipantTeamMember(@Header("Authorization") String authorization, @Path("id") Long id, @Path("member_id") Long memberId);
+
+    @GET("/api/participant/team/{id}/member")
+    Call<MemberResponse> doGetParticipantTeamMember(@Header("Authorization") String authorization, @Path("id") Long id);
 
     @POST("/api/organizer/login")
     Call<LoginResponse> doOrganizerLogin(@Body Map<String, String> data);

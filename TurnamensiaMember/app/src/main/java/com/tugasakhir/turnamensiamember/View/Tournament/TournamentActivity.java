@@ -24,6 +24,7 @@ import com.tugasakhir.turnamensiamember.View.BaseActivity;
 import com.tugasakhir.turnamensiamember.View.Registration.RegistrationActivity;
 import com.tugasakhir.turnamensiamember.View.Schedule.ScheduleActivity;
 
+import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.IS_OPEN;
 import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_KEY;
 
 public class TournamentActivity extends BaseActivity implements iPresenterResponse {
@@ -75,6 +76,13 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
         });
 
         Long tournamentId = getIntent().getLongExtra(TOURNAMENT_KEY, -1);
+        Boolean isOpen = getIntent().getBooleanExtra(IS_OPEN, false);
+
+        if (isOpen == false) {
+            mRegisterIV.setText("Register close");
+            mRegisterIV.setEnabled(false);
+        }
+
         mProgressDialog.show();
         mTournamentPresenter.doGetParticipantTournamentDetail(tournamentId);
     }

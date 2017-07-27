@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tugasakhir.turnamensiamember.Model.Basic.Tournament;
+import com.tugasakhir.turnamensiamember.Model.Basic.LiveMatch;
 import com.tugasakhir.turnamensiamember.R;
 
 import java.util.List;
@@ -15,10 +15,10 @@ import java.util.List;
  */
 
 public class TournamentLiveMatchAdapter extends RecyclerView.Adapter<TournamentLiveMatchViewHolder> {
-    private List<Tournament> mTournaments;
+    private List<LiveMatch> mLiveMatches;
 
-    public TournamentLiveMatchAdapter(List<Tournament> tournaments) {
-        this.mTournaments = tournaments;
+    public TournamentLiveMatchAdapter(List<LiveMatch> liveMatches) {
+        this.mLiveMatches = liveMatches;
     }
 
     @Override
@@ -29,11 +29,12 @@ public class TournamentLiveMatchAdapter extends RecyclerView.Adapter<TournamentL
 
     @Override
     public void onBindViewHolder(TournamentLiveMatchViewHolder holder, int position) {
-
+        LiveMatch liveMatch = mLiveMatches.get(position);
+        holder.bindHolder(liveMatch);
     }
 
     @Override
     public int getItemCount() {
-        return mTournaments.size();
+        return mLiveMatches.size();
     }
 }
