@@ -1,20 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/colorBackground"
     tools:context="com.tugasakhir.turnamensiamember.View.Comment.CommentActivity">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/comment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_above="@+id/comment_linear_layout_1"
+        tools:listitem="@layout/item_comment" />
 
-    <EditText
+    <LinearLayout
+        android:id="@+id/comment_linear_layout_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Write Comment" />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/comment_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Write Comment"
+            android:inputType="textMultiLine"
+            android:textColor="@color/colorTextLight"
+            android:textColorHint="@color/colorTextHint"
+            android:theme="@style/editTextStyle" />
+
+        <ImageButton
+            android:id="@+id/comment_button"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_send_orange_32dp" />
+    </LinearLayout>
+</RelativeLayout>

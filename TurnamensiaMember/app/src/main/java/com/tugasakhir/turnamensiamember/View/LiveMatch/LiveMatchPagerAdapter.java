@@ -9,15 +9,20 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 
 public class LiveMatchPagerAdapter extends FragmentStatePagerAdapter {
+    private PickBanFragment mPickBanFragment;
+    private PlayerStatFragment mPlayerStatFragment;
 
-    public LiveMatchPagerAdapter(FragmentManager fm) {
+    public LiveMatchPagerAdapter(FragmentManager fm, PickBanFragment mPickBanFragment, PlayerStatFragment mPlayerStatFragment) {
         super(fm);
+
+        this.mPickBanFragment = mPickBanFragment;
+        this.mPlayerStatFragment = mPlayerStatFragment;
     }
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) return PickBanFragment.newInstance();
-        if (position == 1) return PlayerStatFragment.newInstance();
+        if (position == 0) return mPickBanFragment;
+        if (position == 1) return mPlayerStatFragment;
         return null;
     }
 

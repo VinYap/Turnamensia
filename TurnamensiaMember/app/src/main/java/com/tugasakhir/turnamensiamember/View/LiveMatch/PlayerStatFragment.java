@@ -8,17 +8,33 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+import com.tugasakhir.turnamensiamember.Model.Basic.Dota2LiveMatch;
+import com.tugasakhir.turnamensiamember.Model.Basic.Dota2LiveMatchPlayer;
 import com.tugasakhir.turnamensiamember.R;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class PlayerStatFragment extends Fragment {
-    private RecyclerView mRadiant1RV;
-    private RecyclerView mRadiant2RV;
-    private RecyclerView mDire1RV;
-    private RecyclerView mDire2RV;
+    private ImageView mRadiantIV;
+    private TextView mRadiantTV;
+    private RecyclerView mRadiantStatistic;
+    private RecyclerView mRadiantItem;
+    private ImageView mDireIV;
+    private TextView mDireTV;
+    private RecyclerView mDireStatistic;
+    private RecyclerView mDireItem;
+
+    private StatisticAdapter mRadiantStatisticAdapter;
+    private ItemAdapter mRadiantItemAdapter;
+    private StatisticAdapter mDireStatisticAdapter;
+    private ItemAdapter mDireItemAdapter;
 
     public PlayerStatFragment() {
         // Required empty public constructor
@@ -34,32 +50,65 @@ public class PlayerStatFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_player_stat, container, false);
 
-        mRadiant1RV = (RecyclerView) view.findViewById(R.id.radiant_player_stat_1);
-        mRadiant2RV = (RecyclerView) view.findViewById(R.id.radiant_player_stat_2);
-        mDire1RV = (RecyclerView) view.findViewById(R.id.dire_player_stat_1);
-        mDire2RV = (RecyclerView) view.findViewById(R.id.dire_player_stat_2);
+        mRadiantIV = (ImageView) view.findViewById(R.id.radiant_image_player_stat);
+        mRadiantTV = (TextView) view.findViewById(R.id.radiant_text_player_stat);
+        mRadiantStatistic = (RecyclerView) view.findViewById(R.id.radiant_statistic);
+        mRadiantItem = (RecyclerView) view.findViewById(R.id.radiant_item);
+        mDireIV = (ImageView) view.findViewById(R.id.dire_image_player_stat);
+        mDireTV = (TextView) view.findViewById(R.id.dire_text_player_stat);
+        mDireStatistic = (RecyclerView) view.findViewById(R.id.dire_statistic);
+        mDireItem = (RecyclerView) view.findViewById(R.id.dire_item);
 
-        mRadiant1RV.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRadiant2RV.setLayoutManager(new LinearLayoutManager(getContext()));
-        mDire1RV.setLayoutManager(new LinearLayoutManager(getContext()));
-        mDire2RV.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRadiantStatistic.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRadiantItem.setLayoutManager(new LinearLayoutManager(getContext()));
+        mDireStatistic.setLayoutManager(new LinearLayoutManager(getContext()));
+        mDireItem.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mRadiant1RV.setHasFixedSize(true);
-        mRadiant2RV.setHasFixedSize(true);
-        mDire1RV.setHasFixedSize(true);
-        mDire2RV.setHasFixedSize(true);
-
-        PlayerStat1Adapter radiant1Adapter = new PlayerStat1Adapter();
-        PlayerStat2Adapter radiant2Adapter = new PlayerStat2Adapter();
-        PlayerStat1Adapter dire1Adapter = new PlayerStat1Adapter();
-        PlayerStat2Adapter dire2Adapter = new PlayerStat2Adapter();
-
-        mRadiant1RV.setAdapter(radiant1Adapter);
-        mRadiant2RV.setAdapter(radiant2Adapter);
-        mDire1RV.setAdapter(dire1Adapter);
-        mDire2RV.setAdapter(dire2Adapter);
+        mRadiantStatisticAdapter = new StatisticAdapter();
+        mRadiantStatistic.setAdapter(mRadiantStatisticAdapter);
+        mRadiantItemAdapter = new ItemAdapter();
+        mRadiantItem.setAdapter(mRadiantItemAdapter);
+        mDireStatisticAdapter = new StatisticAdapter();
+        mDireStatistic.setAdapter(mDireStatisticAdapter);
+        mDireItemAdapter = new ItemAdapter();
+        mDireItem.setAdapter(mDireItemAdapter);
 
         return view;
     }
 
+    public void updateStatistic(Integer team, List<Dota2LiveMatchPlayer> players) {
+        if (team == 1) {
+            mRadiantStatisticAdapter.setmPlayers(players);
+            mRadiantStatisticAdapter.notifyDataSetChanged();
+        } else if (team == 2) {
+            mDireStatisticAdapter.setmPlayers(players);
+            mDireStatisticAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void updateItem(Integer team, List<Dota2LiveMatchPlayer> players) {
+        if (team == 1) {
+            mRadiantItemAdapter.setmPlayers(players);
+            mRadiantItemAdapter.notifyDataSetChanged();
+        } else if (team == 2) {
+            mDireItemAdapter.setmPlayers(players);
+            mDireItemAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void updateImageHeader(Integer team, String image) {
+        if (team == 1) {
+            Picasso.with(getContext()).load(image).into(mRadiantIV);
+        } else if (team == 2) {
+            Picasso.with(getContext()).load(image).into(mDireIV);
+        }
+    }
+
+    public void updateHeader(Integer team, String name) {
+        if (team == 1) {
+            mRadiantTV.setText(name);
+        } else if (team == 2) {
+            mDireTV.setText(name);
+        }
+    }
 }

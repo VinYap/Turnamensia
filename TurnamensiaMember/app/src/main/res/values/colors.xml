@@ -21,4 +21,9 @@
     <color name="colorTextLight">#FFFFFF</color>
     <color name="colorTextHint">#AFAEAC</color>
     <color name="colorBorderHint">#AFAEAC</color>
+    <color name="colorLiveMatchBorder">#5F6471</color>
+    <color name="colorLiveMatchGradientLeft">#2F313A</color>
+    <color name="colorLiveMatchGradientRight">#2F3341</color>
+    <color name="colorLiveMatchTableBackground">#242F39</color>
+    <color name="colorOrange">#C64823</color>
 </resources>

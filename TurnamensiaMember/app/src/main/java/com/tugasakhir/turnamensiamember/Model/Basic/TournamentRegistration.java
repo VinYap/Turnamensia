@@ -10,6 +10,7 @@ import org.parceler.Parcel;
 public class TournamentRegistration {
     private Long id;
     private Long register_at;
+    private Team team;
 
     public Long getId() {
         return id;
@@ -25,5 +26,13 @@ public class TournamentRegistration {
 
     public void setRegister_at(Long register_at) {
         this.register_at = register_at;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

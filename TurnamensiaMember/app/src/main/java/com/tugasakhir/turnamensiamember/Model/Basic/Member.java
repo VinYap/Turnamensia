@@ -13,10 +13,10 @@ public class Member {
     private String steam32_id;
     private String image;
     private String identification_image;
+    private String picture_file_name;
     private String status;
     private Long joined_at;
     private Long attendances_status;
-    private String picture_file_name;
     private boolean selected;
 
     public Long getId() {
@@ -59,6 +59,14 @@ public class Member {
         this.identification_image = identification_image;
     }
 
+    public String getPicture_file_name() {
+        return picture_file_name;
+    }
+
+    public void setPicture_file_name(String picture_file_name) {
+        this.picture_file_name = picture_file_name;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -81,14 +89,6 @@ public class Member {
 
     public void setAttendances_status(Long attendances_status) {
         this.attendances_status = attendances_status;
-    }
-
-    public String getPicture_file_name() {
-        return picture_file_name;
-    }
-
-    public void setPicture_file_name(String picture_file_name) {
-        this.picture_file_name = picture_file_name;
     }
 
     public boolean isSelected() {
