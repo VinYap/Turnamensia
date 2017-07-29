@@ -1,34 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.tugasakhir.turnamensiamember.View.LiveMatch.LiveMatchActivity">
+    android:background="@color/colorBackground">
 
-    <include
-        layout="@layout/item_tournament_live_match"
+    <RelativeLayout
+        android:id="@+id/live_match_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </include>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/live_match_border_background">
+
+        <TextView
+            android:id="@+id/match_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:text="Match ID: 8266273828"
+            android:textColor="@color/colorTextDefault"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/match_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:text="Game 3|Best of 3"
+            android:textColor="@color/colorTextDefault"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/radiant_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@+id/radiant_image"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:maxLines="1"
+            android:text="Radiant"
+            android:textColor="@color/colorTextDefault"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/radiant_image"
+            android:layout_width="48dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="24dp"
+            android:layout_toLeftOf="@+id/status_container"
+            android:scaleType="fitXY"
+            android:src="@drawable/live_match_default" />
+
+        <RelativeLayout
+            android:id="@+id/status_container"
+            android:layout_width="56dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/radiant_score"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="4dp"
+                android:layout_toLeftOf="@+id/dash"
+                android:gravity="right"
+                android:text="999"
+                android:textColor="@color/colorTextDefault"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/dash"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="8dp"
+                android:text="00:00"
+                android:textColor="@color/colorTextDefault"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/dash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="-"
+                android:textColor="@color/colorTextDefault"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/dire_score"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/dash"
+                android:gravity="left"
+                android:text="999"
+                android:textColor="@color/colorTextDefault"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/dire_image"
+            android:layout_width="48dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="24dp"
+            android:layout_toRightOf="@id/status_container"
+            android:scaleType="fitXY"
+            android:src="@drawable/live_match_default" />
+
+        <TextView
+            android:id="@+id/dire_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="2dp"
+            android:layout_toRightOf="@+id/dire_image"
+            android:ellipsize="end"
+            android:gravity="right"
+            android:maxLines="1"
+            android:text="Dire"
+            android:textColor="@color/colorTextDefault" />
+    </RelativeLayout>
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/live_match_tab_layout"
+        android:id="@+id/statistic_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/live_match_container"
+        app:tabBackground="@color/colorTabLayoutBackground"
         app:tabGravity="fill"
-        app:tabMode="scrollable"></android.support.design.widget.TabLayout>
+        app:tabIndicatorColor="@color/colorTabLayoutIndicator"
+        app:tabIndicatorHeight="4dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorTabLayoutTextSelected"
+        app:tabTextColor="@color/colorTabLayoutTextDefault" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/live_match_pager"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/statistic_tab_layout"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Comment" />
-</LinearLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/statistic_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/live_match_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/linear_gradient_orange"
+            android:text="COMMENT" />
+    </LinearLayout>
+</RelativeLayout>

@@ -2,6 +2,8 @@ package com.tugasakhir.turnamensiamember.Presenter.Tournament;
 
 import com.tugasakhir.turnamensiamember.Model.API.ConnectionAPI;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
+import com.tugasakhir.turnamensiamember.Model.Response.CommentResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.Dota2MatchResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.MatchTeamAttendanceResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.OrganizerTournamentDetailResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.QRScannerResultResponse;
@@ -202,6 +204,83 @@ public class TournamentPresenter {
         });
     }
 
+    public void doGetDota2Match(Long id) {
+        ConnectionAPI.getInstance().getAPIModel().doGetDota2Match(id).enqueue(new Callback<Dota2MatchResponse>() {
+            @Override
+            public void onResponse(Call<Dota2MatchResponse> call, retrofit2.Response<Dota2MatchResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iTournamentResponse.doSuccess(response.body());
+                    } else {
+                        iTournamentResponse.doFail(response.body().getMessage()[0]);
+                    }
+                } else {
+                    if (response.body() != null)
+                        iTournamentResponse.doFail(response.body().getMessage()[0]);
+                    else iTournamentResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Dota2MatchResponse> call, Throwable t) {
+                iTournamentResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void doGetDota2MatchComment(String token, Long id) {
+        ConnectionAPI.getInstance().getAPIModel().doGetDota2MatchComment(token, id).enqueue(new Callback<CommentResponse>() {
+            @Override
+            public void onResponse(Call<CommentResponse> call, retrofit2.Response<CommentResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iTournamentResponse.doSuccess(response.body());
+                    } else {
+                        iTournamentResponse.doFail(response.body().getMessage()[0]);
+                    }
+                } else {
+                    if (response.body() != null)
+                        iTournamentResponse.doFail(response.body().getMessage()[0]);
+                    else iTournamentResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommentResponse> call, Throwable t) {
+                iTournamentResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void doPostDota2MatchComment(String token, Long id, String comment) {
+        Map<String, String> data = new HashMap<>();
+        data.put("comment", comment);
+
+        ConnectionAPI.getInstance().getAPIModel().doPostDota2MatchComment(token, id, data).enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iTournamentResponse.doSuccess(response.body());
+                    } else {
+                        iTournamentResponse.doFail(response.body().getMessage()[0]);
+                    }
+                } else {
+                    if (response.body() != null)
+                        iTournamentResponse.doFail(response.body().getMessage()[0]);
+                    else iTournamentResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+                iTournamentResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
 
     /**
      * For Communicating Between Apps and API

@@ -2,53 +2,459 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
     tools:context="com.tugasakhir.turnamensiamember.View.LiveMatch.PickBanFragment">
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/live_match_border_background"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/radiant_pick_ban_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Radiant Pick &amp; Ban"
+            android:textColor="@color/colorTextDefault"
+            android:textSize="24dp" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginBottom="4dp">
 
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Radiant Pick &amp; Ban" />
+            <ImageView
+                android:id="@+id/radiant_pick_1"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
 
-            <GridView
-                android:id="@+id/radiant_pick_ban"
-                android:layout_width="match_parent"
-                android:numColumns="5"
-                android:layout_height="100dp"></GridView>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+            <ImageView
+                android:id="@+id/radiant_status_pick_1"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/radiant_pick_1"
+                android:layout_marginLeft="4dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/pick" />
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/radiant_pick_2"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/radiant_pick_1"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
 
-        <LinearLayout
+            <ImageView
+                android:id="@+id/radiant_status_pick_2"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/radiant_pick_2"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/radiant_status_pick_1"
+                android:scaleType="fitXY"
+                android:src="@drawable/pick" />
+
+            <ImageView
+                android:id="@+id/radiant_pick_3"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/radiant_pick_2"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/radiant_status_pick_3"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/radiant_pick_3"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/radiant_status_pick_2"
+                android:scaleType="fitXY"
+                android:src="@drawable/pick" />
+
+            <ImageView
+                android:id="@+id/radiant_pick_4"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/radiant_pick_3"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/radiant_status_pick_4"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/radiant_pick_4"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/radiant_status_pick_3"
+                android:scaleType="fitXY"
+                android:src="@drawable/pick" />
+
+            <ImageView
+                android:id="@+id/radiant_pick_5"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/radiant_pick_4"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/radiant_status_pick_5"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/radiant_pick_5"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/radiant_status_pick_4"
+                android:scaleType="fitXY"
+                android:src="@drawable/pick" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:paddingBottom="8dp">
 
-            <TextView
-                android:id="@+id/textView23"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dire Pick &amp; Ban" />
+            <ImageView
+                android:id="@+id/radiant_ban_1"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
 
-            <GridView
-                android:id="@+id/dire_pick_ban"
-                android:layout_width="match_parent"
-                android:numColumns="5"
-                android:layout_height="100dp"></GridView>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+            <ImageView
+                android:id="@+id/radiant_status_ban_1"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/radiant_ban_1"
+                android:layout_marginLeft="4dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ban" />
 
+            <ImageView
+                android:id="@+id/radiant_ban_2"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/radiant_ban_1"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/radiant_status_ban_2"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/radiant_ban_2"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/radiant_status_ban_1"
+                android:scaleType="fitXY"
+                android:src="@drawable/ban" />
+
+            <ImageView
+                android:id="@+id/radiant_ban_3"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/radiant_ban_2"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/radiant_status_ban_3"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/radiant_ban_3"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/radiant_status_ban_2"
+                android:scaleType="fitXY"
+                android:src="@drawable/ban" />
+
+            <ImageView
+                android:id="@+id/radiant_ban_4"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/radiant_ban_3"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/radiant_status_ban_4"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/radiant_ban_4"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/radiant_status_ban_3"
+                android:scaleType="fitXY"
+                android:src="@drawable/ban" />
+
+            <ImageView
+                android:id="@+id/radiant_ban_5"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/radiant_ban_4"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/radiant_status_ban_5"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/radiant_ban_5"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/radiant_status_ban_4"
+                android:scaleType="fitXY"
+                android:src="@drawable/ban" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/live_match_border_background"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dire_pick_ban_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Dire Pick &amp; Ban"
+            android:textColor="@color/colorTextDefault"
+            android:textSize="24dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp">
+
+            <ImageView
+                android:id="@+id/dire_pick_1"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/dire_status_pick_1"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/dire_pick_1"
+                android:layout_marginLeft="4dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/pick" />
+
+            <ImageView
+                android:id="@+id/dire_pick_2"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/dire_pick_1"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/dire_status_pick_2"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/dire_pick_2"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/dire_status_pick_1"
+                android:scaleType="fitXY"
+                android:src="@drawable/pick" />
+
+            <ImageView
+                android:id="@+id/dire_pick_3"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/dire_pick_2"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/dire_status_pick_3"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/dire_pick_3"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/dire_status_pick_2"
+                android:scaleType="fitXY"
+                android:src="@drawable/pick" />
+
+            <ImageView
+                android:id="@+id/dire_pick_4"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/dire_pick_3"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/dire_status_pick_4"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/dire_pick_4"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/dire_status_pick_3"
+                android:scaleType="fitXY"
+                android:src="@drawable/pick" />
+
+            <ImageView
+                android:id="@+id/dire_pick_5"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/dire_pick_4"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/dire_status_pick_5"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/dire_pick_5"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/dire_status_pick_4"
+                android:scaleType="fitXY"
+                android:src="@drawable/pick" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:id="@+id/dire_ban_1"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/dire_status_ban_1"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/dire_ban_1"
+                android:layout_marginLeft="4dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ban" />
+
+            <ImageView
+                android:id="@+id/dire_ban_2"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/dire_ban_1"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/dire_status_ban_2"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/dire_ban_2"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/dire_status_ban_1"
+                android:scaleType="fitXY"
+                android:src="@drawable/ban" />
+
+            <ImageView
+                android:id="@+id/dire_ban_3"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/dire_ban_2"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/dire_status_ban_3"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/dire_ban_3"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/dire_status_ban_2"
+                android:scaleType="fitXY"
+                android:src="@drawable/ban" />
+
+            <ImageView
+                android:id="@+id/dire_ban_4"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/dire_ban_3"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/dire_status_ban_4"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/dire_ban_4"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/dire_status_ban_3"
+                android:scaleType="fitXY"
+                android:src="@drawable/ban" />
+
+            <ImageView
+                android:id="@+id/dire_ban_5"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@+id/dire_ban_4"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/live_match_default" />
+
+            <ImageView
+                android:id="@+id/dire_status_ban_5"
+                android:layout_width="64dp"
+                android:layout_height="12dp"
+                android:layout_below="@id/dire_ban_5"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/dire_status_ban_4"
+                android:scaleType="fitXY"
+                android:src="@drawable/ban" />
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

@@ -3,6 +3,8 @@ package com.tugasakhir.turnamensiamember.Model.API;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.CommentResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.Dota2MatchResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.LoginResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.MemberResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.MatchTeamAttendanceResponse;
@@ -116,4 +118,13 @@ public interface APIModel {
 
     @POST("api/organizer/match/{id}/attendance")
     Call<Response> doPostMatchAttendance(@Header("Authorization") String authorization, @Path("id") Long match_id, @Body Map<String, String> data);
+
+    @GET("api/participant/dota-2/match/{id}")
+    Call<Dota2MatchResponse> doGetDota2Match(@Path("id") Long match_id);
+
+    @GET("api/participant/dota-2/match/{id}/comment")
+    Call<CommentResponse> doGetDota2MatchComment(@Header("Authorization") String authorization, @Path("id") Long match_id);
+
+    @POST("api/participant/dota-2/match/{id}/comment")
+    Call<Response> doPostDota2MatchComment(@Header("Authorization") String authorization, @Path("id") Long match_id, @Body Map<String, String> data);
 }

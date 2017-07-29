@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorViewHolder"
+    android:orientation="horizontal"
+    android:paddingBottom="4dp"
+    android:paddingTop="4dp">
+
+    <ImageView
+        android:id="@+id/items_hero"
+        android:layout_width="32dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/live_match_default" />
+
+    <TextView
+        android:id="@+id/items_player_name"
+        android:layout_width="92dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="4dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="Player Name"
+        android:textColor="@color/colorTextDefault"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/items_name_1"
+        android:layout_width="32dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/live_match_default" />
+
+    <ImageView
+        android:id="@+id/items_name_2"
+        android:layout_width="32dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/live_match_default" />
+
+    <ImageView
+        android:id="@+id/items_name_3"
+        android:layout_width="32dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/live_match_default" />
+
+    <ImageView
+        android:id="@+id/items_name_4"
+        android:layout_width="32dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/live_match_default" />
+
+    <ImageView
+        android:id="@+id/items_name_5"
+        android:layout_width="32dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/live_match_default" />
+
+    <ImageView
+        android:id="@+id/items_name_6"
+        android:layout_width="32dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/live_match_default" />
+</LinearLayout>

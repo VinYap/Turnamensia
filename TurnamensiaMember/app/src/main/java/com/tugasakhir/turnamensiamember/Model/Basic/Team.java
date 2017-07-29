@@ -12,6 +12,7 @@ import java.io.Serializable;
 public class Team implements Serializable {
     private Long id;
     private String name;
+    private String picture_file_name;
     private String image;
     private String join_code;
     private Integer number_of_members;
@@ -30,6 +31,14 @@ public class Team implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPicture_file_name() {
+        return picture_file_name;
+    }
+
+    public void setPicture_file_name(String picture_file_name) {
+        this.picture_file_name = picture_file_name;
     }
 
     public String getImage() {

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp">
+
+    <ImageView
+        android:id="@+id/comment_member_image"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/default_profile" />
+
+    <TextView
+        android:id="@+id/comment_member_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/comment_member_image"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Username"
+        android:textColor="@color/colorTextDefault"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/comment_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/comment_member_name"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/comment_member_image"
+        android:text="lajdklsajdkljasdkljsadljsakdjsakldjklj"
+        android:textColor="@color/colorTextDefault" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/comment_detail"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/colorBorderOne" />
+</RelativeLayout>
