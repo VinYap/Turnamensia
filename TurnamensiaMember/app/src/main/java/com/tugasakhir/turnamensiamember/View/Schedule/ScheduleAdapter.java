@@ -16,7 +16,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleViewHolder> {
 
     @Override
     public void onBindViewHolder(ScheduleViewHolder holder, int position) {
-
+        holder.bindHolder();
     }
 
     @Override

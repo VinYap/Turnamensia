@@ -53,7 +53,7 @@ public class OMatchViewHolder extends RecyclerView.ViewHolder implements View.On
         super(itemView);
 
         mMatchCV = (CardView) itemView.findViewById(R.id.match_cardview);
-        mMatchRoundTV = (TextView) itemView.findViewById(R.id.match_id);
+        mMatchRoundTV = (TextView) itemView.findViewById(R.id.match_round);
         mMatchDateTV = (TextView) itemView.findViewById(R.id.match_date);
         mRadiantTV = (TextView) itemView.findViewById(R.id.match_radiant);
         mDireTV = (TextView) itemView.findViewById(R.id.match_dire);

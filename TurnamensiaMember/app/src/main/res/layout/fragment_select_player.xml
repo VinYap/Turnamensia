@@ -15,12 +15,6 @@
         android:layout_height="match_parent"
         android:layout_weight="1"></android.support.v7.widget.RecyclerView>
 
-    <GridView
-        android:id="@+id/selected_player"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:numColumns="5"></GridView>
-
     <Button
         android:id="@+id/next_action"
         android:layout_width="match_parent"

@@ -12,4 +12,8 @@ public class ScheduleViewHolder extends RecyclerView.ViewHolder {
     public ScheduleViewHolder(View itemView) {
         super(itemView);
     }
+
+    public void bindHolder() {
+
+    }
 }

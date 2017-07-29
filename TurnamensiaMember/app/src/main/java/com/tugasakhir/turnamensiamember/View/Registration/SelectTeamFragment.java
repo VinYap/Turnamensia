@@ -1,7 +1,6 @@
 package com.tugasakhir.turnamensiamember.View.Registration;
 
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,14 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Basic.Team;
-import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
-import com.tugasakhir.turnamensiamember.Model.SessionManager;
-import com.tugasakhir.turnamensiamember.Presenter.Account.AccountTeamPresenter;
-import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
+import com.tugasakhir.turnamensiamember.Model.Basic.Tournament;
 import com.tugasakhir.turnamensiamember.R;
 
 import java.util.List;
@@ -25,24 +19,24 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SelectTeamFragment extends Fragment implements iPresenterResponse {
+public class SelectTeamFragment extends Fragment {
     private RecyclerView mTeamRV;
     private TextView mLeftActionTV;
     private TextView mRightActionTV;
 
-    private ProgressDialog mProgressDialog;
-    private SessionManager mSessionManager;
-    private AccountTeamPresenter mAccountTeamPresenter;
-
     private List<Team> mTeams;
+    private Tournament mTournament;
     private SelectTeamAdapter mAdapter;
 
     public SelectTeamFragment() {
         // Required empty public constructor
     }
 
-    public static SelectTeamFragment newInstance() {
-        return new SelectTeamFragment();
+    public static SelectTeamFragment newInstance(List<Team> teams, Tournament tournament) {
+        SelectTeamFragment fragment = new SelectTeamFragment();
+        fragment.mTeams = teams;
+        fragment.mTournament = tournament;
+        return fragment;
     }
 
     @Override
@@ -55,46 +49,15 @@ public class SelectTeamFragment extends Fragment implements iPresenterResponse {
         mLeftActionTV = (TextView) view.findViewById(R.id.left_action);
         mRightActionTV = (TextView) view.findViewById(R.id.right_action);
 
-        mProgressDialog = new ProgressDialog(getContext());
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage("Loading...");
-
-        mSessionManager = new SessionManager(getContext());
-        mAccountTeamPresenter = new AccountTeamPresenter(this);
-
         mLeftActionTV.setText("Select Your Team");
         mRightActionTV.setText("Choose Your Player");
 
         mTeamRV.setLayoutManager(new LinearLayoutManager(getContext()));
         mTeamRV.setHasFixedSize(true);
 
-        String token = mSessionManager.getTokenLoggedIn();
-        mProgressDialog.show();
-        mAccountTeamPresenter.doGetParticipantAccountTeam(token);
-
-        mAdapter = new SelectTeamAdapter(mTeams);
+        mAdapter = new SelectTeamAdapter(mTeams, mTournament);
         mTeamRV.setAdapter(mAdapter);
 
         return view;
-    }
-
-    @Override
-    public void doSuccess(Response response) {
-        mProgressDialog.dismiss();
-        mTeams = ((AccountTeamResponse) response).getTeams();
-        mAdapter.setTeams(mTeams);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void doFail(String message) {
-        mProgressDialog.dismiss();
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void doConnectionError(int message) {
-        mProgressDialog.dismiss();
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -16,6 +16,8 @@ public class Member {
     private String status;
     private Integer joined_at;
     private Integer attendances_status;
+    private String picture_file_name;
+    private boolean selected;
 
     public Long getId() {
         return id;
@@ -79,5 +81,21 @@ public class Member {
 
     public void setAttendances_status(Integer attendances_status) {
         this.attendances_status = attendances_status;
+    }
+
+    public String getPicture_file_name() {
+        return picture_file_name;
+    }
+
+    public void setPicture_file_name(String picture_file_name) {
+        this.picture_file_name = picture_file_name;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

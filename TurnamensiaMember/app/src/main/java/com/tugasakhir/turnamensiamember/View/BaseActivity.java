@@ -3,7 +3,6 @@ package com.tugasakhir.turnamensiamember.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,9 +22,8 @@ import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.Account.AccountActivity;
 import com.tugasakhir.turnamensiamember.View.Authentication.AuthActivity;
 import com.tugasakhir.turnamensiamember.View.Main.MainActivity;
-import com.tugasakhir.turnamensiamember.View.Organizer.Tournament.OTournamentActivity;
-import com.tugasakhir.turnamensiamember.View.Registration.RegistrationActivity;
-import com.tugasakhir.turnamensiamember.View.Tournament.TournamentActivity;
+import com.tugasakhir.turnamensiamember.View.MyRegistration.MyRegistrationActivity;
+import com.tugasakhir.turnamensiamember.View.MyTournament.MyTournamentActivity;
 
 import static com.tugasakhir.turnamensiamember.R.id.toolbar;
 
@@ -164,10 +162,10 @@ public abstract class BaseActivity extends AppCompatActivity
             startActivity(new Intent(this, AccountActivity.class));
         }
         else if (id == R.id.my_tournament_participant) {
-            startActivity(new Intent(this, TournamentActivity.class));
+            startActivity(new Intent(this, MyTournamentActivity.class));
         }
         else if (id == R.id.registration) {
-            startActivity(new Intent(this, RegistrationActivity.class));
+            startActivity(new Intent(this, MyRegistrationActivity.class));
         }
         else if (id == R.id.notification) {
 

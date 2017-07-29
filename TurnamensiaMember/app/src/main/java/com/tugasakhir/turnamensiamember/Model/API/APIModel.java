@@ -9,6 +9,7 @@ import com.tugasakhir.turnamensiamember.Model.Response.MatchTeamAttendanceRespon
 import com.tugasakhir.turnamensiamember.Model.Response.OrganizerTournamentDetailResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.QRScannerResultResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.RegisterTeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TournamentDetailResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TournamentResponse;
@@ -98,6 +99,12 @@ public interface APIModel {
 
     @GET("/api/participant/team/{id}/member")
     Call<MemberResponse> doGetParticipantTeamMember(@Header("Authorization") String authorization, @Path("id") Long id);
+
+    @GET("/api/participant/tournament/{id}/register")
+    Call<RegisterTeamResponse> doGetParticipantRegisterTournamentTeam(@Header("Authorization") String authorization, @Path("id") Long id);
+
+    @POST("/api/participant/tournament/{id}/register")
+    Call<Response> doParticipantRegisterTournament(@Header("Authorization") String authorization, @Path("id") Long id, @Body Map<String, Object> data);
 
     @POST("/api/organizer/login")
     Call<LoginResponse> doOrganizerLogin(@Body Map<String, String> data);

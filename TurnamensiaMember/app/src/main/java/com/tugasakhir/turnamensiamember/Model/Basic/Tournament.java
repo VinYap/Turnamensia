@@ -29,6 +29,8 @@ public class Tournament {
     private String status;
     private Integer number_of_registers;
     private String type;
+    private String owner;
+    private Boolean registration_status;
 
     public Long getId() {
         return id;
@@ -196,5 +198,21 @@ public class Tournament {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public Boolean getRegistration_status() {
+        return registration_status;
+    }
+
+    public void setRegistration_status(Boolean registration_status) {
+        this.registration_status = registration_status;
     }
 }

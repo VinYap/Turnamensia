@@ -24,7 +24,6 @@ import com.tugasakhir.turnamensiamember.View.BaseActivity;
 import com.tugasakhir.turnamensiamember.View.Registration.RegistrationActivity;
 import com.tugasakhir.turnamensiamember.View.Schedule.ScheduleActivity;
 
-import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.IS_OPEN;
 import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_KEY;
 
 public class TournamentActivity extends BaseActivity implements iPresenterResponse {
@@ -33,6 +32,7 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
     private FloatingActionButton mScheduleFAB;
     private ImageView mImageIV;
     private TextView mNameTV;
+    private TextView mOrganizerTV;
     private Button mRegisterIV;
 
     private TournamentPresenter mTournamentPresenter;
@@ -51,6 +51,7 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
         mScheduleFAB = (FloatingActionButton) findViewById(R.id.schedule_fab);
         mImageIV = (ImageView) findViewById(R.id.tournament_image);
         mNameTV = (TextView) findViewById(R.id.league_name);
+        mOrganizerTV = (TextView) findViewById(R.id.organizer_name);
         mRegisterIV = (Button) findViewById(R.id.register_tournament);
 
         mProgressDialog = new ProgressDialog(this);
@@ -59,6 +60,8 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
 
         mTournamentPresenter = new TournamentPresenter(this);
         mSessionManager = new SessionManager(this);
+
+        final Long tournamentId = getIntent().getLongExtra(TOURNAMENT_KEY, -1);
 
         mScheduleFAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,18 +73,16 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
         mRegisterIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mSessionManager.isUserLoggedIn()) startActivity(new Intent(getApplicationContext(), RegistrationActivity.class));
-                else startActivity(new Intent(getApplicationContext(), AuthActivity.class));
+                if (mSessionManager.isUserLoggedIn()) {
+                    Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
+                    intent.putExtra(TOURNAMENT_KEY, tournamentId);
+                    startActivity(intent);
+                }
+                else {
+                    startActivity(new Intent(getApplicationContext(), AuthActivity.class));
+                }
             }
         });
-
-        Long tournamentId = getIntent().getLongExtra(TOURNAMENT_KEY, -1);
-        Boolean isOpen = getIntent().getBooleanExtra(IS_OPEN, false);
-
-        if (isOpen == false) {
-            mRegisterIV.setText("Register close");
-            mRegisterIV.setEnabled(false);
-        }
 
         mProgressDialog.show();
         mTournamentPresenter.doGetParticipantTournamentDetail(tournamentId);
@@ -94,7 +95,16 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
         TournamentDetailResponse tournamentDetailResponse = (TournamentDetailResponse) response;
 
         mNameTV.setText(tournamentDetailResponse.getTournament().getName());
+        mOrganizerTV.setText(tournamentDetailResponse.getTournament().getOwner());
         Picasso.with(this).load(tournamentDetailResponse.getTournament().getImage()).into(mImageIV);
+
+        if (tournamentDetailResponse.getTournament().getRegistration_status() == false) {
+            mRegisterIV.setText("Registration Closed");
+            mRegisterIV.setEnabled(false);
+        }
+        else if (mSessionManager.isUserLoggedIn() == false) {
+            mRegisterIV.setText("Sign In to Register");
+        }
 
         TournamentPagerAdapter adapter = new TournamentPagerAdapter(getSupportFragmentManager(), tournamentDetailResponse);
         mViewPager.setAdapter(adapter);
