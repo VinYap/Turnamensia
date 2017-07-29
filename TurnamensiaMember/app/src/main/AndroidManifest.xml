@@ -62,6 +62,10 @@
         <activity
             android:name=".View.Organizer.QRScanner.QRScannerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".View.MyTournament.MyTournamentActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".View.MyRegistration.MyRegistrationActivity"></activity>
     </application>
 
 </manifest>

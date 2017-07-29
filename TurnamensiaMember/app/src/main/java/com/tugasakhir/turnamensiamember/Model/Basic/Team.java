@@ -16,6 +16,7 @@ public class Team implements Serializable {
     private String image;
     private String join_code;
     private Integer number_of_members;
+    private Integer number_of_valid_members;
 
     public Long getId() {
         return id;
@@ -63,5 +64,13 @@ public class Team implements Serializable {
 
     public void setNumber_of_members(Integer number_of_members) {
         this.number_of_members = number_of_members;
+    }
+
+    public Integer getNumber_of_valid_members() {
+        return number_of_valid_members;
+    }
+
+    public void setNumber_of_valid_members(Integer number_of_valid_members) {
+        this.number_of_valid_members = number_of_valid_members;
     }
 }

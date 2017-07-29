@@ -1,56 +1,54 @@
-package com.tugasakhir.turnamensiamember.View.Registration;
+package com.tugasakhir.turnamensiamember.View.MyTournament;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
-import com.tugasakhir.turnamensiamember.Model.Response.RegisterTeamResponse;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
-import com.tugasakhir.turnamensiamember.Presenter.Register.RegisterTournamentPresenter;
+import com.tugasakhir.turnamensiamember.Presenter.MyTournament.MyTournamentPresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
 
-import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_KEY;
+public class MyTournamentActivity extends BaseActivity implements iPresenterResponse {
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
 
-public class RegistrationActivity extends BaseActivity implements iPresenterResponse {
     private ProgressDialog mProgressDialog;
     private SessionManager mSessionManager;
-    private RegisterTournamentPresenter mRegisterTournamentPresenter;
+    private MyTournamentPresenter mMyTournamentPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_registration, mBaseLayout);
+        getLayoutInflater().inflate(R.layout.activity_my_tournament, mBaseLayout);
 
-        showUpCaretMenu();
-
-        if (savedInstanceState !=  null) {
-            return;
-        }
+        mTabLayout = (TabLayout) findViewById(R.id.my_tournament_tab_layout);
+        mViewPager = (ViewPager) findViewById(R.id.my_tournament_pager);
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
 
         mSessionManager = new SessionManager(this);
-        mRegisterTournamentPresenter = new RegisterTournamentPresenter(this);
+        mMyTournamentPresenter = new MyTournamentPresenter(this);
 
         String token = mSessionManager.getTokenLoggedIn();
-        Long tournamentId = getIntent().getLongExtra(TOURNAMENT_KEY, -1);
+
         mProgressDialog.show();
-        mRegisterTournamentPresenter.doGetParticipantRegisterTournamentTeam(token, tournamentId);
+        mMyTournamentPresenter.doGetParticipantMyTournament(token);
     }
 
     @Override
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
-        RegisterTeamResponse newResponse = (RegisterTeamResponse) response;
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.layout_registration, SelectTeamFragment.newInstance(newResponse.getTeams(), newResponse.getTournament()))
-                .commit();
+//        MyTournamentPagerAdapter adapter = new MyTournamentPagerAdapter(getSupportFragmentManager());
+//        mViewPager.setAdapter(adapter);
+//
+//        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
