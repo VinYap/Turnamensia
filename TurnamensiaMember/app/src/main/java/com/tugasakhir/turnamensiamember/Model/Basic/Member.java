@@ -14,8 +14,8 @@ public class Member {
     private String image;
     private String identification_image;
     private String status;
-    private Integer joined_at;
-    private Integer attendances_status;
+    private Long joined_at;
+    private Long attendances_status;
     private String picture_file_name;
     private boolean selected;
 
@@ -67,19 +67,19 @@ public class Member {
         this.status = status;
     }
 
-    public Integer getJoined_at() {
+    public Long getJoined_at() {
         return joined_at;
     }
 
-    public void setJoined_at(Integer joined_at) {
+    public void setJoined_at(Long joined_at) {
         this.joined_at = joined_at;
     }
 
-    public Integer getAttendances_status() {
+    public Long getAttendances_status() {
         return attendances_status;
     }
 
-    public void setAttendances_status(Integer attendances_status) {
+    public void setAttendances_status(Long attendances_status) {
         this.attendances_status = attendances_status;
     }
 

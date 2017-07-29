@@ -4,8 +4,10 @@ import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.LoginResponse;
-import com.tugasakhir.turnamensiamember.Model.Response.MemberResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.MatchTeamAttendanceResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.MemberResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.MyRegisterResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.MyTournamentResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.OrganizerTournamentDetailResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.QRScannerResultResponse;
@@ -73,7 +75,10 @@ public interface APIModel {
     Call<PictureResponse> doUpdateParticipantIdentification(@Header("Authorization") String authorization, @Part MultipartBody.Part image);
 
     @GET("/api/participant/my-tournament")
-    Call<Response> doGetParticipantMyTournament(@Header("Authorization") String authorization);
+    Call<MyTournamentResponse> doGetParticipantMyTournament(@Header("Authorization") String authorization);
+
+    @GET("/api/participant/my-register")
+    Call<MyRegisterResponse> doGetParticipantMyRegister(@Header("Authorization") String authorization);
 
     @GET("/api/participant/my-team")
     Call<AccountTeamResponse> doGetParticipantAccountTeam(@Header("Authorization") String authorization);

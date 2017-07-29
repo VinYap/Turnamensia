@@ -1,7 +1,7 @@
 package com.tugasakhir.turnamensiamember.Presenter.MyTournament;
 
 import com.tugasakhir.turnamensiamember.Model.API.ConnectionAPI;
-import com.tugasakhir.turnamensiamember.Model.Basic.Response;
+import com.tugasakhir.turnamensiamember.Model.Response.MyTournamentResponse;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 
@@ -30,9 +30,9 @@ public class MyTournamentPresenter {
      * @param token
      */
     public void doGetParticipantMyTournament(String token) {
-        ConnectionAPI.getInstance().getAPIModel().doGetParticipantMyTournament(token).enqueue(new Callback<Response>() {
+        ConnectionAPI.getInstance().getAPIModel().doGetParticipantMyTournament(token).enqueue(new Callback<MyTournamentResponse>() {
             @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+            public void onResponse(Call<MyTournamentResponse> call, retrofit2.Response<MyTournamentResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
                         iMyTournamentResponse.doSuccess(response.body());
@@ -47,7 +47,7 @@ public class MyTournamentPresenter {
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
+            public void onFailure(Call<MyTournamentResponse> call, Throwable t) {
                 iMyTournamentResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }

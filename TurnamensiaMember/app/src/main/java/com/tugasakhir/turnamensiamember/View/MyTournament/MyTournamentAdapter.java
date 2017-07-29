@@ -5,15 +5,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tugasakhir.turnamensiamember.Model.Basic.MyTournament;
 import com.tugasakhir.turnamensiamember.R;
+
+import java.util.List;
 
 /**
  * Created by Asus on 29/07/2017.
  */
 
 public class MyTournamentAdapter extends RecyclerView.Adapter<MyTournamentViewHolder> {
+    private List<MyTournament> myTournaments;
+
     private static final int TYPE_IN_PROGRESS = 0;
     private static final int TYPE_COMPLETED = 1;
+
+    public MyTournamentAdapter(List<MyTournament> myTournaments) {
+        this.myTournaments = myTournaments;
+    }
 
     @Override
     public MyTournamentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -30,16 +39,22 @@ public class MyTournamentAdapter extends RecyclerView.Adapter<MyTournamentViewHo
 
     @Override
     public void onBindViewHolder(MyTournamentViewHolder holder, int position) {
-        holder.bindHolder();
+        MyTournament myTournament = myTournaments.get(position);
+        holder.bindHolder(myTournament);
     }
 
     @Override
     public int getItemCount() {
+        if (myTournaments != null) return myTournaments.size();
         return 0;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return TYPE_IN_PROGRESS;
+        if (myTournaments != null) {
+            if (myTournaments.get(position).getQr_identifier() == null) return TYPE_COMPLETED;
+            return TYPE_IN_PROGRESS;
+        }
+        return TYPE_COMPLETED;
     }
 }

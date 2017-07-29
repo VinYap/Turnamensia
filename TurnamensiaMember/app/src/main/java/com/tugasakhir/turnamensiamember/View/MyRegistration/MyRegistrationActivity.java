@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
+import com.tugasakhir.turnamensiamember.Presenter.MyRegister.MyRegisterPresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
@@ -18,6 +19,7 @@ public class MyRegistrationActivity extends BaseActivity implements iPresenterRe
 
     private ProgressDialog mProgressDialog;
     private SessionManager mSessionManager;
+    private MyRegisterPresenter mMyRegisterPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +34,21 @@ public class MyRegistrationActivity extends BaseActivity implements iPresenterRe
         mProgressDialog.setMessage("Loading...");
 
         mSessionManager = new SessionManager(this);
+        mMyRegisterPresenter = new MyRegisterPresenter(this);
 
         String token = mSessionManager.getTokenLoggedIn();
 
         mProgressDialog.show();
+        mMyRegisterPresenter.doGetParticipantMyRegister(token);
     }
 
     @Override
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
-        MyRegistrationPagerAdapter adapter = new MyRegistrationPagerAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(adapter);
-
-        mTabLayout.setupWithViewPager(mViewPager);
+//        MyRegistrationPagerAdapter adapter = new MyRegistrationPagerAdapter(getSupportFragmentManager());
+//        mViewPager.setAdapter(adapter);
+//
+//        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override

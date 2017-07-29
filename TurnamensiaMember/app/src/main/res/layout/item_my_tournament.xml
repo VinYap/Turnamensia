@@ -49,10 +49,11 @@
 
     <ImageView
         android:id="@+id/tournament_qr_code"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/ic_delete_black_24dp"
+        android:layout_alignBottom="@+id/tournament_image"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/tournament_date" />
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

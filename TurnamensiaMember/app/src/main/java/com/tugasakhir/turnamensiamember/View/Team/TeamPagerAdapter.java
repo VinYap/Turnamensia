@@ -21,7 +21,7 @@ public class TeamPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) return TeamProfileFragment.newInstance(mResponse.getTeam(), mResponse.getIs_leader());
-        else if (position == 1) return TeamMemberFragment.newInstance(mResponse.getTeams_details(), mResponse.getTeam().getId(), mResponse.getIs_leader());
+        if (position == 1) return TeamMemberFragment.newInstance(mResponse.getTeams_details(), mResponse.getTeam().getId(), mResponse.getIs_leader());
         return null;
     }
 

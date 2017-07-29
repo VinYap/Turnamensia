@@ -9,20 +9,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tugasakhir.turnamensiamember.Model.Basic.MyTournament;
 import com.tugasakhir.turnamensiamember.R;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MyTournamentFragment extends Fragment {
     private RecyclerView mTournamentRV;
+    private List<MyTournament> myTournaments;
 
     public MyTournamentFragment() {
         // Required empty public constructor
     }
 
-    public static MyTournamentFragment newInstance() {
-        return new MyTournamentFragment();
+    public static MyTournamentFragment newInstance(List<MyTournament> myTournaments) {
+        MyTournamentFragment fragment = new MyTournamentFragment();
+        fragment.myTournaments = myTournaments;
+        return fragment;
     }
 
     @Override
@@ -35,7 +41,7 @@ public class MyTournamentFragment extends Fragment {
         mTournamentRV.setLayoutManager(new LinearLayoutManager(getContext()));
         mTournamentRV.setHasFixedSize(true);
 
-        MyTournamentAdapter adapter = new MyTournamentAdapter();
+        MyTournamentAdapter adapter = new MyTournamentAdapter(myTournaments);
         mTournamentRV.setAdapter(adapter);
 
         return view;

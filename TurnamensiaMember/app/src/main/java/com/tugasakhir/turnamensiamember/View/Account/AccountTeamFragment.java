@@ -60,7 +60,7 @@ public class AccountTeamFragment extends Fragment implements iPresenterResponse 
                 mCreateTeamB.setVisibility(View.GONE);
                 ((AccountActivity)getActivity()).getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.layout_account_team, CreateTeamFragment.newInstance())
+                        .add(R.id.layout_account_team, CreateTeamFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
             }

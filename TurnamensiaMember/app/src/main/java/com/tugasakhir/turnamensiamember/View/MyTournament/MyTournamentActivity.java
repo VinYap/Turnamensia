@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
+import com.tugasakhir.turnamensiamember.Model.Response.MyTournamentResponse;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
 import com.tugasakhir.turnamensiamember.Presenter.MyTournament.MyTournamentPresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
@@ -45,10 +46,10 @@ public class MyTournamentActivity extends BaseActivity implements iPresenterResp
     @Override
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
-//        MyTournamentPagerAdapter adapter = new MyTournamentPagerAdapter(getSupportFragmentManager());
-//        mViewPager.setAdapter(adapter);
-//
-//        mTabLayout.setupWithViewPager(mViewPager);
+        MyTournamentPagerAdapter adapter = new MyTournamentPagerAdapter(getSupportFragmentManager(), (MyTournamentResponse) response);
+        mViewPager.setAdapter(adapter);
+
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
