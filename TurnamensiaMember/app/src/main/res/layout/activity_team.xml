@@ -12,9 +12,13 @@
         android:id="@+id/team_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="scrollable"
-        app:tabGravity="fill">
-    </android.support.design.widget.TabLayout>
+        app:tabBackground="@color/colorTabLayoutBackground"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/colorTabLayoutIndicator"
+        app:tabIndicatorHeight="4dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorTabLayoutTextSelected"
+        app:tabTextColor="@color/colorTabLayoutTextDefault" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/team_pager"

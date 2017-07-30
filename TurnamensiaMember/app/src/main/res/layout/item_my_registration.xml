@@ -3,11 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="4dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorViewHolder">
 
         <TextView
             android:id="@+id/tournament_name"
@@ -16,9 +20,11 @@
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:textSize="18sp"
             android:text="WhiteNet Fun - Season 1"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorViewHolderHeaderText" />
 
         <TextView
             android:id="@+id/team_size"
@@ -26,10 +32,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="5 Players"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tournament_name" />
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tournament_name"
+            app:layout_constraintTop_toBottomOf="@+id/tournament_name"
+            android:textColor="@color/colorViewHolderHeaderText" />
 
         <TextView
             android:id="@+id/registration_date"
@@ -37,51 +45,59 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
+            android:textSize="14sp"
             android:text="Register on 29 July 2017"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/team_size" />
+            app:layout_constraintLeft_toLeftOf="@+id/tournament_name"
+            app:layout_constraintTop_toBottomOf="@+id/team_size"
+            android:textColor="@color/colorViewHolderHeaderText" />
 
         <Button
             android:id="@+id/confirm"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30sp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
+            android:paddingLeft="16sp"
+            android:paddingRight="16sp"
             android:text="Payment Confimation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registration_date"
-            app:layout_constraintVertical_bias="0.0" />
+            android:textSize="12sp"
+            android:background="@drawable/linear_gradient_orange"
+            android:textColor="@color/colorViewHolderHeaderText" />
 
         <ImageView
             android:id="@+id/status_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_check_green_32dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="0dp"
             app:layout_constraintBottom_toTopOf="@+id/status"
-            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            android:layout_marginBottom="8dp"
+            app:srcCompat="@drawable/ic_error_24dp"
             android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="@+id/status" />
+            app:layout_constraintLeft_toLeftOf="@+id/status"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="@+id/status" />
 
         <TextView
             android:id="@+id/status"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Accepted"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:text="Not Confirmed"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/status_image" />
+            app:layout_constraintTop_toBottomOf="@+id/status_image"
+            android:textSize="14sp"
+            android:textColor="@color/colorOrange" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

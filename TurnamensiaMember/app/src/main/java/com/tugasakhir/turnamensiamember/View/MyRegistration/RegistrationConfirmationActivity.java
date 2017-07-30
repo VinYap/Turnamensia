@@ -100,15 +100,17 @@ public class RegistrationConfirmationActivity extends BaseActivity {
                 mTransferToS.setAdapter(adapter);
 
                 if (newResponse.getTournament_registration_confirmation() != null) {
+                    String image = newResponse.getTournament_registration_confirmation().getImage();
                     mTransferNameET.setText(newResponse.getTournament_registration_confirmation().getName());
-                    Picasso.with(getApplicationContext()).load(newResponse.getTournament_registration_confirmation().getImage()).into(mPaymentIV);
                     for (int i = 0; i < banks.size(); i++) {
                         if (banks.get(i).getId() == newResponse.getTournament_registration_confirmation().getBank()) {
                             mTransferToS.setSelection(i);
                             break;
                         }
                     }
-                    mPaymentIV.setVisibility(View.VISIBLE);
+                    if (!TextUtils.isEmpty(image)) {
+                        Picasso.with(getApplicationContext()).load(image).into(mPaymentIV);
+                    }
                 }
             }
 

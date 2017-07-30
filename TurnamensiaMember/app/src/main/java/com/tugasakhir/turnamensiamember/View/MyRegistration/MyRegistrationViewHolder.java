@@ -2,7 +2,9 @@ package com.tugasakhir.turnamensiamember.View.MyRegistration;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -55,6 +57,7 @@ public class MyRegistrationViewHolder extends RecyclerView.ViewHolder {
 
     public void bindHolder(TournamentRegistration tournamentRegistration) {
         Date registerAt = new Date(Long.parseLong(String.valueOf(tournamentRegistration.getRegister_at())) * 1000);
+        String status = tournamentRegistration.getStatus();
 
         this.id = tournamentRegistration.getId();
 
@@ -62,5 +65,26 @@ public class MyRegistrationViewHolder extends RecyclerView.ViewHolder {
         mSizeTV.setText(tournamentRegistration.getTeam_size().toString().concat(" Players"));
         mDateTV.setText("Register on " + new SimpleDateFormat("dd MMMM yyyy").format(registerAt));
         mStatusTV.setText(tournamentRegistration.getStatus());
+
+        if (status.equals("Accepted")) {
+            mStatusTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            mStatusTV.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.colorButtonApprove));
+            mStatusIV.setImageResource(R.drawable.ic_check_green_32dp);
+        }
+        else if (status.equals("Rejected")) {
+            mStatusTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            mStatusTV.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.colorButtonRejected));
+            mStatusIV.setImageResource(R.drawable.ic_block_red_500_24dp);
+        }
+        else if (status.equals("Pending")) {
+            mStatusTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            mStatusTV.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.colorButtonPending));
+            mStatusIV.setImageResource(R.drawable.ic_access_time_blue_32dp);
+        }
+        else if (status.equals("Not Confirmed")) {
+            mStatusTV.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            mStatusTV.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.colorOrange));
+            mStatusIV.setImageResource(R.drawable.ic_error_24dp);
+        }
     }
 }

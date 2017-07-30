@@ -15,16 +15,16 @@
 
         <ImageView
             android:id="@+id/main_tournament_image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ib" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/main_tournament_name"

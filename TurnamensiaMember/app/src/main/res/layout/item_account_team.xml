@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/team_image"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:scaleType="fitXY"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
@@ -39,7 +39,7 @@
             android:textSize="18sp"
             app:layout_constraintLeft_toRightOf="@+id/team_image"
             app:layout_constraintTop_toTopOf="@+id/team_image"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="0dp" />
 
         <TextView
             android:id="@+id/team_member"

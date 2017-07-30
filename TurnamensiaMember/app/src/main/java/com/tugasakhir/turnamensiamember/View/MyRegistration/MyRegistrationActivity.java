@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.MyRegistration;
@@ -30,6 +32,8 @@ public class MyRegistrationActivity extends BaseActivity implements iPresenterRe
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_my_registration, mBaseLayout);
 
+        showUpCaretMenu();
+
         mTabLayout = (TabLayout) findViewById(R.id.my_registration_tab_layout);
         mViewPager = (ViewPager) findViewById(R.id.my_registration_pager);
 
@@ -41,6 +45,8 @@ public class MyRegistrationActivity extends BaseActivity implements iPresenterRe
         mMyRegistrationPresenter = new MyRegistrationPresenter(this);
 
         String token = mSessionManager.getTokenLoggedIn();
+
+        this.setTitle("My Registration");
 
         mProgressDialog.show();
         mMyRegistrationPresenter.doGetParticipantMyRegister(token);
@@ -67,4 +73,13 @@ public class MyRegistrationActivity extends BaseActivity implements iPresenterRe
         mProgressDialog.dismiss();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem mActionSettings = menu.findItem(R.id.action_settings);
+        mActionSettings.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+        return true;
+    }
+
 }

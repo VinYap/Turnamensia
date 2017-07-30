@@ -131,9 +131,9 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
         initializedData((Team) getArguments().getSerializable(TEAM_DETAIL));
 
         if (getArguments().getBoolean(IS_LEADER) == false) {
-            mUpdateB.setVisibility(View.GONE);
-            mChangeImageIV.setVisibility(View.GONE);
-            mDeleteImageIV.setVisibility(View.GONE);
+            mUpdateB.setVisibility(View.INVISIBLE);
+            mChangeImageIV.setVisibility(View.INVISIBLE);
+            mDeleteImageIV.setVisibility(View.INVISIBLE);
             mNameET.setEnabled(false);
             mJoinCodeET.setEnabled(false);
         }

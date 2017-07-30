@@ -4,36 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="4dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorViewHolder"
         app:layout_constraintHeight_default="wrap">
 
         <ImageView
             android:id="@+id/member_image"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ib" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/member_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="20dp"
             android:text="Member Name"
             android:textSize="18sp"
             app:layout_constraintLeft_toRightOf="@+id/member_image"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="@color/colorViewHolderHeaderText"
+            app:layout_constraintTop_toTopOf="@+id/member_image"
+            android:layout_marginTop="0dp" />
 
         <TextView
             android:id="@+id/member_steam_id"
@@ -41,9 +44,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
+            android:textSize="16sp"
             android:text="steam id"
             app:layout_constraintLeft_toRightOf="@+id/member_image"
-            app:layout_constraintTop_toBottomOf="@+id/member_name" />
+            app:layout_constraintTop_toBottomOf="@+id/member_name"
+            android:textColor="@color/colorViewHolderHeaderText" />
 
         <TextView
             android:id="@+id/member_joined_date"
@@ -51,20 +56,22 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
+            android:textSize="14sp"
             android:text="joined on 28 July 2017"
             app:layout_constraintLeft_toRightOf="@+id/member_image"
-            app:layout_constraintTop_toBottomOf="@+id/member_steam_id" />
+            app:layout_constraintTop_toBottomOf="@+id/member_steam_id"
+            android:textColor="@color/colorViewHolderHeaderText" />
 
         <ImageView
             android:id="@+id/member_delete"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:scaleType="fitXY"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_highlight_off_black_24dp" />
+            app:srcCompat="@drawable/ic_cancel_white_24dp" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
