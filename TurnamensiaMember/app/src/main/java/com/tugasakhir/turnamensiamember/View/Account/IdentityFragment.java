@@ -44,6 +44,7 @@ public class IdentityFragment extends Fragment implements iPresenterResponse {
     private AccountProfilePresenter mAccountProfilePresenter;
 
     private static final Integer IMAGE_CODE = 2;
+    private boolean isGet;
 
     public IdentityFragment() {
         // Required empty public constructor
@@ -78,6 +79,7 @@ public class IdentityFragment extends Fragment implements iPresenterResponse {
 
         String token = mSessionManager.getTokenLoggedIn();
 
+        isGet = true;
         mProgressDialog.show();
         mAccountProfilePresenter.doGetParticipantIdentification(token);
 
@@ -102,7 +104,8 @@ public class IdentityFragment extends Fragment implements iPresenterResponse {
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
         Picasso.with(getContext()).load(((PictureResponse) response).getFile_path()).into(mIdentityIV);
-        Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
+        if (isGet == true) isGet = false;
+        else Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
     }
 
     @Override

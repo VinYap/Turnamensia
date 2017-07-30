@@ -1,4 +1,4 @@
-package com.tugasakhir.turnamensiamember.View.MyTournament;
+package com.tugasakhir.turnamensiamember.View.Account;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,15 +7,14 @@ import android.view.MenuItem;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
 
-import static com.tugasakhir.turnamensiamember.View.MyTournament.MyTournamentViewHolder.TOURNAMENT_NAME;
-import static com.tugasakhir.turnamensiamember.View.MyTournament.MyTournamentViewHolder.URI_KEY;
-
-public class MyQrCodeActivity extends BaseActivity {
+public class AccountModalActivity extends BaseActivity {
+    public static final String MODAL_TYPE = "MODAL_TYPE";
+    public static final String MODAL_NAME = "MODAL_NAME";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_my_qr_code, mBaseLayout);
+        getLayoutInflater().inflate(R.layout.activity_account_modal, mBaseLayout);
 
         if (savedInstanceState != null) {
             return;
@@ -23,14 +22,13 @@ public class MyQrCodeActivity extends BaseActivity {
 
         showUpCaretMenu();
 
-        String uri = getIntent().getStringExtra(URI_KEY);
-        String name = getIntent().getStringExtra(TOURNAMENT_NAME);
+        this.setTitle(getIntent().getStringExtra(MODAL_NAME));
 
-        this.setTitle(name + " Qr Code");
+        Integer type = getIntent().getIntExtra(MODAL_TYPE, -1);
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.layout_my_qr_code, MyQrCodeFragment.newInstance(uri))
+                .add(R.id.layout_account_modal, type == 0 ? ChangePasswordFragment.newInstance() : (type == 1 ? IdentityFragment.newInstance() : null))
                 .commit();
     }
 

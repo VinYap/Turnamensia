@@ -193,7 +193,7 @@ public abstract class BaseActivity extends AppCompatActivity
         return true;
     }
 
-    protected void doUserLogin(Boolean isLogin) {
+    public void doUserLogin(Boolean isLogin) {
         User user = null;
         if (isLogin) {
             user = mSessionManager.getUserLoggedIn();

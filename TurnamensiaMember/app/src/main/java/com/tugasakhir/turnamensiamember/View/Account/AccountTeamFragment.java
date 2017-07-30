@@ -4,7 +4,6 @@ package com.tugasakhir.turnamensiamember.View.Account;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -83,17 +82,17 @@ public class AccountTeamFragment extends Fragment implements iPresenterResponse 
         mAdapter = new AccountTeamAdapter(mTeams);
         mTeamRV.setAdapter(mAdapter);
 
-        getActivity().getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() == 0) {
-                    mProgressDialog.show();
-                    String token = mSessionManager.getTokenLoggedIn();
-                    mCreateTeamB.setVisibility(View.VISIBLE);
-                    mAccountTeamPresenter.doGetParticipantAccountTeam(token);
-                }
-            }
-        });
+//        getActivity().getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+//            @Override
+//            public void onBackStackChanged() {
+//                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() == 0) {
+//                    mProgressDialog.show();
+//                    String token = mSessionManager.getTokenLoggedIn();
+//                    mCreateTeamB.setVisibility(View.VISIBLE);
+//                    mAccountTeamPresenter.doGetParticipantAccountTeam(token);
+//                }
+//            }
+//        });
 
         return view;
     }

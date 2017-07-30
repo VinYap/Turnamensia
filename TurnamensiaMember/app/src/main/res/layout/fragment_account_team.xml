@@ -21,6 +21,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:text="Create Team" />
+        android:layout_marginTop="4dp"
+        android:text="Create Team"
+        android:background="@drawable/linear_gradient_orange"
+        android:textColor="@color/colorTextLight"/>
 
 </LinearLayout>

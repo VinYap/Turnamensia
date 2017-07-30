@@ -35,6 +35,8 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 import static android.app.Activity.RESULT_OK;
+import static com.tugasakhir.turnamensiamember.View.Account.AccountModalActivity.MODAL_NAME;
+import static com.tugasakhir.turnamensiamember.View.Account.AccountModalActivity.MODAL_TYPE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -129,22 +131,20 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
         mChangePasswordB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AccountActivity)getActivity()).getSupportFragmentManager()
-                        .beginTransaction()
-                        .add(R.id.layout_account_profile, ChangePasswordFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
+                Intent intent = new Intent(getContext(), AccountModalActivity.class);
+                intent.putExtra(MODAL_TYPE, 0);
+                intent.putExtra(MODAL_NAME, "Change Password");
+                startActivity(intent);
             }
         });
 
         mIdentityB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((AccountActivity)getActivity()).getSupportFragmentManager()
-                        .beginTransaction()
-                        .add(R.id.layout_account_profile, IdentityFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
+                Intent intent = new Intent(getContext(), AccountModalActivity.class);
+                intent.putExtra(MODAL_TYPE, 1);
+                intent.putExtra(MODAL_NAME, "Identity Card");
+                startActivity(intent);
             }
         });
 
@@ -181,6 +181,7 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
             user.setEmail(mEmailET.getText().toString());
             user.setSteam32_id(mSteamIdET.getText().toString());
             mSessionManager.doChangeUserData(user);
+            ((AccountActivity)getActivity()).doUserLogin(mSessionManager.isUserLoggedIn());
             mProgressDialog.dismiss();
             Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
         }
@@ -188,6 +189,7 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
             User user = new User();
             user.setImage(((PictureResponse) response).getFile_path());
             mSessionManager.doChangeUserData(user);
+            ((AccountActivity)getActivity()).doUserLogin(mSessionManager.isUserLoggedIn());
             mProgressDialog.dismiss();
             Picasso.with(getContext()).load(user.getImage()).into(mImageIV);
             Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
