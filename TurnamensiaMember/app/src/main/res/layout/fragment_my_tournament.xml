@@ -3,6 +3,7 @@
     android:id="@+id/layout_my_tournament"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context="com.tugasakhir.turnamensiamember.View.MyTournament.MyTournamentFragment">
 
     <android.support.v7.widget.RecyclerView

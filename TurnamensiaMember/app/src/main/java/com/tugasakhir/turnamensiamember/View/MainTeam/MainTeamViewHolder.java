@@ -44,7 +44,7 @@ public class MainTeamViewHolder extends RecyclerView.ViewHolder {
         id = team.getId();
 
         mNameTV.setText(team.getName());
-        mMemberTV.setText(team.getNumber_of_members());
+        mMemberTV.setText(team.getNumber_of_members().toString().concat(" Member"));
         Picasso.with(itemView.getContext()).load(team.getImage()).into(mPhotoIV);
     }
 }

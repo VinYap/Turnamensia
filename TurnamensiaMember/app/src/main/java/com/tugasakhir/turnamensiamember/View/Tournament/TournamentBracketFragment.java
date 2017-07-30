@@ -36,10 +36,12 @@ public class TournamentBracketFragment extends Fragment {
 
         mBracketWV = (WebView) view.findViewById(R.id.layout_bracket);
 
-//        WebSettings webSettings = mBracketWV.getSettings();
-//        webSettings.setJavaScriptEnabled(true);
+        mBracketWV.getSettings().setJavaScriptEnabled(true);
+//        mBracketWV.getSettings().setUseWideViewPort(true);
+//        mBracketWV.getSettings().setLoadWithOverviewMode(true);
 
-        mBracketWV.loadUrl(url);
+        String iframe = "<iframe src=\"http://challonge.com/dotabattleground_1c080561808a18dcbaf25bd45f3ed411d/module\" width=\"100%\" height=\"500\" frameborder=\"0\" scrolling=\"auto\" allowtransparency=\"true\"></iframe>";
+        mBracketWV.loadData(iframe, "text/html", null);
 
         return view;
     }

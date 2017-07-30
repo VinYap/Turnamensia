@@ -38,4 +38,8 @@ public class MainTeamAdapter extends RecyclerView.Adapter<MainTeamViewHolder> {
         if (teams != null) return teams.size();
         return 0;
     }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
 }

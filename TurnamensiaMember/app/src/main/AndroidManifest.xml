@@ -74,6 +74,9 @@
         <activity
             android:name=".View.MainTeam.MainTeamActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".View.MyTournament.MyQrCodeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

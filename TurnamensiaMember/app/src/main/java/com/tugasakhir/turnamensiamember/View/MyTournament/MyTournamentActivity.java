@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
@@ -39,6 +41,8 @@ public class MyTournamentActivity extends BaseActivity implements iPresenterResp
 
         String token = mSessionManager.getTokenLoggedIn();
 
+        this.setTitle("My Tournament");
+
         mProgressDialog.show();
         mMyTournamentPresenter.doGetParticipantMyTournament(token);
     }
@@ -62,5 +66,13 @@ public class MyTournamentActivity extends BaseActivity implements iPresenterResp
     public void doConnectionError(int message) {
         mProgressDialog.dismiss();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem mActionSettings = menu.findItem(R.id.action_settings);
+        mActionSettings.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+        return true;
     }
 }

@@ -57,7 +57,7 @@ public interface APIModel {
     Call<TournamentDetailResponse> doGetParticipantTournamentDetail(@Path("id") Long id);
 
     @GET("/api/participant/team")
-    Call<TeamResponse> doGetParticipantTeam(@Header("Authorization") String authorization, @QueryMap Map<String, Object> data);
+    Call<AccountTeamResponse> doGetParticipantTeam(@Header("Authorization") String authorization, @QueryMap Map<String, Object> data);
 
     @GET("/api/participant/profile")
     Call<AccountProfileResponse> doGetParticipantAccountProfile(@Header("Authorization") String authorization);

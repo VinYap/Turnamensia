@@ -30,6 +30,10 @@ public class MyTournamentViewHolder extends RecyclerView.ViewHolder {
 
     private Long id;
     private String uri;
+    private String name;
+
+    public static final String URI_KEY = "URI_KEY";
+    public static final String TOURNAMENT_NAME = "TOURNAMENT_NAME";
 
     public MyTournamentViewHolder(View view, boolean isCompleted) {
         super(view);
@@ -54,11 +58,10 @@ public class MyTournamentViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 Context context = itemView.getContext();
-                ((MyTournamentActivity) context).getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.layout_my_tournament, MyQrCodeFragment.newInstance(uri))
-                        .addToBackStack(null)
-                        .commit();
+                Intent intent = new Intent(context, MyQrCodeActivity.class);
+                intent.putExtra(URI_KEY, uri);
+                intent.putExtra(TOURNAMENT_NAME, name);
+                context.startActivity(intent);
             }
         });
 
@@ -70,11 +73,12 @@ public class MyTournamentViewHolder extends RecyclerView.ViewHolder {
         Date endDate = new Date(Long.parseLong(String.valueOf(myTournament.getEnd_date())) * 1000);
 
         this.uri = myTournament.getQr_identifier();
+        this.name = myTournament.getTournament_name();
         this.id = myTournament.getId();
 
         mTournamentNameTV.setText(myTournament.getTournament_name());
         mTeamNameTV.setText(myTournament.getTeam_name());
-        mDateTV.setText(new SimpleDateFormat("dd MMMM yyyy").format(startDate) + " - " + new SimpleDateFormat("dd MMMM yyyy").format(endDate));
+        mDateTV.setText(new SimpleDateFormat("dd MMMM").format(startDate) + " - " + new SimpleDateFormat("dd MMMM").format(endDate));
         Picasso.with(itemView.getContext()).load(myTournament.getImage()).into(mPhotoIV);
         Picasso.with(itemView.getContext()).load(this.uri).into(mQrCodeIV);
     }

@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.tugasakhir.turnamensiamember.Model.API.ConnectionAPI;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
+import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.MemberResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TeamResponse;
@@ -31,6 +32,38 @@ public class TeamPresenter {
      */
     public TeamPresenter(iPresenterResponse iTeamResponse) {
         this.iTeamResponse = iTeamResponse;
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     */
+    public void doGetParticipantTeam(String token) {
+        Map<String, Object> data = new HashMap<>();
+
+        ConnectionAPI.getInstance().getAPIModel().doGetParticipantTeam(token, data).enqueue(new Callback<AccountTeamResponse>() {
+            @Override
+            public void onResponse(Call<AccountTeamResponse> call, retrofit2.Response<AccountTeamResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iTeamResponse.doSuccess(response.body());
+                    } else {
+                        iTeamResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    if (response.body() != null) iTeamResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AccountTeamResponse> call, Throwable t) {
+                iTeamResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
     }
 
     /**
