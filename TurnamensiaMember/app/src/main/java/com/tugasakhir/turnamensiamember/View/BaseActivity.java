@@ -156,10 +156,7 @@ public abstract class BaseActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.tournaments) {
-            startActivity(new Intent(this, MainActivity.class));
-        }
-        else if (id == R.id.teams) {
+        if (id == R.id.teams) {
             startActivity(new Intent(this, MainTeamActivity.class));
         }
         else if (id == R.id.login_register) {
@@ -207,7 +204,7 @@ public abstract class BaseActivity extends AppCompatActivity
             mUserEmailTV.setText("Login your account");
         }
 
-        mNavigationMenu.setGroupVisible(R.id.group_main, !isLogin || (user != null && user.getMember_type() == 1));
+        mNavigationMenu.setGroupVisible(R.id.group_main, user != null && user.getMember_type() == 1);
         mNavigationMenu.setGroupVisible(R.id.group_auth, !isLogin);
         mNavigationMenu.setGroupVisible(R.id.group_participant, user != null && user.getMember_type() == 1);
 //        mNavigationMenu.setGroupVisible(R.id.group_organizer, user != null && user.getMember_type() == 2);

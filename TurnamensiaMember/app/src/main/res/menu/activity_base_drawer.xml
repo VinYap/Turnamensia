@@ -5,10 +5,6 @@
         android:visible="true"
         android:id="@+id/group_main">
         <item
-            android:id="@+id/tournaments"
-            android:icon="@drawable/ic_vpn_key_gray_32dp"
-            android:title="List Tournament" />
-        <item
             android:id="@+id/teams"
             android:icon="@drawable/ic_vpn_key_gray_32dp"
             android:title="List Team" />

@@ -1,6 +1,7 @@
 package com.tugasakhir.turnamensiamember.View.Account;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -79,7 +80,8 @@ public class CreateTeamFragment extends Fragment implements iPresenterResponse {
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
         Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
-        getActivity().getSupportFragmentManager().popBackStack();
+        getActivity().setResult(Activity.RESULT_OK);
+        getActivity().finish();
     }
 
     @Override

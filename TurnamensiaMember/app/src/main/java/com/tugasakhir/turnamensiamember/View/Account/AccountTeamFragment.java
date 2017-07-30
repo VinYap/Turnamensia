@@ -2,6 +2,7 @@ package com.tugasakhir.turnamensiamember.View.Account;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,10 @@ import com.tugasakhir.turnamensiamember.R;
 
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+import static com.tugasakhir.turnamensiamember.View.Account.AccountModalActivity.MODAL_NAME;
+import static com.tugasakhir.turnamensiamember.View.Account.AccountModalActivity.MODAL_TYPE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -35,6 +40,8 @@ public class AccountTeamFragment extends Fragment implements iPresenterResponse 
     private ProgressDialog mProgressDialog;
     private AccountTeamPresenter mAccountTeamPresenter;
     private AccountTeamAdapter mAdapter;
+
+    private static final Integer REQUEST_CODE = 0;
 
     public AccountTeamFragment() {
         // Required empty public constructor
@@ -56,12 +63,10 @@ public class AccountTeamFragment extends Fragment implements iPresenterResponse 
         mCreateTeamB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCreateTeamB.setVisibility(View.GONE);
-                ((AccountActivity)getActivity()).getSupportFragmentManager()
-                        .beginTransaction()
-                        .add(R.id.layout_account_team, CreateTeamFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
+                Intent intent = new Intent(getContext(), AccountModalActivity.class);
+                intent.putExtra(MODAL_TYPE, 2);
+                intent.putExtra(MODAL_NAME, "Create Team");
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
 
@@ -81,18 +86,6 @@ public class AccountTeamFragment extends Fragment implements iPresenterResponse 
 
         mAdapter = new AccountTeamAdapter(mTeams);
         mTeamRV.setAdapter(mAdapter);
-
-//        getActivity().getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-//            @Override
-//            public void onBackStackChanged() {
-//                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() == 0) {
-//                    mProgressDialog.show();
-//                    String token = mSessionManager.getTokenLoggedIn();
-//                    mCreateTeamB.setVisibility(View.VISIBLE);
-//                    mAccountTeamPresenter.doGetParticipantAccountTeam(token);
-//                }
-//            }
-//        });
 
         return view;
     }
@@ -115,5 +108,15 @@ public class AccountTeamFragment extends Fragment implements iPresenterResponse 
     public void doConnectionError(int message) {
         mProgressDialog.dismiss();
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            mProgressDialog.show();
+            String token = mSessionManager.getTokenLoggedIn();
+            mAccountTeamPresenter.doGetParticipantAccountTeam(token);
+        }
     }
 }

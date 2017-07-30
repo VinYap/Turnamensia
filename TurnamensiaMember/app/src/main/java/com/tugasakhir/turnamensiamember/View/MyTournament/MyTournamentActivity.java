@@ -29,6 +29,8 @@ public class MyTournamentActivity extends BaseActivity implements iPresenterResp
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_my_tournament, mBaseLayout);
 
+        showUpCaretMenu();
+
         mTabLayout = (TabLayout) findViewById(R.id.my_tournament_tab_layout);
         mViewPager = (ViewPager) findViewById(R.id.my_tournament_pager);
 

@@ -28,7 +28,7 @@ public class AccountModalActivity extends BaseActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.layout_account_modal, type == 0 ? ChangePasswordFragment.newInstance() : (type == 1 ? IdentityFragment.newInstance() : null))
+                .add(R.id.layout_account_modal, type == 0 ? ChangePasswordFragment.newInstance() : (type == 1 ? IdentityFragment.newInstance() : (type == 2 ? CreateTeamFragment.newInstance() : null)))
                 .commit();
     }
 
