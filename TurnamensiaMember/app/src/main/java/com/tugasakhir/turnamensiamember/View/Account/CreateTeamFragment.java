@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
-import com.tugasakhir.turnamensiamember.Presenter.Team.TeamDetailPresenter;
+import com.tugasakhir.turnamensiamember.Presenter.Team.TeamPresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 
@@ -28,7 +28,7 @@ public class CreateTeamFragment extends Fragment implements iPresenterResponse {
 
     private SessionManager mSessionManager;
     private ProgressDialog mProgressDialog;
-    private TeamDetailPresenter mTeamDetailPresenter;
+    private TeamPresenter mTeamPresenter;
 
     public CreateTeamFragment() {
         // Required empty public constructor
@@ -53,7 +53,7 @@ public class CreateTeamFragment extends Fragment implements iPresenterResponse {
         mProgressDialog.setMessage("Loading...");
 
         mSessionManager = new SessionManager(getContext());
-        mTeamDetailPresenter = new TeamDetailPresenter(this);
+        mTeamPresenter = new TeamPresenter(this);
 
         mCreateB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +67,7 @@ public class CreateTeamFragment extends Fragment implements iPresenterResponse {
                 else {
                     mProgressDialog.show();
                     String token = mSessionManager.getTokenLoggedIn();
-                    mTeamDetailPresenter.doCreateParticipantTeam(token, name, joinCode);
+                    mTeamPresenter.doCreateParticipantTeam(token, name, joinCode);
                 }
             }
         });

@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tugasakhir.turnamensiamember.Model.Basic.TournamentRegistration;
 import com.tugasakhir.turnamensiamember.R;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,12 +19,16 @@ import com.tugasakhir.turnamensiamember.R;
 public class MyRegistrationFragment extends Fragment {
     private RecyclerView mRegistrationRV;
 
+    private List<TournamentRegistration> tournamentRegistrations;
+
     public MyRegistrationFragment() {
         // Required empty public constructor
     }
 
-    public static MyRegistrationFragment newInstance() {
-        return new MyRegistrationFragment();
+    public static MyRegistrationFragment newInstance(List<TournamentRegistration> tournamentRegistrations) {
+        MyRegistrationFragment fragment = new MyRegistrationFragment();
+        fragment.tournamentRegistrations = tournamentRegistrations;
+        return fragment;
     }
 
     @Override
@@ -34,7 +41,7 @@ public class MyRegistrationFragment extends Fragment {
         mRegistrationRV.setLayoutManager(new LinearLayoutManager(getContext()));
         mRegistrationRV.setHasFixedSize(true);
 
-        MyRegistrationAdapter adapter = new MyRegistrationAdapter();
+        MyRegistrationAdapter adapter = new MyRegistrationAdapter(tournamentRegistrations);
         mRegistrationRV.setAdapter(adapter);
 
         return view;

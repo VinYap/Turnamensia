@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.TeamResponse;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
-import com.tugasakhir.turnamensiamember.Presenter.Team.TeamDetailPresenter;
+import com.tugasakhir.turnamensiamember.Presenter.Team.TeamPresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
@@ -22,7 +22,7 @@ public class TeamActivity extends BaseActivity implements iPresenterResponse {
 
     private ProgressDialog mProgressDialog;
     private SessionManager mSessionManager;
-    private TeamDetailPresenter mTeamDetailPresenter;
+    private TeamPresenter mTeamPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +39,13 @@ public class TeamActivity extends BaseActivity implements iPresenterResponse {
         mProgressDialog.setMessage("Loading...");
 
         mSessionManager = new SessionManager(this);
-        mTeamDetailPresenter = new TeamDetailPresenter(this);
+        mTeamPresenter = new TeamPresenter(this);
 
         Long teamId = getIntent().getLongExtra(TEAM_KEY, -1);
         String token = mSessionManager.getTokenLoggedIn();
 
         mProgressDialog.show();
-        mTeamDetailPresenter.doGetParticipantTeamDetail(token, teamId);
+        mTeamPresenter.doGetParticipantTeamDetail(token, teamId);
     }
 
     @Override

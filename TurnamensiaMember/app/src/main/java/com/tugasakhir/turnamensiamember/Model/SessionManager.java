@@ -32,13 +32,13 @@ public class SessionManager {
 
     public void doCreateSession(LoginResponse loginResponse) {
         editor.putBoolean(KEY_IS_PREF_LOGIN, true);
-        editor.putString(KEY_TOKEN_DATA, BEARER.concat(loginResponse.getToken()));
+        editor.putString(KEY_TOKEN_DATA, loginResponse.getToken());
         editor.putString(KEY_USER_DATA, new Gson().toJson(loginResponse.getUser()));
         editor.commit();
     }
 
     public void doChangeTokenData(String token) {
-        editor.putString(KEY_TOKEN_DATA, BEARER.concat(token));
+        editor.putString(KEY_TOKEN_DATA, token);
         editor.commit();
     }
 
@@ -61,7 +61,9 @@ public class SessionManager {
     }
 
     public String getTokenLoggedIn() {
-        return sharedPreferences.getString(KEY_TOKEN_DATA, "");
+        String token = sharedPreferences.getString(KEY_TOKEN_DATA, "");
+        if (token.equals("")) return token;
+        return BEARER.concat(token);
     }
 
     public User getUserLoggedIn() {

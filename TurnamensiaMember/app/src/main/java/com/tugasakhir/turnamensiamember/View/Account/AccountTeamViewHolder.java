@@ -38,7 +38,7 @@ public class AccountTeamViewHolder extends RecyclerView.ViewHolder implements Vi
     public void bindHolder(Team team) {
         id = team.getId();
         mNameTV.setText(team.getName());
-        mMemberTV.setText(team.getNumber_of_members().toString().concat(" member").concat(team.getNumber_of_members() > 1 ? "s" : ""));
+        mMemberTV.setText(team.getNumber_of_members().toString().concat(" Member"));
         Picasso.with(itemView.getContext()).load(team.getImage()).into(mImageIV);
     }
 

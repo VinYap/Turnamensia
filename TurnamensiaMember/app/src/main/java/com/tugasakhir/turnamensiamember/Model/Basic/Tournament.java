@@ -22,10 +22,10 @@ public class Tournament {
     private String prize_2nd;
     private String prize_3rd;
     private String prize_other;
-    private Integer start_date;
-    private Integer end_date;
-    private Integer registration_closed;
-    private Integer entry_fee;
+    private Long start_date;
+    private Long end_date;
+    private Long registration_closed;
+    private Long entry_fee;
     private String status;
     private Integer number_of_registers;
     private String type;
@@ -144,35 +144,35 @@ public class Tournament {
         this.prize_other = prize_other;
     }
 
-    public Integer getStart_date() {
+    public Long getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(Integer start_date) {
+    public void setStart_date(Long start_date) {
         this.start_date = start_date;
     }
 
-    public Integer getEnd_date() {
+    public Long getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Integer end_date) {
+    public void setEnd_date(Long end_date) {
         this.end_date = end_date;
     }
 
-    public Integer getRegistration_closed() {
+    public Long getRegistration_closed() {
         return registration_closed;
     }
 
-    public void setRegistration_closed(Integer registration_closed) {
+    public void setRegistration_closed(Long registration_closed) {
         this.registration_closed = registration_closed;
     }
 
-    public Integer getEntry_fee() {
+    public Long getEntry_fee() {
         return entry_fee;
     }
 
-    public void setEntry_fee(Integer entry_fee) {
+    public void setEntry_fee(Long entry_fee) {
         this.entry_fee = entry_fee;
     }
 

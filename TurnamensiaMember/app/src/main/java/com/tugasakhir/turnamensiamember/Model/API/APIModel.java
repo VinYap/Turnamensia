@@ -14,6 +14,7 @@ import com.tugasakhir.turnamensiamember.Model.Response.OrganizerTournamentDetail
 import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.QRScannerResultResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.RegisterTeamResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.RegistrationConfirmationResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TournamentDetailResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.TournamentResponse;
@@ -21,6 +22,7 @@ import com.tugasakhir.turnamensiamember.Model.Response.TournamentResponse;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -30,6 +32,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
@@ -52,6 +55,9 @@ public interface APIModel {
 
     @GET("/api/participant/tournament/{id}/detail")
     Call<TournamentDetailResponse> doGetParticipantTournamentDetail(@Path("id") Long id);
+
+    @GET("/api/participant/team")
+    Call<TeamResponse> doGetParticipantTeam(@Header("Authorization") String authorization, @QueryMap Map<String, Object> data);
 
     @GET("/api/participant/profile")
     Call<AccountProfileResponse> doGetParticipantAccountProfile(@Header("Authorization") String authorization);
@@ -112,6 +118,13 @@ public interface APIModel {
 
     @POST("/api/participant/tournament/{id}/register")
     Call<Response> doParticipantRegisterTournament(@Header("Authorization") String authorization, @Path("id") Long id, @Body Map<String, Object> data);
+
+    @GET("/api/participant/tournament/confirm-payment/{id}")
+    Call<RegistrationConfirmationResponse> doGetParticipantConfirmPayment(@Header("Authorization") String authorization, @Path("id") Long id);
+
+    @Multipart
+    @POST("/api/participant/tournament/confirm-payment/{id}")
+    Call<PictureResponse> doParticipantConfirmPayment(@Header("Authorization") String authorization, @Path("id") Long id, @Part MultipartBody.Part image, @PartMap Map<String, RequestBody> data);
 
     @POST("/api/organizer/login")
     Call<LoginResponse> doOrganizerLogin(@Body Map<String, String> data);

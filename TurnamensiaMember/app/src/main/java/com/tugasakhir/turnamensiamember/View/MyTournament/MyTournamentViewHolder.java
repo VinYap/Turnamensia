@@ -1,6 +1,7 @@
 package com.tugasakhir.turnamensiamember.View.MyTournament;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,9 +10,12 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.tugasakhir.turnamensiamember.Model.Basic.MyTournament;
 import com.tugasakhir.turnamensiamember.R;
+import com.tugasakhir.turnamensiamember.View.Tournament.TournamentActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_KEY;
 
 /**
  * Created by Asus on 29/07/2017.
@@ -24,6 +28,7 @@ public class MyTournamentViewHolder extends RecyclerView.ViewHolder {
     private TextView mDateTV;
     private ImageView mQrCodeIV;
 
+    private Long id;
     private String uri;
 
     public MyTournamentViewHolder(View view, boolean isCompleted) {
@@ -34,6 +39,16 @@ public class MyTournamentViewHolder extends RecyclerView.ViewHolder {
         mTeamNameTV = (TextView) itemView.findViewById(R.id.team_name);
         mDateTV = (TextView) itemView.findViewById(R.id.tournament_date);
         mQrCodeIV = (ImageView) itemView.findViewById(R.id.tournament_qr_code);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = itemView.getContext();
+                Intent intent = new Intent(context, TournamentActivity.class);
+                intent.putExtra(TOURNAMENT_KEY, id);
+                context.startActivity(intent);
+            }
+        });
 
         mQrCodeIV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,9 +62,7 @@ public class MyTournamentViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
-        if (isCompleted == true) {
-            mQrCodeIV.setVisibility(View.GONE);
-        }
+        if (isCompleted == true) mQrCodeIV.setVisibility(View.GONE);
     }
 
     public void bindHolder(MyTournament myTournament) {
@@ -57,6 +70,7 @@ public class MyTournamentViewHolder extends RecyclerView.ViewHolder {
         Date endDate = new Date(Long.parseLong(String.valueOf(myTournament.getEnd_date())) * 1000);
 
         this.uri = myTournament.getQr_identifier();
+        this.id = myTournament.getId();
 
         mTournamentNameTV.setText(myTournament.getTournament_name());
         mTeamNameTV.setText(myTournament.getTeam_name());

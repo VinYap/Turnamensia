@@ -10,13 +10,13 @@ import java.util.List;
  */
 
 public class MyRegisterResponse extends Response {
-    private List<MyRegistration> myRegistrations;
+    private List<MyRegistration> registrations;
 
-    public List<MyRegistration> getMyRegistrations() {
-        return myRegistrations;
+    public List<MyRegistration> getRegistrations() {
+        return registrations;
     }
 
-    public void setMyRegistrations(List<MyRegistration> myRegistrations) {
-        this.myRegistrations = myRegistrations;
+    public void setRegistrations(List<MyRegistration> registrations) {
+        this.registrations = registrations;
     }
 }

@@ -9,8 +9,8 @@ public class MyTournament {
     private String image;
     private String tournament_name;
     private String team_name;
-    private Integer start_date;
-    private Integer end_date;
+    private Long start_date;
+    private Long end_date;
     private String qr_identifier;
 
     public Long getId() {
@@ -45,19 +45,19 @@ public class MyTournament {
         this.team_name = team_name;
     }
 
-    public Integer getStart_date() {
+    public Long getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(Integer start_date) {
+    public void setStart_date(Long start_date) {
         this.start_date = start_date;
     }
 
-    public Integer getEnd_date() {
+    public Long getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Integer end_date) {
+    public void setEnd_date(Long end_date) {
         this.end_date = end_date;
     }
 

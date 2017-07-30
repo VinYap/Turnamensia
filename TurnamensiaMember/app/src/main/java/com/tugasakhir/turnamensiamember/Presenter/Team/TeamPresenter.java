@@ -21,16 +21,16 @@ import retrofit2.Callback;
  * Created by alvin on 7/21/2017.
  */
 
-public class TeamDetailPresenter {
-    iPresenterResponse iTeamDetailResponse;
+public class TeamPresenter {
+    iPresenterResponse iTeamResponse;
 
     /**
      * For Communicating Between View and Presenter
      *
-     * @param iTeamDetailResponse
+     * @param iTeamResponse
      */
-    public TeamDetailPresenter(iPresenterResponse iTeamDetailResponse) {
-        this.iTeamDetailResponse = iTeamDetailResponse;
+    public TeamPresenter(iPresenterResponse iTeamResponse) {
+        this.iTeamResponse = iTeamResponse;
     }
 
     /**
@@ -45,20 +45,20 @@ public class TeamDetailPresenter {
             public void onResponse(Call<TeamResponse> call, retrofit2.Response<TeamResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
-                        iTeamDetailResponse.doSuccess(response.body());
+                        iTeamResponse.doSuccess(response.body());
                     } else {
-                        iTeamDetailResponse.doFail(response.body().getMessage()[0]);
+                        iTeamResponse.doFail(response.body().getMessage()[0]);
                     }
                 }
                 else {
-                    if (response.body() != null) iTeamDetailResponse.doFail(response.body().getMessage()[0]);
-                    else iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                    if (response.body() != null) iTeamResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamResponse.doConnectionError(R.string.connection_error);
                 }
             }
 
             @Override
             public void onFailure(Call<TeamResponse> call, Throwable t) {
-                iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                iTeamResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }
         });
@@ -83,20 +83,20 @@ public class TeamDetailPresenter {
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
-                        iTeamDetailResponse.doSuccess(response.body());
+                        iTeamResponse.doSuccess(response.body());
                     } else {
-                        iTeamDetailResponse.doFail(response.body().getMessage()[0]);
+                        iTeamResponse.doFail(response.body().getMessage()[0]);
                     }
                 }
                 else {
-                    if (response.body() != null) iTeamDetailResponse.doFail(response.body().getMessage()[0]);
-                    else iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                    if (response.body() != null) iTeamResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamResponse.doConnectionError(R.string.connection_error);
                 }
             }
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
-                iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                iTeamResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }
         });
@@ -115,20 +115,20 @@ public class TeamDetailPresenter {
             public void onResponse(Call<PictureResponse> call, retrofit2.Response<PictureResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
-                        iTeamDetailResponse.doSuccess(response.body());
+                        iTeamResponse.doSuccess(response.body());
                     } else {
-                        iTeamDetailResponse.doFail(response.body().getMessage()[0]);
+                        iTeamResponse.doFail(response.body().getMessage()[0]);
                     }
                 }
                 else {
-                    if (response.body() != null) iTeamDetailResponse.doFail(response.body().getMessage()[0]);
-                    else iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                    if (response.body() != null) iTeamResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamResponse.doConnectionError(R.string.connection_error);
                 }
             }
 
             @Override
             public void onFailure(Call<PictureResponse> call, Throwable t) {
-                iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                iTeamResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }
         });
@@ -146,20 +146,20 @@ public class TeamDetailPresenter {
             public void onResponse(Call<PictureResponse> call, retrofit2.Response<PictureResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
-                        iTeamDetailResponse.doSuccess(response.body());
+                        iTeamResponse.doSuccess(response.body());
                     } else {
-                        iTeamDetailResponse.doFail(response.body().getMessage()[0]);
+                        iTeamResponse.doFail(response.body().getMessage()[0]);
                     }
                 }
                 else {
-                    if (response.body() != null) iTeamDetailResponse.doFail(response.body().getMessage()[0]);
-                    else iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                    if (response.body() != null) iTeamResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamResponse.doConnectionError(R.string.connection_error);
                 }
             }
 
             @Override
             public void onFailure(Call<PictureResponse> call, Throwable t) {
-                iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                iTeamResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }
         });
@@ -183,20 +183,20 @@ public class TeamDetailPresenter {
             public void onResponse(Call<TeamResponse> call, retrofit2.Response<TeamResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 201) {
-                        iTeamDetailResponse.doSuccess(response.body());
+                        iTeamResponse.doSuccess(response.body());
                     } else {
-                        iTeamDetailResponse.doFail(response.body().getMessage()[0]);
+                        iTeamResponse.doFail(response.body().getMessage()[0]);
                     }
                 }
                 else {
-                    if (response.body() != null) iTeamDetailResponse.doFail(response.body().getMessage()[0]);
-                    else iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                    if (response.body() != null) iTeamResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamResponse.doConnectionError(R.string.connection_error);
                 }
             }
 
             @Override
             public void onFailure(Call<TeamResponse> call, Throwable t) {
-                iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                iTeamResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }
         });
@@ -215,20 +215,20 @@ public class TeamDetailPresenter {
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
-                        iTeamDetailResponse.doSuccess(response.body());
+                        iTeamResponse.doSuccess(response.body());
                     } else {
-                        iTeamDetailResponse.doFail(response.body().getMessage()[0]);
+                        iTeamResponse.doFail(response.body().getMessage()[0]);
                     }
                 }
                 else {
-                    if (response.body() != null) iTeamDetailResponse.doFail(response.body().getMessage()[0]);
-                    else iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                    if (response.body() != null) iTeamResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamResponse.doConnectionError(R.string.connection_error);
                 }
             }
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
-                iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                iTeamResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }
         });
@@ -246,20 +246,20 @@ public class TeamDetailPresenter {
             public void onResponse(Call<MemberResponse> call, retrofit2.Response<MemberResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
-                        iTeamDetailResponse.doSuccess(response.body());
+                        iTeamResponse.doSuccess(response.body());
                     } else {
-                        iTeamDetailResponse.doFail(response.body().getMessage()[0]);
+                        iTeamResponse.doFail(response.body().getMessage()[0]);
                     }
                 }
                 else {
-                    if (response.body() != null) iTeamDetailResponse.doFail(response.body().getMessage()[0]);
-                    else iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                    if (response.body() != null) iTeamResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamResponse.doConnectionError(R.string.connection_error);
                 }
             }
 
             @Override
             public void onFailure(Call<MemberResponse> call, Throwable t) {
-                iTeamDetailResponse.doConnectionError(R.string.connection_error);
+                iTeamResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }
         });

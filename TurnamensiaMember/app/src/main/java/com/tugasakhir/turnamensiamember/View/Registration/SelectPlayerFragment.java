@@ -19,7 +19,7 @@ import com.tugasakhir.turnamensiamember.Model.Basic.Team;
 import com.tugasakhir.turnamensiamember.Model.Basic.Tournament;
 import com.tugasakhir.turnamensiamember.Model.Response.MemberResponse;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
-import com.tugasakhir.turnamensiamember.Presenter.Team.TeamDetailPresenter;
+import com.tugasakhir.turnamensiamember.Presenter.Team.TeamPresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 
@@ -37,7 +37,7 @@ public class SelectPlayerFragment extends Fragment implements iPresenterResponse
 
     private ProgressDialog mProgressDialog;
     private SessionManager mSessionManager;
-    private TeamDetailPresenter mTeamDetailPresenter;
+    private TeamPresenter mTeamPresenter;
 
     private Tournament tournament;
     private Team team;
@@ -96,11 +96,11 @@ public class SelectPlayerFragment extends Fragment implements iPresenterResponse
         mProgressDialog.setMessage("Loading...");
 
         mSessionManager = new SessionManager(getContext());
-        mTeamDetailPresenter = new TeamDetailPresenter(this);
+        mTeamPresenter = new TeamPresenter(this);
 
         mProgressDialog.show();
         String token = mSessionManager.getTokenLoggedIn();
-        mTeamDetailPresenter.doGetParticipantTeamMember(token, team.getId());
+        mTeamPresenter.doGetParticipantTeamMember(token, team.getId());
 
         return view;
     }

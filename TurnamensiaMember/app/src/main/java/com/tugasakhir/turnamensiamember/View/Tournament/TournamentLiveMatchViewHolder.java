@@ -26,7 +26,6 @@ public class TournamentLiveMatchViewHolder extends RecyclerView.ViewHolder imple
     private TextView mDireTV;
     private TextView mDireScoreTV;
     private TextView mTimeTV;
-    private TextView mSpectatorTV;
 
     private Long id;
 
@@ -44,7 +43,6 @@ public class TournamentLiveMatchViewHolder extends RecyclerView.ViewHolder imple
         mDireTV = (TextView) itemView.findViewById(R.id.match_dire);
         mDireScoreTV = (TextView) itemView.findViewById(R.id.match_dire_score);
         mTimeTV = (TextView) itemView.findViewById(R.id.match_time);
-        mSpectatorTV = (TextView) itemView.findViewById(R.id.match_spectator);
 
         itemView.setOnClickListener(this);
     }
@@ -60,7 +58,6 @@ public class TournamentLiveMatchViewHolder extends RecyclerView.ViewHolder imple
         mDireTV.setText(liveMatch.getPlayer_2());
         mDireScoreTV.setText(liveMatch.getPlayer_2_score().toString());
         mTimeTV.setText(String.format("%02d", duration / 60) + ":" + String.format("%02d", duration % 60));
-        mSpectatorTV.setText("Spectators : " + liveMatch.getSpectators().toString());
         Picasso.with(itemView.getContext()).load(liveMatch.getPlayer_1_image()).into(mRadiantPhotoIV);
         Picasso.with(itemView.getContext()).load(liveMatch.getPlayer_2_image()).into(mDirePhotoIV);
     }

@@ -65,7 +65,15 @@
         <activity
             android:name=".View.MyTournament.MyTournamentActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".View.MyRegistration.MyRegistrationActivity"></activity>
+        <activity
+            android:name=".View.MyRegistration.MyRegistrationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".View.MyRegistration.RegistrationConfirmationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".View.MainTeam.MainTeamActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

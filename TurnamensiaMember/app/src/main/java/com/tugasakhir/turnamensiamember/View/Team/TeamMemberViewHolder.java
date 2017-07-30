@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso;
 import com.tugasakhir.turnamensiamember.Model.Basic.Member;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
-import com.tugasakhir.turnamensiamember.Presenter.Team.TeamDetailPresenter;
+import com.tugasakhir.turnamensiamember.Presenter.Team.TeamPresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 
@@ -35,7 +35,7 @@ public class TeamMemberViewHolder extends RecyclerView.ViewHolder implements iPr
     private TeamMemberAdapter mAdapter;
     private ProgressDialog mProgressDialog;
     private SessionManager mSessionManager;
-    private TeamDetailPresenter mTeamDetailPresenter;
+    private TeamPresenter mTeamPresenter;
 
     public TeamMemberViewHolder(View itemView, TeamMemberAdapter adapter, final Long teamId, Boolean isLeader) {
         super(itemView);
@@ -53,14 +53,14 @@ public class TeamMemberViewHolder extends RecyclerView.ViewHolder implements iPr
         mProgressDialog.setMessage("Loading...");
 
         mSessionManager = new SessionManager(itemView.getContext());
-        mTeamDetailPresenter = new TeamDetailPresenter(this);
+        mTeamPresenter = new TeamPresenter(this);
 
         mDeleteB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mProgressDialog.show();
                 String token = mSessionManager.getTokenLoggedIn();
-                mTeamDetailPresenter.doDeleteParticipantTeamMember(token, teamId, id);
+                mTeamPresenter.doDeleteParticipantTeamMember(token, teamId, id);
             }
         });
 

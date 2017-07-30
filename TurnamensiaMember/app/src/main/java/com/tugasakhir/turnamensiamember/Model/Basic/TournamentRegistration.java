@@ -11,6 +11,9 @@ public class TournamentRegistration {
     private Long id;
     private Long register_at;
     private Team team;
+    private String name;
+    private Integer team_size;
+    private String status;
 
     public Long getId() {
         return id;
@@ -34,5 +37,29 @@ public class TournamentRegistration {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getTeam_size() {
+        return team_size;
+    }
+
+    public void setTeam_size(Integer team_size) {
+        this.team_size = team_size;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

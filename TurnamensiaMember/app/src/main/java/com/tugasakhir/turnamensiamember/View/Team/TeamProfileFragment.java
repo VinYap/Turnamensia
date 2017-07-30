@@ -23,7 +23,7 @@ import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Basic.Team;
 import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
-import com.tugasakhir.turnamensiamember.Presenter.Team.TeamDetailPresenter;
+import com.tugasakhir.turnamensiamember.Presenter.Team.TeamPresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 
@@ -47,7 +47,7 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
     private Button mUpdateB;
 
     private ProgressDialog mProgressDialog;
-    private TeamDetailPresenter mTeamDetailPresenter;
+    private TeamPresenter mTeamPresenter;
     private SessionManager mSessionManager;
 
     private Integer mStatus;
@@ -88,7 +88,7 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
 
-        mTeamDetailPresenter = new TeamDetailPresenter(this);
+        mTeamPresenter = new TeamPresenter(this);
         mSessionManager = new SessionManager(getContext());
 
         mChangeImageIV.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +105,7 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
                 mStatus = 2;
                 String token = mSessionManager.getTokenLoggedIn();
                 Long id = getArguments().getLong(TEAM_ID);
-                mTeamDetailPresenter.doDeleteParticipantTeamPicture(token, id);
+                mTeamPresenter.doDeleteParticipantTeamPicture(token, id);
             }
         });
 
@@ -123,7 +123,7 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
                     mStatus = 1;
                     String token = mSessionManager.getTokenLoggedIn();
                     Long id = getArguments().getLong(TEAM_ID);
-                    mTeamDetailPresenter.doUpdateParticipantTeamProfile(token, id, name, joinCode);
+                    mTeamPresenter.doUpdateParticipantTeamProfile(token, id, name, joinCode);
                 }
             }
         });
@@ -153,7 +153,7 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
             MultipartBody.Part image = MultipartBody.Part.createFormData("picture", file.getName(), requestFile);
             String token = mSessionManager.getTokenLoggedIn();
             Long id = getArguments().getLong(TEAM_ID);
-            mTeamDetailPresenter.doUpdateParticipantTeamPicture(token, id, image);
+            mTeamPresenter.doUpdateParticipantTeamPicture(token, id, image);
         }
     }
 
