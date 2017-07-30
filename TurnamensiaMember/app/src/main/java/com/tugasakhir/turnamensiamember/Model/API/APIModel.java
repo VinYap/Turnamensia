@@ -10,6 +10,7 @@ import com.tugasakhir.turnamensiamember.Model.Response.MatchTeamAttendanceRespon
 import com.tugasakhir.turnamensiamember.Model.Response.MemberResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.MyRegisterResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.MyTournamentResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.NotificationResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.OrganizerTournamentDetailResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.QRScannerResultResponse;
@@ -152,4 +153,10 @@ public interface APIModel {
 
     @POST("api/participant/dota-2/match/{id}/comment")
     Call<Response> doPostDota2MatchComment(@Header("Authorization") String authorization, @Path("id") Long match_id, @Body Map<String, String> data);
+
+    @GET("api/participant/my-notification")
+    Call<NotificationResponse> doGetMyNotification(@Header("Authorization") String authorization);
+
+    @POST("api/participant/my-notification/{id}")
+    Call<Response> doPostMyNotification(@Header("Authorization") String authorization, @Path("id") Long notification_id);
 }

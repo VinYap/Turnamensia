@@ -34,6 +34,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".View.Tournament.TournamentActivity"
+            android:hardwareAccelerated="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".View.Schedule.ScheduleActivity"
@@ -79,6 +80,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".View.Account.AccountModalActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".View.Notification.NotificationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

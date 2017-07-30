@@ -28,4 +28,7 @@
     <color name="colorOrange">#C64823</color>
     <color name="colorButtonRejected">#F44336</color>
     <color name="colorButtonPending">#FF5F89A3</color>
+    <color name="colorNotifBGGradientLeft">#2F313A</color>
+    <color name="colorNotifBGGradientRight">#2F3341</color>
+    <color name="colorNotifBorder">#5F6471</color>
 </resources>
