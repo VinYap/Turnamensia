@@ -26,4 +26,7 @@
     <color name="colorLiveMatchGradientRight">#2F3341</color>
     <color name="colorLiveMatchTableBackground">#242F39</color>
     <color name="colorOrange">#C64823</color>
+    <color name="colorNotifBGGradientLeft">#2F313A</color>
+    <color name="colorNotifBGGradientRight">#2F3341</color>
+    <color name="colorNotifBorder">#5F6471</color>
 </resources>

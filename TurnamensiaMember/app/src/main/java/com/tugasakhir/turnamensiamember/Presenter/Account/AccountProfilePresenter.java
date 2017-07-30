@@ -3,6 +3,7 @@ package com.tugasakhir.turnamensiamember.Presenter.Account;
 import com.tugasakhir.turnamensiamember.Model.API.ConnectionAPI;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.NotificationResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
@@ -252,6 +253,56 @@ public class AccountProfilePresenter {
 
             @Override
             public void onFailure(Call<PictureResponse> call, Throwable t) {
+                iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void doGetMyNotification(String token) {
+        ConnectionAPI.getInstance().getAPIModel().doGetMyNotification(token).enqueue(new Callback<NotificationResponse>() {
+            @Override
+            public void onResponse(Call<NotificationResponse> call, retrofit2.Response<NotificationResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iAccountProfileResponse.doSuccess(response.body());
+                    } else {
+                        iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    if (response.body() != null) iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    else iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NotificationResponse> call, Throwable t) {
+                iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void doPostMyNotification(String token, Long notification_id) {
+        ConnectionAPI.getInstance().getAPIModel().doPostMyNotification(token, notification_id).enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iAccountProfileResponse.doSuccess(response.body());
+                    } else {
+                        iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    if (response.body() != null) iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    else iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
                 iAccountProfileResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }
