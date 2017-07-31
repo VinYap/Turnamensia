@@ -28,8 +28,10 @@ public class TournamentLiveMatchViewHolder extends RecyclerView.ViewHolder imple
     private TextView mTimeTV;
 
     private Long id;
+    private String tournament_name;
 
     public static final String LIVE_MATCH_KEY = "LIVE_MATCH_KEY";
+    public static final String LIVE_MATCH_TOURNAMENT_NAME_KEY = "LIVE_MATCH_TOURNAMENT_NAME_KEY";
 
     public TournamentLiveMatchViewHolder(View itemView) {
         super(itemView);
@@ -47,10 +49,11 @@ public class TournamentLiveMatchViewHolder extends RecyclerView.ViewHolder imple
         itemView.setOnClickListener(this);
     }
 
-    public void bindHolder(LiveMatch liveMatch) {
+    public void bindHolder(LiveMatch liveMatch, String tournament_name) {
         int duration = liveMatch.getDuration();
 
         id = liveMatch.getId();
+        this.tournament_name = tournament_name;
         mIdTV.setText("Match ID:".concat(id.toString()));
         mRoundTV.setText("Game " + liveMatch.getRound().toString() + "|" + liveMatch.getSeries());
         mRadiantTV.setText(liveMatch.getPlayer_1());
@@ -67,6 +70,7 @@ public class TournamentLiveMatchViewHolder extends RecyclerView.ViewHolder imple
         Context context = itemView.getContext();
         Intent intent = new Intent(context, LiveMatchActivity.class);
         intent.putExtra(LIVE_MATCH_KEY, id);
+        intent.putExtra(LIVE_MATCH_TOURNAMENT_NAME_KEY, tournament_name);
         context.startActivity(intent);
     }
 }

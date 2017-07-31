@@ -21,14 +21,16 @@ public class TournamentLiveMatchFragment extends Fragment {
     private RecyclerView mLiveMatchRV;
 
     private List<LiveMatch> mLiveMatches;
+    private String tournament_name;
 
     public TournamentLiveMatchFragment() {
         // Required empty public constructor
     }
 
-    public static TournamentLiveMatchFragment newInstance(List<LiveMatch> liveMatches) {
+    public static TournamentLiveMatchFragment newInstance(List<LiveMatch> liveMatches, String tournament_name) {
         TournamentLiveMatchFragment fragment = new TournamentLiveMatchFragment();
         fragment.mLiveMatches = liveMatches;
+        fragment.tournament_name = tournament_name;
         return fragment;
     }
 
@@ -42,7 +44,7 @@ public class TournamentLiveMatchFragment extends Fragment {
         mLiveMatchRV.setLayoutManager(new LinearLayoutManager(getContext()));
         mLiveMatchRV.setHasFixedSize(true);
 
-        TournamentLiveMatchAdapter adapter = new TournamentLiveMatchAdapter(mLiveMatches);
+        TournamentLiveMatchAdapter adapter = new TournamentLiveMatchAdapter(mLiveMatches, tournament_name);
         mLiveMatchRV.setAdapter(adapter);
 
         return view;
