@@ -17,6 +17,7 @@ import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
 
 import static com.tugasakhir.turnamensiamember.View.Account.AccountTeamViewHolder.TEAM_KEY;
+import static com.tugasakhir.turnamensiamember.View.MainTeam.MainTeamViewHolder.HAS_INVITATION;
 import static com.tugasakhir.turnamensiamember.View.MainTeam.MainTeamViewHolder.IS_SEARCH;
 
 public class TeamActivity extends BaseActivity implements iPresenterResponse {
@@ -28,6 +29,7 @@ public class TeamActivity extends BaseActivity implements iPresenterResponse {
     private TeamPresenter mTeamPresenter;
 
     private boolean isSearch;
+    private boolean hasInvitation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class TeamActivity extends BaseActivity implements iPresenterResponse {
         Long teamId = getIntent().getLongExtra(TEAM_KEY, -1);
         String token = mSessionManager.getTokenLoggedIn();
         isSearch = getIntent().getBooleanExtra(IS_SEARCH, false);
+        hasInvitation = getIntent().getBooleanExtra(HAS_INVITATION, false);
 
         this.setTitle("My Team");
 
@@ -60,15 +63,10 @@ public class TeamActivity extends BaseActivity implements iPresenterResponse {
     @Override
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
-        if (isSearch) {
-
-        }
-        else {
-            TeamPagerAdapter adapter = new TeamPagerAdapter(getSupportFragmentManager(), (TeamResponse) response);
-            mViewPager.setAdapter(adapter);
-            mTabLayout.setupWithViewPager(mViewPager);
-            this.setTitle(((TeamResponse) response).getTeam().getName());
-        }
+        TeamPagerAdapter adapter = new TeamPagerAdapter(getSupportFragmentManager(), (TeamResponse) response, isSearch, hasInvitation);
+        mViewPager.setAdapter(adapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+        this.setTitle(((TeamResponse) response).getTeam().getName());
     }
 
     @Override

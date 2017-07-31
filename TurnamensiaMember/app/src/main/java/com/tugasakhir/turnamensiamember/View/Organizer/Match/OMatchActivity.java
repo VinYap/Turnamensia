@@ -54,7 +54,7 @@ public class OMatchActivity extends BaseActivity {
                 mProgressDialog.dismiss();
 
                 OMatchPagerAdapter adapter = new OMatchPagerAdapter(getSupportFragmentManager(), ((OrganizerTournamentDetailResponse) response).getMatches());
-                if (((OrganizerTournamentDetailResponse) response).getMatches().size() <= 1) {
+                if (((OrganizerTournamentDetailResponse) response).getMatches().size() <= 2) {
                     mTabLayout.setTabMode(TabLayout.MODE_FIXED);
                 } else {
                     mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);

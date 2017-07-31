@@ -74,9 +74,9 @@ public class TeamPresenter {
      * @param teamId
      */
     public void doGetParticipantTeamSearchDetail(String token, Long teamId) {
-        ConnectionAPI.getInstance().getAPIModel().doGetParticipantTeamSearchDetail(token, teamId).enqueue(new Callback<Response>() {
+        ConnectionAPI.getInstance().getAPIModel().doGetParticipantTeamSearchDetail(token, teamId).enqueue(new Callback<TeamResponse>() {
             @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+            public void onResponse(Call<TeamResponse> call, retrofit2.Response<TeamResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
                         iTeamResponse.doSuccess(response.body());
@@ -91,7 +91,7 @@ public class TeamPresenter {
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
+            public void onFailure(Call<TeamResponse> call, Throwable t) {
                 iTeamResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }

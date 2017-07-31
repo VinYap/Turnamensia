@@ -62,7 +62,7 @@ public interface APIModel {
     Call<AccountTeamResponse> doGetParticipantTeam(@Header("Authorization") String authorization, @QueryMap Map<String, Object> data);
 
     @GET("/api/participant/team/{id}")
-    Call<Response> doGetParticipantTeamSearchDetail(@Header("Authorization") String authorization, @Path("id") Long id);
+    Call<TeamResponse> doGetParticipantTeamSearchDetail(@Header("Authorization") String authorization, @Path("id") Long id);
 
     @GET("/api/participant/profile")
     Call<AccountProfileResponse> doGetParticipantAccountProfile(@Header("Authorization") String authorization);

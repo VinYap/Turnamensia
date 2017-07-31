@@ -3,12 +3,16 @@ package com.tugasakhir.turnamensiamember.View.Team;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +38,8 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 import static android.app.Activity.RESULT_OK;
+import static com.tugasakhir.turnamensiamember.View.MainTeam.MainTeamViewHolder.HAS_INVITATION;
+import static com.tugasakhir.turnamensiamember.View.MainTeam.MainTeamViewHolder.IS_SEARCH;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,26 +51,37 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
     private EditText mNameET;
     private EditText mJoinCodeET;
     private Button mUpdateB;
+    private TextInputLayout mJoinCodeTIL;
+    private Button mJoinB;
+    private Button mAcceptB;
+    private Button mRejectB;
 
     private ProgressDialog mProgressDialog;
     private TeamPresenter mTeamPresenter;
+    private TeamPresenter teamPresenter;
     private SessionManager mSessionManager;
 
     private Integer mStatus;
+    private String token;
+    private Long id;
 
     private static final String TEAM_DETAIL = "TEAM_DETAIL";
     private static final String IS_LEADER = "IS_LEADER";
     private static final String TEAM_ID = "TEAM_ID";
     private static final Integer IMAGE_CODE = 1;
+    private static final String IN_TEAM = "IN_TEAM";
 
     public TeamProfileFragment() {
         // Required empty public constructor
     }
 
-    public static TeamProfileFragment newInstance(Team team, Boolean isLeader) {
+    public static TeamProfileFragment newInstance(Team team, Boolean isLeader, Boolean inTeam, boolean isSearch, boolean hasInvitation) {
         Bundle args = new Bundle();
         args.putSerializable(TEAM_DETAIL, team);
         args.putBoolean(IS_LEADER, isLeader);
+        args.putBoolean(IN_TEAM, inTeam != null ? inTeam : false);
+        args.putBoolean(IS_SEARCH, isSearch);
+        args.putBoolean(HAS_INVITATION, hasInvitation);
         args.putLong(TEAM_ID, team.getId());
         TeamProfileFragment fragment = new TeamProfileFragment();
         fragment.setArguments(args);
@@ -83,6 +100,10 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
         mNameET = (EditText) view.findViewById(R.id.team_name);
         mJoinCodeET = (EditText) view.findViewById(R.id.team_join_code);
         mUpdateB = (Button) view.findViewById(R.id.update_team);
+        mJoinCodeTIL = (TextInputLayout) view.findViewById(R.id.team_join_code_container);
+        mJoinB = (Button) view.findViewById(R.id.team_join);
+        mAcceptB = (Button) view.findViewById(R.id.team_accept);
+        mRejectB = (Button) view.findViewById(R.id.team_reject);
 
         mProgressDialog = new ProgressDialog(getContext());
         mProgressDialog.setIndeterminate(true);
@@ -90,6 +111,31 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
 
         mTeamPresenter = new TeamPresenter(this);
         mSessionManager = new SessionManager(getContext());
+
+        teamPresenter = new TeamPresenter(new iPresenterResponse() {
+            @Override
+            public void doSuccess(Response response) {
+                mProgressDialog.dismiss();
+                Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
+                getActivity().finish();
+            }
+
+            @Override
+            public void doFail(String message) {
+                mProgressDialog.dismiss();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void doConnectionError(int message) {
+                mProgressDialog.dismiss();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        token = mSessionManager.getTokenLoggedIn();
+        id = getArguments().getLong(TEAM_ID);
+        final Team team = (Team) getArguments().getSerializable(TEAM_DETAIL);
 
         mChangeImageIV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,14 +174,87 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
             }
         });
 
-        initializedData((Team) getArguments().getSerializable(TEAM_DETAIL));
+        mJoinB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(team.getJoin_code())) {
+                    mProgressDialog.show();
+                    teamPresenter.doJoinPartcipantTeam(token, id, null);
+                }
+                else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle("Join Code");
 
-        if (getArguments().getBoolean(IS_LEADER) == false) {
-            mUpdateB.setVisibility(View.INVISIBLE);
+                    final EditText input = new EditText(getContext());
+                    builder.setView(input);
+
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String joinCode = input.getText().toString();
+                            if (TextUtils.isEmpty(joinCode)) {
+                                Toast.makeText(getContext(), "Please fill Join Code", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                mProgressDialog.show();
+                                teamPresenter.doJoinPartcipantTeam(token, id, joinCode);
+                            }
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    builder.show();
+                }
+            }
+        });
+
+        mAcceptB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mProgressDialog.show();
+                teamPresenter.doAcceptPartcipantTeam(token, id);
+            }
+        });
+
+        mRejectB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mProgressDialog.show();
+                teamPresenter.doRejectPartcipantTeam(token, id);
+            }
+        });
+
+        initializedData(team);
+
+        Boolean isLeader = getArguments().getBoolean(IS_LEADER);
+        Boolean inTeam = getArguments().getBoolean(IN_TEAM);
+        boolean isSearch = getArguments().getBoolean(IS_SEARCH);
+        boolean hasInvitation = getArguments().getBoolean(HAS_INVITATION);
+
+        if (isLeader == false) {
+            mUpdateB.setVisibility(View.GONE);
             mChangeImageIV.setVisibility(View.INVISIBLE);
             mDeleteImageIV.setVisibility(View.INVISIBLE);
             mNameET.setEnabled(false);
             mJoinCodeET.setEnabled(false);
+        }
+        if (isSearch == true && inTeam == false) {
+            mJoinCodeTIL.setVisibility(View.GONE);
+            if (hasInvitation) {
+                mRejectB.setVisibility(View.VISIBLE);
+                mAcceptB.setVisibility(View.VISIBLE);
+            }
+            else {
+                mJoinB.setVisibility(View.VISIBLE);
+                if (TextUtils.isEmpty(team.getJoin_code())) {
+                    mJoinB.setBackground(ContextCompat.getDrawable(getContext(), R.color.colorButtonPending));
+                }
+            }
         }
 
         return view;
@@ -151,8 +270,6 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
             File file = new File(getRealPathFromURI(getContext(), selectedImage));
             RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
             MultipartBody.Part image = MultipartBody.Part.createFormData("picture", file.getName(), requestFile);
-            String token = mSessionManager.getTokenLoggedIn();
-            Long id = getArguments().getLong(TEAM_ID);
             mTeamPresenter.doUpdateParticipantTeamPicture(token, id, image);
         }
     }

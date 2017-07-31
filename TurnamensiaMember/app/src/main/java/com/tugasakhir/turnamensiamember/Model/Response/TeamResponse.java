@@ -13,6 +13,7 @@ import java.util.List;
 public class TeamResponse extends Response {
     private Team team;
     private Boolean is_leader;
+    private Boolean in_team;
     private List<Member> teams_details;
 
     public Team getTeam() {
@@ -29,6 +30,14 @@ public class TeamResponse extends Response {
 
     public void setIs_leader(Boolean is_leader) {
         this.is_leader = is_leader;
+    }
+
+    public Boolean getIn_team() {
+        return in_team;
+    }
+
+    public void setIn_team(Boolean in_team) {
+        this.in_team = in_team;
     }
 
     public List<Member> getTeams_details() {

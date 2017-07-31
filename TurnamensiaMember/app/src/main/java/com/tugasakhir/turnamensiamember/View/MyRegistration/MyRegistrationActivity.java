@@ -56,6 +56,9 @@ public class MyRegistrationActivity extends BaseActivity implements iPresenterRe
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
         List<MyRegistration> myRegistrations = ((MyRegisterResponse) response).getRegistrations();
+        if (myRegistrations != null && myRegistrations.size() <= 2) {
+            mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        }
         MyRegistrationPagerAdapter adapter = new MyRegistrationPagerAdapter(getSupportFragmentManager(), myRegistrations);
         mViewPager.setAdapter(adapter);
 

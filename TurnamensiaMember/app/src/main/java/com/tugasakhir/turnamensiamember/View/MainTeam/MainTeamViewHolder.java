@@ -49,8 +49,9 @@ public class MainTeamViewHolder extends RecyclerView.ViewHolder implements iPres
     private TeamPresenter mTeamPresenter;
 
     public static final String IS_SEARCH = "IS_SEARCH";
+    public static final String HAS_INVITATION = "HAS_INVITATION";
 
-    public MainTeamViewHolder(View view, MainTeamAdapter adapter, boolean inTeam, boolean hasInvitation) {
+    public MainTeamViewHolder(View view, MainTeamAdapter adapter, boolean inTeam, final boolean hasInvitation) {
         super(view);
 
         this.adapter = adapter;
@@ -77,6 +78,7 @@ public class MainTeamViewHolder extends RecyclerView.ViewHolder implements iPres
                 Intent intent = new Intent(context, TeamActivity.class);
                 intent.putExtra(TEAM_KEY, id);
                 intent.putExtra(IS_SEARCH, true);
+                intent.putExtra(HAS_INVITATION, hasInvitation);
                 context.startActivity(intent);
             }
         });
