@@ -1,14 +1,15 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorBackground"
+    android:padding="4dp"
     tools:context="com.tugasakhir.turnamensiamember.View.Tournament.TournamentRuleFragment">
 
     <TextView
         android:id="@+id/tournament_rule"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:textColor="@color/colorTextLight" />
 
-</LinearLayout>
+</ScrollView>

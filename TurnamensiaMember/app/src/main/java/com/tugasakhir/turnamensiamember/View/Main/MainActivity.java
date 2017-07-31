@@ -119,11 +119,11 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem mActionSettings = menu.findItem(R.id.action_settings);
-        if (member_type == 1) {
-            mActionSettings.setVisible(true);
-        } else {
+//        if (member_type == 1) {
+//            mActionSettings.setVisible(true);
+//        } else {
             mActionSettings.setVisible(false);
-        }
+//        }
         super.onPrepareOptionsMenu(menu);
         return true;
     }

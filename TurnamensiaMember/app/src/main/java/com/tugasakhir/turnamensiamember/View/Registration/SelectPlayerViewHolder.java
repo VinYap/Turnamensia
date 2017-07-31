@@ -25,7 +25,7 @@ public class SelectPlayerViewHolder extends RecyclerView.ViewHolder {
 
     private int position;
 
-    public SelectPlayerViewHolder(View itemView, final SelectPlayerAdapter adapter) {
+    public SelectPlayerViewHolder(final View itemView, final SelectPlayerAdapter adapter) {
         super(itemView);
         this.adapter = adapter;
 
@@ -37,7 +37,7 @@ public class SelectPlayerViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 adapter.getMembers().get(position).setSelected(isChecked);
-                adapter.updateAction();
+                adapter.updateAction(itemView.getContext());
             }
         });
     }

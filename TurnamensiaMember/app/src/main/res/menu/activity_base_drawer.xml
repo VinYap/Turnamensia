@@ -3,21 +3,21 @@
     <group
         android:checkableBehavior="none"
         android:visible="true"
-        android:id="@+id/group_main">
-        <item
-            android:id="@+id/teams"
-            android:icon="@drawable/ic_vpn_key_gray_32dp"
-            android:title="List Team" />
-    </group>
-
-    <group
-        android:checkableBehavior="none"
-        android:visible="true"
         android:id="@+id/group_auth">
         <item
             android:id="@+id/login_register"
             android:icon="@drawable/ic_vpn_key_gray_32dp"
             android:title="Sign In / Sign Up" />
+    </group>
+
+    <group
+        android:checkableBehavior="none"
+        android:visible="true"
+        android:id="@+id/group_main">
+        <item
+            android:id="@+id/teams"
+            android:icon="@drawable/ic_people_gray_32dp"
+            android:title="List Team" />
     </group>
 
     <group
@@ -35,7 +35,7 @@
         <item
             android:id="@+id/registration"
             android:icon="@drawable/ic_attach_money_gray_32dp"
-            android:title="Registration" />
+            android:title="Registration Status" />
         <item
             android:id="@+id/notification"
             android:icon="@drawable/ic_info_gray_32dp"

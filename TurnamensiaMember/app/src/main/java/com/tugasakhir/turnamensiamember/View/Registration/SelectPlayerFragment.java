@@ -4,6 +4,7 @@ package com.tugasakhir.turnamensiamember.View.Registration;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -68,12 +69,13 @@ public class SelectPlayerFragment extends Fragment implements iPresenterResponse
 
         mLeftActionTV.setText("Choose Your Player");
         mRightActionTV.setText("Finish");
+        mRightActionTV.setTextColor(ContextCompat.getColor(getContext(), R.color.colorTextHint));
 
         mPlayerRV.setLayoutManager(new LinearLayoutManager(getContext()));
         mPlayerRV.setHasFixedSize(true);
 
         selectAdapter = new SelectPlayerAdapter(members, mActionB, tournament.getTeam_size());
-        selectAdapter.updateAction();
+        selectAdapter.updateAction(getContext());
         mPlayerRV.setAdapter(selectAdapter);
 
         mActionB.setOnClickListener(new View.OnClickListener() {

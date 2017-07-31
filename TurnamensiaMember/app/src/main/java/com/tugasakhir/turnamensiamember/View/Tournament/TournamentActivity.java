@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,9 +25,13 @@ import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.Authentication.AuthActivity;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
 import com.tugasakhir.turnamensiamember.View.Registration.RegistrationActivity;
-import com.tugasakhir.turnamensiamember.View.Schedule.ScheduleActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static com.tugasakhir.turnamensiamember.View.Authentication.LoginFragment.MEMBER_TYPE;
 import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_KEY;
+import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_NAME;
 
 public class TournamentActivity extends BaseActivity implements iPresenterResponse {
     private TabLayout mTabLayout;
@@ -33,11 +40,17 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
     private ImageView mImageIV;
     private TextView mNameTV;
     private TextView mOrganizerTV;
-    private Button mRegisterIV;
+    private TextView mDateTV;
+    private Button mRegisterB;
 
     private TournamentPresenter mTournamentPresenter;
     private ProgressDialog mProgressDialog;
     private SessionManager mSessionManager;
+
+    private Long tournamentId;
+    private String tournamentName;
+
+    private static final Integer REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +61,12 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
 
         mTabLayout = (TabLayout) findViewById(R.id.tournament_tab_layout);
         mViewPager = (ViewPager) findViewById(R.id.tournament_pager);
-        mScheduleFAB = (FloatingActionButton) findViewById(R.id.schedule_fab);
+//        mScheduleFAB = (FloatingActionButton) findViewById(R.id.schedule_fab);
         mImageIV = (ImageView) findViewById(R.id.tournament_image);
-        mNameTV = (TextView) findViewById(R.id.league_name);
-        mOrganizerTV = (TextView) findViewById(R.id.organizer_name);
-        mRegisterIV = (Button) findViewById(R.id.register_tournament);
+        mNameTV = (TextView) findViewById(R.id.tournament_name);
+        mOrganizerTV = (TextView) findViewById(R.id.team_name);
+        mDateTV = (TextView) findViewById(R.id.tournament_date);
+        mRegisterB = (Button) findViewById(R.id.register_tournament);
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
@@ -61,28 +75,32 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
         mTournamentPresenter = new TournamentPresenter(this);
         mSessionManager = new SessionManager(this);
 
-        final Long tournamentId = getIntent().getLongExtra(TOURNAMENT_KEY, -1);
+        tournamentId = getIntent().getLongExtra(TOURNAMENT_KEY, -1);
+        tournamentName = getIntent().getStringExtra(TOURNAMENT_NAME);
 
-        mScheduleFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ScheduleActivity.class));
-            }
-        });
+//        mScheduleFAB.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getApplicationContext(), ScheduleActivity.class));
+//            }
+//        });
 
-        mRegisterIV.setOnClickListener(new View.OnClickListener() {
+        mRegisterB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mSessionManager.isUserLoggedIn()) {
                     Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
                     intent.putExtra(TOURNAMENT_KEY, tournamentId);
+                    intent.putExtra(TOURNAMENT_NAME, tournamentName);
                     startActivity(intent);
                 }
                 else {
-                    startActivity(new Intent(getApplicationContext(), AuthActivity.class));
+                    startActivityForResult(new Intent(getApplicationContext(), AuthActivity.class), REQUEST_CODE);
                 }
             }
         });
+
+        this.setTitle(tournamentName);
 
         mProgressDialog.show();
         mTournamentPresenter.doGetParticipantTournamentDetail(tournamentId);
@@ -94,16 +112,22 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
 
         TournamentDetailResponse tournamentDetailResponse = (TournamentDetailResponse) response;
 
+        Date startDate = new Date(Long.parseLong(String.valueOf(tournamentDetailResponse.getTournament().getStart_date())) * 1000);
+        Date endDate = new Date(Long.parseLong(String.valueOf(tournamentDetailResponse.getTournament().getEnd_date())) * 1000);
+
         mNameTV.setText(tournamentDetailResponse.getTournament().getName());
-        mOrganizerTV.setText(tournamentDetailResponse.getTournament().getOwner());
+        mOrganizerTV.setText("Organized By : " + tournamentDetailResponse.getTournament().getOwner());
+        mDateTV.setText("Event Date : " + new SimpleDateFormat("dd MMMM").format(startDate) + " - " + new SimpleDateFormat("dd MMMM").format(endDate));
         Picasso.with(this).load(tournamentDetailResponse.getTournament().getImage()).into(mImageIV);
 
         if (tournamentDetailResponse.getTournament().getRegistration_status() == false) {
-            mRegisterIV.setText("Registration Closed");
-            mRegisterIV.setEnabled(false);
+            mRegisterB.setText("Registration Closed");
+            mRegisterB.setEnabled(false);
+            mRegisterB.setBackground(ContextCompat.getDrawable(this, R.color.colorBackground));
+            mRegisterB.setTextColor(ContextCompat.getColor(this, R.color.colorOrange));
         }
         else if (mSessionManager.isUserLoggedIn() == false) {
-            mRegisterIV.setText("Sign In to Register");
+            mRegisterB.setText("Sign In to Register");
         }
 
         TournamentPagerAdapter adapter = new TournamentPagerAdapter(getSupportFragmentManager(), tournamentDetailResponse);
@@ -122,5 +146,30 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
     public void doConnectionError(int message) {
         mProgressDialog.dismiss();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null && data.getIntExtra(MEMBER_TYPE, -1) == 1) {
+                mRegisterB.setText("Register");
+                Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
+                intent.putExtra(TOURNAMENT_KEY, tournamentId);
+                intent.putExtra(TOURNAMENT_NAME, tournamentName);
+                startActivity(intent);
+            }
+            else {
+                finish();
+            }
+        }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem mActionSettings = menu.findItem(R.id.action_settings);
+        mActionSettings.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+        return true;
     }
 }

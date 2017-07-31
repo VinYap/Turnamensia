@@ -1,5 +1,7 @@
 package com.tugasakhir.turnamensiamember.View.Registration;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +54,7 @@ public class SelectPlayerAdapter extends RecyclerView.Adapter<SelectPlayerViewHo
         return members;
     }
 
-    public void updateAction() {
+    public void updateAction(Context context) {
         int cnt = teamSize;
         if (members != null) {
             for (Member member : members) {
@@ -62,10 +64,14 @@ public class SelectPlayerAdapter extends RecyclerView.Adapter<SelectPlayerViewHo
         if (cnt == 0) {
             actionB.setText("Next");
             actionB.setEnabled(true);
+            actionB.setBackground(ContextCompat.getDrawable(context, R.drawable.linear_gradient_orange));
+            actionB.setTextColor(ContextCompat.getColor(context, R.color.colorTextLight));
         }
         else {
             actionB.setText("Player Left : " + cnt);
             actionB.setEnabled(false);
+            actionB.setBackground(ContextCompat.getDrawable(context, R.color.colorBackground));
+            actionB.setTextColor(ContextCompat.getColor(context, R.color.colorOrange));
         }
     }
 }

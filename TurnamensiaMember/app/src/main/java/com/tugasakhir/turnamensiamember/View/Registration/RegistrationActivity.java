@@ -2,6 +2,8 @@ package com.tugasakhir.turnamensiamember.View.Registration;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
@@ -13,6 +15,7 @@ import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
 
 import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_KEY;
+import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_NAME;
 
 public class RegistrationActivity extends BaseActivity implements iPresenterResponse {
     private ProgressDialog mProgressDialog;
@@ -39,6 +42,9 @@ public class RegistrationActivity extends BaseActivity implements iPresenterResp
 
         String token = mSessionManager.getTokenLoggedIn();
         Long tournamentId = getIntent().getLongExtra(TOURNAMENT_KEY, -1);
+
+        this.setTitle(getIntent().getStringExtra(TOURNAMENT_NAME) + " Registration");
+
         mProgressDialog.show();
         mRegisterTournamentPresenter.doGetParticipantRegisterTournamentTeam(token, tournamentId);
     }
@@ -63,5 +69,13 @@ public class RegistrationActivity extends BaseActivity implements iPresenterResp
     public void doConnectionError(int message) {
         mProgressDialog.dismiss();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem mActionSettings = menu.findItem(R.id.action_settings);
+        mActionSettings.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+        return true;
     }
 }

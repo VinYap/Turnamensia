@@ -4,9 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorBackground"
+    android:padding="4dp"
     tools:context="com.tugasakhir.turnamensiamember.View.Tournament.TournamentDetailFragment">
 
     <LinearLayout
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -14,16 +16,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Event Type"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
 
         <TextView
             android:id="@+id/tournament_event_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -31,16 +38,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Location"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
 
         <TextView
             android:id="@+id/tournament_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -48,16 +60,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Address"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
 
         <TextView
             android:id="@+id/tournament_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -65,16 +82,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Entry Fee"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
 
         <TextView
             android:id="@+id/tournament_entry_fee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -82,17 +104,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Min Participants"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
 
         <TextView
             android:id="@+id/tournament_min_participants"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="2" />
+            android:text="2"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -100,16 +127,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Max Participants"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
 
         <TextView
             android:id="@+id/tournament_max_participants"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -117,16 +149,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Current Participants"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
 
         <TextView
             android:id="@+id/tournament_current_participants"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -134,12 +171,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Team Size"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
 
         <TextView
             android:id="@+id/tournament_team_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextLight" />
     </LinearLayout>
 </LinearLayout>

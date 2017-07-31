@@ -46,7 +46,7 @@ public class MyRegistrationActivity extends BaseActivity implements iPresenterRe
 
         String token = mSessionManager.getTokenLoggedIn();
 
-        this.setTitle("My Registration");
+        this.setTitle("Registration Status");
 
         mProgressDialog.show();
         mMyRegistrationPresenter.doGetParticipantMyRegister(token);

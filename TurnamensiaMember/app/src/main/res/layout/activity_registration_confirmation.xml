@@ -40,7 +40,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1"
                 android:textColor="@color/colorTextLight"/>
         </LinearLayout>
 
@@ -71,7 +70,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Team A"
                 android:textSize="16sp"
                 android:textColor="@color/colorTextLight"/>
         </LinearLayout>
@@ -104,7 +102,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="16sp"
-                android:text="Rp. 100,000"
                 android:textColor="@color/colorTextLight"/>
 
         </LinearLayout>
@@ -112,7 +109,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:theme="@style/textInputLayoutStyle">
 
             <EditText
@@ -123,6 +120,7 @@
                 android:drawablePadding="@dimen/icon_padding"
                 android:drawableStart="@drawable/ic_person_white_24dp"
                 android:hint="Transfer Name"
+                android:textSize="16sp"
                 android:padding="@dimen/text_padding"
                 android:textColor="@color/colorTextLight"/>
         </android.support.design.widget.TextInputLayout>
@@ -130,15 +128,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="center_vertical"
                 android:text="Transfer To"
+                android:textSize="16sp"
                 android:textColor="@color/colorTextLight"/>
 
             <Spinner
@@ -146,19 +146,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:theme="@style/textInputLayoutStyle"
                 android:layout_weight="1" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
 
             <Button
                 android:id="@+id/upload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Choose file" />
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:text="Choose file"
+                android:layout_weight="2"
+                android:background="@drawable/linear_gradient_orange"
+                android:textColor="@color/colorTextLight" />
 
             <TextView
                 android:id="@+id/upload_name"
@@ -167,13 +172,15 @@
                 android:gravity="center_vertical"
                 android:layout_weight="1"
                 android:text="No file chosen"
+                android:paddingLeft="5dp"
                 android:textColor="@color/colorTextLight"/>
         </LinearLayout>
 
         <ImageView
+            android:layout_marginTop="16dp"
             android:id="@+id/payment_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>

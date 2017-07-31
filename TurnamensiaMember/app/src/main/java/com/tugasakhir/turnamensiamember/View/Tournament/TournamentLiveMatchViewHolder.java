@@ -35,14 +35,14 @@ public class TournamentLiveMatchViewHolder extends RecyclerView.ViewHolder imple
         super(itemView);
 
         mIdTV = (TextView) itemView.findViewById(R.id.match_id);
-        mRoundTV = (TextView) itemView.findViewById(R.id.match_round);
-        mRadiantPhotoIV = (ImageView) itemView.findViewById(R.id.match_radiant_image);
-        mRadiantTV = (TextView) itemView.findViewById(R.id.match_radiant);
-        mRadiantScoreTV = (TextView) itemView.findViewById(R.id.match_radiant_score);
-        mDirePhotoIV = (ImageView) itemView.findViewById(R.id.match_dire_image);
-        mDireTV = (TextView) itemView.findViewById(R.id.match_dire);
-        mDireScoreTV = (TextView) itemView.findViewById(R.id.match_dire_score);
-        mTimeTV = (TextView) itemView.findViewById(R.id.match_time);
+        mRoundTV = (TextView) itemView.findViewById(R.id.match_game);
+        mRadiantPhotoIV = (ImageView) itemView.findViewById(R.id.radiant_image);
+        mRadiantTV = (TextView) itemView.findViewById(R.id.radiant_text);
+        mRadiantScoreTV = (TextView) itemView.findViewById(R.id.radiant_score);
+        mDirePhotoIV = (ImageView) itemView.findViewById(R.id.dire_image);
+        mDireTV = (TextView) itemView.findViewById(R.id.dire_text);
+        mDireScoreTV = (TextView) itemView.findViewById(R.id.dire_score);
+        mTimeTV = (TextView) itemView.findViewById(R.id.duration);
 
         itemView.setOnClickListener(this);
     }
@@ -51,8 +51,8 @@ public class TournamentLiveMatchViewHolder extends RecyclerView.ViewHolder imple
         int duration = liveMatch.getDuration();
 
         id = liveMatch.getId();
-        mIdTV.setText("Match ID : ".concat(id.toString()));
-        mRoundTV.setText("Game " + liveMatch.getRound().toString() + " | " + liveMatch.getSeries());
+        mIdTV.setText("Match ID:".concat(id.toString()));
+        mRoundTV.setText("Game " + liveMatch.getRound().toString() + "|" + liveMatch.getSeries());
         mRadiantTV.setText(liveMatch.getPlayer_1());
         mRadiantScoreTV.setText(liveMatch.getPlayer_1_score().toString());
         mDireTV.setText(liveMatch.getPlayer_2());

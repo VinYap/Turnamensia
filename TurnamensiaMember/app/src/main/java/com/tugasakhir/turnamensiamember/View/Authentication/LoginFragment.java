@@ -1,6 +1,8 @@
 package com.tugasakhir.turnamensiamember.View.Authentication;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -37,6 +39,8 @@ public class LoginFragment extends Fragment implements iPresenterResponse {
     private SessionManager mSessionManager;
 
     private Integer mMemberType;
+
+    public static final String MEMBER_TYPE = "MEMBER_TYPE";
 
     public LoginFragment() {
         // Required empty public constructor
@@ -110,6 +114,9 @@ public class LoginFragment extends Fragment implements iPresenterResponse {
         mSessionManager.doCreateSession((LoginResponse) response);
         mProgressDialog.dismiss();
         Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
+        Intent data = new Intent();
+        data.putExtra(MEMBER_TYPE, mMemberType);
+        getActivity().setResult(Activity.RESULT_OK, data);
         getActivity().finish();
     }
 

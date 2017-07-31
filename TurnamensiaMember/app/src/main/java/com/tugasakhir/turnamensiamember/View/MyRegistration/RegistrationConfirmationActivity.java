@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,6 +37,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 import static com.tugasakhir.turnamensiamember.View.MyRegistration.MyRegistrationViewHolder.REGISTRATION_KEY;
+import static com.tugasakhir.turnamensiamember.View.MyRegistration.MyRegistrationViewHolder.TOURNAMENT_NAME;
 
 public class RegistrationConfirmationActivity extends BaseActivity {
     private TextView mRegistrationIdTV;
@@ -174,6 +177,9 @@ public class RegistrationConfirmationActivity extends BaseActivity {
             }
         });
 
+        this.setTitle(getIntent().getStringExtra(TOURNAMENT_NAME) + " Payment Confirmation");
+
+        mProgressDialog.show();
         myGetRegistrationPresenter.doGetParticipantConfirmPayment(token, transferId);
     }
 
@@ -205,5 +211,13 @@ public class RegistrationConfirmationActivity extends BaseActivity {
                 cursor.close();
             }
         }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem mActionSettings = menu.findItem(R.id.action_settings);
+        mActionSettings.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+        return true;
     }
 }

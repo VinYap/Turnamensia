@@ -27,9 +27,11 @@ public class MainViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private TextView mPriceTV;
     private ImageView mPhotoIV;
 
+    private String name;
     private Long id;
 
     public static final String TOURNAMENT_KEY = "TOURNAMENT_KEY";
+    public static final String TOURNAMENT_NAME = "TOURNAMENT_NAME";
 
     public MainViewHolder(View itemView) {
         super(itemView);
@@ -49,7 +51,9 @@ public class MainViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         Date endDate = new Date(Long.parseLong(String.valueOf(tournament.getEnd_date())) * 1000);
         Date registrationClosed = new Date(Long.parseLong(String.valueOf(tournament.getRegistration_closed())) * 1000);
 
-        id = tournament.getId();
+        this.id = tournament.getId();
+        this.name = tournament.getName();
+
         mNameTV.setText(tournament.getName());
         mDateTV.setText(new SimpleDateFormat("dd MMMM").format(startDate) + " - " + new SimpleDateFormat("dd MMMM").format(endDate));
         mRegistrationTV.setText("Registration before " + new SimpleDateFormat("dd MMMM").format(registrationClosed));
@@ -63,6 +67,7 @@ public class MainViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         Context context = itemView.getContext();
         Intent intent = new Intent(context, TournamentActivity.class);
         intent.putExtra(TOURNAMENT_KEY, id);
+        intent.putExtra(TOURNAMENT_NAME, name);
         context.startActivity(intent);
     }
 }

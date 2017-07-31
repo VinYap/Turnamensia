@@ -29,8 +29,10 @@ public class MyRegistrationViewHolder extends RecyclerView.ViewHolder {
     private TextView mStatusTV;
 
     private Long id;
+    private String name;
 
     public static final String REGISTRATION_KEY = "REGISTRATION_KEY";
+    public static final String TOURNAMENT_NAME = "TOURNAMENT_NAME";
 
     public MyRegistrationViewHolder(View view, boolean isAccepted) {
         super(view);
@@ -48,6 +50,7 @@ public class MyRegistrationViewHolder extends RecyclerView.ViewHolder {
                 Context context = itemView.getContext();
                 Intent intent = new Intent(context, RegistrationConfirmationActivity.class);
                 intent.putExtra(REGISTRATION_KEY, id);
+                intent.putExtra(TOURNAMENT_NAME, name);
                 context.startActivity(intent);
             }
         });
@@ -60,6 +63,7 @@ public class MyRegistrationViewHolder extends RecyclerView.ViewHolder {
         String status = tournamentRegistration.getStatus();
 
         this.id = tournamentRegistration.getId();
+        this.name = tournamentRegistration.getName();
 
         mNameTV.setText(tournamentRegistration.getName());
         mSizeTV.setText(tournamentRegistration.getTeam_size().toString().concat(" Players"));
