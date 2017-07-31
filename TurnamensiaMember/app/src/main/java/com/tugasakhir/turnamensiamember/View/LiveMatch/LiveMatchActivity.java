@@ -38,6 +38,9 @@ import com.tugasakhir.turnamensiamember.View.Comment.CommentActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.tugasakhir.turnamensiamember.View.Tournament.TournamentLiveMatchViewHolder.LIVE_MATCH_KEY;
+import static com.tugasakhir.turnamensiamember.View.Tournament.TournamentLiveMatchViewHolder.LIVE_MATCH_TOURNAMENT_NAME_KEY;
+
 public class LiveMatchActivity extends BaseActivity {
     public static final String LIVE_MATCH_ID_KEY = "LiveMatchID";
 
@@ -71,7 +74,7 @@ public class LiveMatchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(R.layout.activity_live_match, mBaseLayout);
 
-        setTitle("EPICENTER 2017");
+        setTitle(getIntent().getExtras().getString(LIVE_MATCH_TOURNAMENT_NAME_KEY, ""));
 
         showUpCaretMenu();
 
@@ -88,7 +91,7 @@ public class LiveMatchActivity extends BaseActivity {
         mViewPager = (ViewPager) findViewById(R.id.statistic_view_pager);
         mCommentB = (Button) findViewById(R.id.live_match_comment);
 
-        match_id = Long.valueOf("3234831963");
+        match_id = getIntent().getExtras().getLong(LIVE_MATCH_KEY, 0);
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);

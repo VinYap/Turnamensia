@@ -24,8 +24,8 @@ public class TournamentPagerAdapter extends FragmentStatePagerAdapter {
         else if (position == 1) return TournamentDetailFragment.newInstance(mResponse.getTournament());
         else if (position == 2) return TournamentRuleFragment.newInstance(mResponse.getTournament().getRules());
         else if (position == 3) return TournamentPriceFragment.newInstance(mResponse.getTournament());
-        else if (position == 4) return TournamentBracketFragment.newInstance(mResponse.getTournament().getChallonges_url());
-        else if (position == 5) return TournamentLiveMatchFragment.newInstance(mResponse.getLive_matches_json());
+        else if (position == 4) return TournamentBracketFragment.newInstance(mResponse.getTournament().getId());
+        else if (position == 5) return TournamentLiveMatchFragment.newInstance(mResponse.getLive_matches_json(), mResponse.getTournament().getName());
         return null;
     }
 

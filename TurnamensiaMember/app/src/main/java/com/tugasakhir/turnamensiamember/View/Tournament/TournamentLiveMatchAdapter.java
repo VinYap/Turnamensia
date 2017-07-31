@@ -16,9 +16,11 @@ import java.util.List;
 
 public class TournamentLiveMatchAdapter extends RecyclerView.Adapter<TournamentLiveMatchViewHolder> {
     private List<LiveMatch> mLiveMatches;
+    private String tournament_name;
 
-    public TournamentLiveMatchAdapter(List<LiveMatch> liveMatches) {
+    public TournamentLiveMatchAdapter(List<LiveMatch> liveMatches, String tournament_name) {
         this.mLiveMatches = liveMatches;
+        this.tournament_name = tournament_name;
     }
 
     @Override
@@ -30,7 +32,7 @@ public class TournamentLiveMatchAdapter extends RecyclerView.Adapter<TournamentL
     @Override
     public void onBindViewHolder(TournamentLiveMatchViewHolder holder, int position) {
         LiveMatch liveMatch = mLiveMatches.get(position);
-        holder.bindHolder(liveMatch);
+        holder.bindHolder(liveMatch, tournament_name);
     }
 
     @Override
