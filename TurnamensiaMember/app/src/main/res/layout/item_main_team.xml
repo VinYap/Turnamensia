@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginTop="4dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
         app:layout_constraintHeight_default="wrap">
 
         <ImageView
             android:id="@+id/team_image"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:scaleType="fitXY"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ib"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp" />
@@ -34,7 +37,8 @@
             android:text="Team Name"
             android:textSize="18sp"
             app:layout_constraintLeft_toRightOf="@+id/team_image"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorTextLight"/>
 
         <TextView
             android:id="@+id/team_member"
@@ -44,19 +48,53 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="5 member"
+            android:textSize="14sp"
             app:layout_constraintLeft_toRightOf="@+id/team_image"
-            app:layout_constraintTop_toBottomOf="@+id/team_name" />
+            app:layout_constraintTop_toBottomOf="@+id/team_name"
+            android:textColor="@color/colorTextLight" />
 
         <Button
             android:id="@+id/join_team"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="36dp"
             android:text="Join Team"
+            android:textSize="14sp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/linear_gradient_orange"
+            android:textColor="@color/colorTextLight"
+            android:layout_marginRight="8dp" />
+
+        <Button
+            android:id="@+id/accept_team"
+            android:layout_width="100dp"
+            android:layout_height="36dp"
+            android:text="Accept"
             android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent" />
+            android:textSize="14sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/reject_team"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorButtonApprove"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:textColor="@color/colorTextLight"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="4dp" />
+
+        <Button
+            android:id="@+id/reject_team"
+            android:layout_width="100dp"
+            android:layout_height="36dp"
+            android:text="Reject"
+            android:layout_marginRight="389dp"
+            android:textSize="14sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
+            android:background="@color/colorButtonRejected"
+            app:layout_constraintTop_toBottomOf="@+id/accept_team"
+            android:textColor="@color/colorTextLight"/>
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

@@ -17,6 +17,8 @@ public class Team implements Serializable {
     private String join_code;
     private Integer number_of_members;
     private Integer number_of_valid_members;
+    private Boolean in_team;
+    private Boolean has_invitation;
 
     public Long getId() {
         return id;
@@ -72,5 +74,21 @@ public class Team implements Serializable {
 
     public void setNumber_of_valid_members(Integer number_of_valid_members) {
         this.number_of_valid_members = number_of_valid_members;
+    }
+
+    public Boolean getIn_team() {
+        return in_team;
+    }
+
+    public void setIn_team(Boolean in_team) {
+        this.in_team = in_team;
+    }
+
+    public Boolean getHas_invitation() {
+        return has_invitation;
+    }
+
+    public void setHas_invitation(Boolean has_invitation) {
+        this.has_invitation = has_invitation;
     }
 }

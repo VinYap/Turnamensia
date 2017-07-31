@@ -13,8 +13,7 @@
         android:id="@+id/player_image"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/ic_menu_gallery" />
+        android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/player_name"

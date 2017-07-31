@@ -17,6 +17,7 @@ import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
 
 import static com.tugasakhir.turnamensiamember.View.Account.AccountTeamViewHolder.TEAM_KEY;
+import static com.tugasakhir.turnamensiamember.View.MainTeam.MainTeamViewHolder.IS_SEARCH;
 
 public class TeamActivity extends BaseActivity implements iPresenterResponse {
     private TabLayout mTabLayout;
@@ -25,6 +26,8 @@ public class TeamActivity extends BaseActivity implements iPresenterResponse {
     private ProgressDialog mProgressDialog;
     private SessionManager mSessionManager;
     private TeamPresenter mTeamPresenter;
+
+    private boolean isSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,22 +48,27 @@ public class TeamActivity extends BaseActivity implements iPresenterResponse {
 
         Long teamId = getIntent().getLongExtra(TEAM_KEY, -1);
         String token = mSessionManager.getTokenLoggedIn();
+        isSearch = getIntent().getBooleanExtra(IS_SEARCH, false);
 
         this.setTitle("My Team");
 
         mProgressDialog.show();
-        mTeamPresenter.doGetParticipantTeamDetail(token, teamId);
+        if (isSearch) mTeamPresenter.doGetParticipantTeamSearchDetail(token, teamId);
+        else mTeamPresenter.doGetParticipantTeamDetail(token, teamId);
     }
 
     @Override
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
-        TeamPagerAdapter adapter = new TeamPagerAdapter(getSupportFragmentManager(), (TeamResponse) response);
-        mViewPager.setAdapter(adapter);
+        if (isSearch) {
 
-        mTabLayout.setupWithViewPager(mViewPager);
-
-        this.setTitle(((TeamResponse) response).getTeam().getName());
+        }
+        else {
+            TeamPagerAdapter adapter = new TeamPagerAdapter(getSupportFragmentManager(), (TeamResponse) response);
+            mViewPager.setAdapter(adapter);
+            mTabLayout.setupWithViewPager(mViewPager);
+            this.setTitle(((TeamResponse) response).getTeam().getName());
+        }
     }
 
     @Override

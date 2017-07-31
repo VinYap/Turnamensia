@@ -4,6 +4,7 @@ import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.CommentResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.CountResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.Dota2MatchResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.LoginResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.MatchTeamAttendanceResponse;
@@ -60,6 +61,9 @@ public interface APIModel {
     @GET("/api/participant/team")
     Call<AccountTeamResponse> doGetParticipantTeam(@Header("Authorization") String authorization, @QueryMap Map<String, Object> data);
 
+    @GET("/api/participant/team/{id}")
+    Call<Response> doGetParticipantTeamSearchDetail(@Header("Authorization") String authorization, @Path("id") Long id);
+
     @GET("/api/participant/profile")
     Call<AccountProfileResponse> doGetParticipantAccountProfile(@Header("Authorization") String authorization);
 
@@ -107,6 +111,15 @@ public interface APIModel {
 
     @DELETE("/api/participant/team/{id}/picture")
     Call<PictureResponse> doDeleteParticipantTeamPicture(@Header("Authorization") String authorization, @Path("id") Long id);
+
+    @POST("/api/participant/team/{id}/join")
+    Call<CountResponse> doJoinPartcipantTeam(@Header("Authorization") String authorization, @Path("id") Long id, @Body Map<String, String> data);
+
+    @POST("/api/participant/team/{id}/accept-invitation")
+    Call<CountResponse> doAcceptPartcipantTeam(@Header("Authorization") String authorization, @Path("id") Long id);
+
+    @POST("/api/participant/team/{id}/reject-invitation")
+    Call<CountResponse> doRejectPartcipantTeam(@Header("Authorization") String authorization, @Path("id") Long id);
 
     @DELETE("/api/participant/team/{id}/kick-member/{member_id}")
     Call<Response> doDeleteParticipantTeamMember(@Header("Authorization") String authorization, @Path("id") Long id, @Path("member_id") Long memberId);
