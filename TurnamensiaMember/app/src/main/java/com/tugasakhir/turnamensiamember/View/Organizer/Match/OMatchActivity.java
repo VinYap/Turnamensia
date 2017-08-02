@@ -8,16 +8,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.tugasakhir.turnamensiamember.Model.Basic.OrganizerMatch;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.OrganizerTournamentDetailResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.TournamentDetailResponse;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
 import com.tugasakhir.turnamensiamember.Presenter.Tournament.TournamentPresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
 
+import java.util.List;
+import java.util.Map;
+
 import static com.tugasakhir.turnamensiamember.View.Main.MainOrganizerViewHolder.TOURNAMENT_KEY;
 import static com.tugasakhir.turnamensiamember.View.Main.MainOrganizerViewHolder.TOURNAMENT_NAME_KEY;
+import static com.tugasakhir.turnamensiamember.View.Tournament.TournamentActivity.IS_CLICKABLE;
 
 public class OMatchActivity extends BaseActivity {
     private TabLayout mTabLayout;
@@ -25,9 +31,12 @@ public class OMatchActivity extends BaseActivity {
 
     private SessionManager mSessionManager;
 
+    private Boolean isClickable;
     private Long id;
     private ProgressDialog mProgressDialog;
     private TournamentPresenter mTournamentOrganizerPresenter;
+
+    private TournamentDetailResponse tournamentDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,7 @@ public class OMatchActivity extends BaseActivity {
 
         id = getIntent().getExtras().getLong(TOURNAMENT_KEY, -1);
         setTitle(getIntent().getExtras().getString(TOURNAMENT_NAME_KEY, ""));
+        isClickable = getIntent().getExtras().getBoolean(IS_CLICKABLE, true);
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
@@ -53,13 +63,12 @@ public class OMatchActivity extends BaseActivity {
             public void doSuccess(Response response) {
                 mProgressDialog.dismiss();
 
-                OMatchPagerAdapter adapter = new OMatchPagerAdapter(getSupportFragmentManager(), ((OrganizerTournamentDetailResponse) response).getMatches());
-                if (((OrganizerTournamentDetailResponse) response).getMatches().size() <= 2) {
-                    mTabLayout.setTabMode(TabLayout.MODE_FIXED);
-                } else {
-                    mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+                if (response instanceof OrganizerTournamentDetailResponse) {
+                    setAdapter(((OrganizerTournamentDetailResponse) response).getMatches());
                 }
-                mViewPager.setAdapter(adapter);
+                else if (response instanceof TournamentDetailResponse) {
+                    setAdapter(((TournamentDetailResponse) response).getMatches());
+                }
             }
 
             @Override
@@ -77,7 +86,13 @@ public class OMatchActivity extends BaseActivity {
 
         mTabLayout.setupWithViewPager(mViewPager);
 
-        fetchDataMatches();
+        if (isClickable) fetchDataMatches();
+        else fetchDataTournamentMatches();
+    }
+
+    public void fetchDataTournamentMatches() {
+        mProgressDialog.show();
+        mTournamentOrganizerPresenter.doGetParticipantTournamentDetail(id);
     }
 
     public void fetchDataMatches() {
@@ -93,5 +108,15 @@ public class OMatchActivity extends BaseActivity {
         mActionSettings.setVisible(false);
         super.onPrepareOptionsMenu(menu);
         return true;
+    }
+
+    public void setAdapter(Map<String, List<OrganizerMatch>> matches) {
+        OMatchPagerAdapter adapter = new OMatchPagerAdapter(getSupportFragmentManager(), matches, isClickable);
+        if (matches.size() <= 2) {
+            mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        } else {
+            mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        }
+        mViewPager.setAdapter(adapter);
     }
 }

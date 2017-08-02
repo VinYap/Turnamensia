@@ -1,7 +1,7 @@
 package com.tugasakhir.turnamensiamember.Model.Response;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.LiveMatch;
-import com.tugasakhir.turnamensiamember.Model.Basic.Match;
+import com.tugasakhir.turnamensiamember.Model.Basic.OrganizerMatch;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Basic.Tournament;
 
@@ -12,9 +12,10 @@ import java.util.Map;
  * Created by Asus on 27/07/2017.
  */
 
+
 public class TournamentDetailResponse extends Response {
     private Tournament tournament;
-    private Map<String, List<Match>> matches;
+    private Map<String, List<OrganizerMatch>> matches;
     private List<LiveMatch> live_matches_json;
 
     public Tournament getTournament() {
@@ -25,11 +26,11 @@ public class TournamentDetailResponse extends Response {
         this.tournament = tournament;
     }
 
-    public Map<String, List<Match>> getMatches() {
+    public Map<String, List<OrganizerMatch>> getMatches() {
         return matches;
     }
 
-    public void setMatches(Map<String, List<Match>> matches) {
+    public void setMatches(Map<String, List<OrganizerMatch>> matches) {
         this.matches = matches;
     }
 

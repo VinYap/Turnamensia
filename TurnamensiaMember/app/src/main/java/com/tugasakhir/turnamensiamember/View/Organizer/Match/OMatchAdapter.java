@@ -16,15 +16,17 @@ import java.util.List;
 
 public class OMatchAdapter extends RecyclerView.Adapter<OMatchViewHolder> {
     private List<OrganizerMatch> mMatchs;
+    private Boolean isClickable;
 
-    public OMatchAdapter(List<OrganizerMatch> match) {
+    public OMatchAdapter(List<OrganizerMatch> match, Boolean isClickable) {
         this.mMatchs = match;
+        this.isClickable = isClickable;
     }
 
     @Override
     public OMatchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_organizer_match, parent, false);
-        return new OMatchViewHolder(view);
+        return new OMatchViewHolder(view, isClickable);
     }
 
     @Override

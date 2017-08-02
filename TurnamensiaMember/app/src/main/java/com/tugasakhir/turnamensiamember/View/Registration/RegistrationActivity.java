@@ -14,7 +14,7 @@ import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
 
-import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_KEY;
+import static com.tugasakhir.turnamensiamember.View.Main.MainOrganizerViewHolder.TOURNAMENT_KEY;
 import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_NAME;
 
 public class RegistrationActivity extends BaseActivity implements iPresenterResponse {

@@ -17,12 +17,14 @@ import java.util.Map;
 public class OMatchPagerAdapter extends FragmentStatePagerAdapter {
     private String[] titles;
     private List<List<OrganizerMatch>> matches;
+    private Boolean isClickable;
 
-    public OMatchPagerAdapter(FragmentManager fm, Map<String, List<OrganizerMatch>> matches) {
+    public OMatchPagerAdapter(FragmentManager fm, Map<String, List<OrganizerMatch>> matches, Boolean isClickable) {
         super(fm);
 
         this.titles = new String[matches.size()];
         this.matches = new ArrayList<>();
+        this.isClickable = isClickable;
 
         Integer index = 0;
         for (Map.Entry<String, List<OrganizerMatch>> entry : matches.entrySet()) {
@@ -35,7 +37,7 @@ public class OMatchPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return OMatchFragment.newInstance(matches.get(position));
+        return OMatchFragment.newInstance(matches.get(position), isClickable);
     }
 
     @Override

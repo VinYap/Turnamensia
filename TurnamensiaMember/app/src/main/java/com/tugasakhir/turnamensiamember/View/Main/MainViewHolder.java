@@ -15,6 +15,9 @@ import com.tugasakhir.turnamensiamember.View.Tournament.TournamentActivity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.tugasakhir.turnamensiamember.View.Main.MainOrganizerViewHolder.TOURNAMENT_KEY;
+
+
 /**
  * Created by Asus on 26/06/2017.
  */
@@ -30,7 +33,6 @@ public class MainViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private String name;
     private Long id;
 
-    public static final String TOURNAMENT_KEY = "TOURNAMENT_KEY";
     public static final String TOURNAMENT_NAME = "TOURNAMENT_NAME";
 
     public MainViewHolder(View itemView) {

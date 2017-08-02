@@ -24,13 +24,15 @@ import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.Authentication.AuthActivity;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
+import com.tugasakhir.turnamensiamember.View.Organizer.Match.OMatchActivity;
 import com.tugasakhir.turnamensiamember.View.Registration.RegistrationActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.tugasakhir.turnamensiamember.View.Authentication.LoginFragment.MEMBER_TYPE;
-import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_KEY;
+import static com.tugasakhir.turnamensiamember.View.Main.MainOrganizerViewHolder.TOURNAMENT_NAME_KEY;
+import static com.tugasakhir.turnamensiamember.View.Main.MainOrganizerViewHolder.TOURNAMENT_KEY;
 import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_NAME;
 
 public class TournamentActivity extends BaseActivity implements iPresenterResponse {
@@ -51,6 +53,7 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
     private String tournamentName;
 
     private static final Integer REQUEST_CODE = 1;
+    public static final String IS_CLICKABLE = "IS_CLICKABLE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,7 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
 
         mTabLayout = (TabLayout) findViewById(R.id.tournament_tab_layout);
         mViewPager = (ViewPager) findViewById(R.id.tournament_pager);
-//        mScheduleFAB = (FloatingActionButton) findViewById(R.id.schedule_fab);
+        mScheduleFAB = (FloatingActionButton) findViewById(R.id.schedule_fab);
         mImageIV = (ImageView) findViewById(R.id.tournament_image);
         mNameTV = (TextView) findViewById(R.id.tournament_name);
         mOrganizerTV = (TextView) findViewById(R.id.team_name);
@@ -78,12 +81,16 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
         tournamentId = getIntent().getLongExtra(TOURNAMENT_KEY, -1);
         tournamentName = getIntent().getStringExtra(TOURNAMENT_NAME);
 
-//        mScheduleFAB.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getApplicationContext(), ScheduleActivity.class));
-//            }
-//        });
+        mScheduleFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TournamentActivity.this, OMatchActivity.class);
+                intent.putExtra(TOURNAMENT_KEY, tournamentId);
+                intent.putExtra(TOURNAMENT_NAME_KEY, "Schedule");
+                intent.putExtra(IS_CLICKABLE, false);
+                startActivity(intent);
+            }
+        });
 
         mRegisterB.setOnClickListener(new View.OnClickListener() {
             @Override

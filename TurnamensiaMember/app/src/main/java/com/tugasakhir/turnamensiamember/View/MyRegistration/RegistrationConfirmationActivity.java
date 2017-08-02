@@ -98,7 +98,7 @@ public class RegistrationConfirmationActivity extends BaseActivity {
 
                 banks = newResponse.getBanks();
 
-                ArrayAdapter<Bank> adapter = new ArrayAdapter<Bank>(getApplicationContext(), R.layout.item_bank_spinner, banks);
+                ArrayAdapter<Bank> adapter = new ArrayAdapter<Bank>(RegistrationConfirmationActivity.this, R.layout.item_bank_spinner, banks);
                 adapter.setDropDownViewResource(R.layout.item_bank_spinner);
                 mTransferToS.setAdapter(adapter);
 
@@ -112,7 +112,7 @@ public class RegistrationConfirmationActivity extends BaseActivity {
                         }
                     }
                     if (!TextUtils.isEmpty(image)) {
-                        Picasso.with(getApplicationContext()).load(image).into(mPaymentIV);
+                        Picasso.with(RegistrationConfirmationActivity.this).load(image).into(mPaymentIV);
                     }
                 }
             }
@@ -120,13 +120,13 @@ public class RegistrationConfirmationActivity extends BaseActivity {
             @Override
             public void doFail(String message) {
                 mProgressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistrationConfirmationActivity.this, message, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void doConnectionError(int message) {
                 mProgressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegistrationConfirmationActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
 

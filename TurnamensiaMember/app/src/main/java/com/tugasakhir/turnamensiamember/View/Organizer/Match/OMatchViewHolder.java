@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,8 +38,6 @@ public class OMatchViewHolder extends RecyclerView.ViewHolder implements View.On
     private TextView mDireTV;
     private ImageView mRadiantIV;
     private ImageView mDireIV;
-    private ClickableSpan mClickableSpanRadiant;
-    private ClickableSpan mClickableSpanDire;
 
     private Context mContext;
 
@@ -49,7 +46,7 @@ public class OMatchViewHolder extends RecyclerView.ViewHolder implements View.On
     private Long dire_tournament_registration_id;
     private String team_attendance_title;
 
-    public OMatchViewHolder(View itemView) {
+    public OMatchViewHolder(View itemView, boolean isClickable) {
         super(itemView);
 
         mMatchCV = (CardView) itemView.findViewById(R.id.match_cardview);
@@ -62,30 +59,32 @@ public class OMatchViewHolder extends RecyclerView.ViewHolder implements View.On
 
         mContext = itemView.getContext();
 
-        mRadiantTV.setPaintFlags(mRadiantTV.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        mRadiantTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, OTeamActivity.class);
-                intent.putExtra(MATCH_KEY, match_id);
-                intent.putExtra(TOURNAMENT_REGISTRATION_KEY, radiant_tournament_registration_id);
-                intent.putExtra(MATCH_TEAM_ATTENDANCE_TITLE_KEY, team_attendance_title);
-                mContext.startActivity(intent);
-            }
-        });
-        mDireTV.setPaintFlags(mDireTV.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        mDireTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, OTeamActivity.class);
-                intent.putExtra(MATCH_KEY, match_id);
-                intent.putExtra(TOURNAMENT_REGISTRATION_KEY, dire_tournament_registration_id);
-                intent.putExtra(MATCH_TEAM_ATTENDANCE_TITLE_KEY, team_attendance_title);
-                mContext.startActivity(intent);
-            }
-        });
+        if (isClickable) {
+            mRadiantTV.setPaintFlags(mRadiantTV.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+            mRadiantTV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, OTeamActivity.class);
+                    intent.putExtra(MATCH_KEY, match_id);
+                    intent.putExtra(TOURNAMENT_REGISTRATION_KEY, radiant_tournament_registration_id);
+                    intent.putExtra(MATCH_TEAM_ATTENDANCE_TITLE_KEY, team_attendance_title);
+                    mContext.startActivity(intent);
+                }
+            });
+            mDireTV.setPaintFlags(mDireTV.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+            mDireTV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, OTeamActivity.class);
+                    intent.putExtra(MATCH_KEY, match_id);
+                    intent.putExtra(TOURNAMENT_REGISTRATION_KEY, dire_tournament_registration_id);
+                    intent.putExtra(MATCH_TEAM_ATTENDANCE_TITLE_KEY, team_attendance_title);
+                    mContext.startActivity(intent);
+                }
+            });
 
-        itemView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
+        }
     }
 
     public void bindHolder(int position, OrganizerMatch match) {
@@ -95,7 +94,8 @@ public class OMatchViewHolder extends RecyclerView.ViewHolder implements View.On
         team_attendance_title = match.getPlayer_1() + " VS " + match.getPlayer_2();
 
         mMatchRoundTV.setText("Match " + (position + 1));
-        mMatchDateTV.setText(new SimpleDateFormat("d MMM yyyy HH:mm:ss").format(new Date(match.getScheduled_date() * 1000)));
+        if (match.getScheduled_date() == 0) mMatchDateTV.setText("Not Scheduled");
+        else mMatchDateTV.setText(new SimpleDateFormat("d MMM yyyy HH:mm:ss").format(new Date(match.getScheduled_date() * 1000)));
         mRadiantTV.setText(match.getPlayer_1());
         mDireTV.setText(match.getPlayer_2());
         Picasso.with(itemView.getContext()).load(match.getPlayer_1_image()).into(mRadiantIV);

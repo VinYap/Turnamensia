@@ -15,7 +15,7 @@ import com.tugasakhir.turnamensiamember.View.Tournament.TournamentActivity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_KEY;
+import static com.tugasakhir.turnamensiamember.View.Main.MainOrganizerViewHolder.TOURNAMENT_KEY;
 
 /**
  * Created by Asus on 29/07/2017.

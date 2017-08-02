@@ -16,6 +16,8 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
+import static com.tugasakhir.turnamensiamember.View.Tournament.TournamentActivity.IS_CLICKABLE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -23,15 +25,17 @@ public class OMatchFragment extends Fragment {
     private RecyclerView mMatchRV;
 
     private List<OrganizerMatch> matches;
+    private Boolean isClickable;
 
     public OMatchFragment() {
         // Required empty public constructor
     }
 
-    public static OMatchFragment newInstance(List<OrganizerMatch> matches) {
+    public static OMatchFragment newInstance(List<OrganizerMatch> matches, Boolean isClickable) {
         Bundle bundle = new Bundle();
         Parcelable wrapped = Parcels.wrap(matches);
         bundle.putParcelable("MATCHES", wrapped);
+        bundle.putBoolean(IS_CLICKABLE, isClickable);
 
         OMatchFragment f = new OMatchFragment();
         f.setArguments(bundle);
@@ -46,12 +50,13 @@ public class OMatchFragment extends Fragment {
 
         Bundle bundle = getArguments();
         matches = Parcels.unwrap(bundle.getParcelable("MATCHES"));
+        isClickable = bundle.getBoolean(IS_CLICKABLE);
 
         mMatchRV = (RecyclerView) view.findViewById(R.id.match);
         mMatchRV.setLayoutManager(new LinearLayoutManager(getContext()));
         mMatchRV.setHasFixedSize(true);
 
-        OMatchAdapter adapter = new OMatchAdapter(matches);
+        OMatchAdapter adapter = new OMatchAdapter(matches, isClickable);
         mMatchRV.setAdapter(adapter);
         return view;
     }
