@@ -97,7 +97,6 @@ public class RegistrationConfirmFragment extends Fragment implements iPresenterR
                 }
                 String token = mSessionManager.getTokenLoggedIn();
                 mRegisterTournamentPresenter.doParticipantRegisterTournament(token, tournamentId, team.getId(), membersId);
-                getActivity().finish();
             }
         });
 
@@ -108,6 +107,7 @@ public class RegistrationConfirmFragment extends Fragment implements iPresenterR
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
         Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
+        getActivity().finish();
     }
 
     @Override
