@@ -55,6 +55,7 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
     private Button mJoinB;
     private Button mAcceptB;
     private Button mRejectB;
+    private Button mDisbandLeaveB;
 
     private ProgressDialog mProgressDialog;
     private TeamPresenter mTeamPresenter;
@@ -104,6 +105,7 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
         mJoinB = (Button) view.findViewById(R.id.team_join);
         mAcceptB = (Button) view.findViewById(R.id.team_accept);
         mRejectB = (Button) view.findViewById(R.id.team_reject);
+        mDisbandLeaveB = (Button) view.findViewById(R.id.disband_leave);
 
         mProgressDialog = new ProgressDialog(getContext());
         mProgressDialog.setIndeterminate(true);
@@ -136,6 +138,11 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
         token = mSessionManager.getTokenLoggedIn();
         id = getArguments().getLong(TEAM_ID);
         final Team team = (Team) getArguments().getSerializable(TEAM_DETAIL);
+
+        final Boolean isLeader = getArguments().getBoolean(IS_LEADER);
+        Boolean inTeam = getArguments().getBoolean(IN_TEAM);
+        boolean isSearch = getArguments().getBoolean(IS_SEARCH);
+        boolean hasInvitation = getArguments().getBoolean(HAS_INVITATION);
 
         mChangeImageIV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +177,18 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
                     String token = mSessionManager.getTokenLoggedIn();
                     Long id = getArguments().getLong(TEAM_ID);
                     mTeamPresenter.doUpdateParticipantTeamProfile(token, id, name, joinCode);
+                }
+            }
+        });
+
+        mDisbandLeaveB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isLeader == true) {
+                    teamPresenter.doDisbandParticipantTeam(token, id);
+                }
+                else {
+                    teamPresenter.doLeaveParticipantTeam(token, id);
                 }
             }
         });
@@ -231,20 +250,17 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
 
         initializedData(team);
 
-        Boolean isLeader = getArguments().getBoolean(IS_LEADER);
-        Boolean inTeam = getArguments().getBoolean(IN_TEAM);
-        boolean isSearch = getArguments().getBoolean(IS_SEARCH);
-        boolean hasInvitation = getArguments().getBoolean(HAS_INVITATION);
-
         if (isLeader == false) {
             mUpdateB.setVisibility(View.GONE);
             mChangeImageIV.setVisibility(View.INVISIBLE);
             mDeleteImageIV.setVisibility(View.INVISIBLE);
             mNameET.setEnabled(false);
             mJoinCodeET.setEnabled(false);
+            mDisbandLeaveB.setText("Leave Team");
         }
         if (isSearch == true && inTeam == false) {
             mJoinCodeTIL.setVisibility(View.GONE);
+            mDisbandLeaveB.setVisibility(View.GONE);
             if (hasInvitation) {
                 mRejectB.setVisibility(View.VISIBLE);
                 mAcceptB.setVisibility(View.VISIBLE);

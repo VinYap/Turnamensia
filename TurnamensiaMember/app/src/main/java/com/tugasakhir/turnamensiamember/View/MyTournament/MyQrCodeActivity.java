@@ -2,7 +2,6 @@ package com.tugasakhir.turnamensiamember.View.MyTournament;
 
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
@@ -36,8 +35,7 @@ public class MyQrCodeActivity extends BaseActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem mActionSettings = menu.findItem(R.id.action_settings);
-        mActionSettings.setVisible(false);
+        menu.setGroupVisible(R.id.group_setting, false);
         super.onPrepareOptionsMenu(menu);
         return true;
     }

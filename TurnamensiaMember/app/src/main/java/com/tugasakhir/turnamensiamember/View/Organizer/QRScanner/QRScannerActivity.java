@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -141,8 +140,7 @@ public class QRScannerActivity extends BaseActivity implements ZXingScannerView.
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem mActionSettings = menu.findItem(R.id.action_settings);
-        mActionSettings.setVisible(false);
+        menu.setGroupVisible(R.id.group_setting, false);
         super.onPrepareOptionsMenu(menu);
         return true;
     }

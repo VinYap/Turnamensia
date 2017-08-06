@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,7 +28,6 @@ import org.parceler.Parcels;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.tugasakhir.turnamensiamember.View.Organizer.Match.OMatchViewHolder.MATCH_TEAM_ATTENDANCE_TITLE_KEY;
 import static com.tugasakhir.turnamensiamember.View.Organizer.QRScanner.QRScannerActivity.MATCH_ID_KEY;
 import static com.tugasakhir.turnamensiamember.View.Organizer.QRScanner.QRScannerActivity.QR_CODE_IDENTIFIER_KEY;
 import static com.tugasakhir.turnamensiamember.View.Organizer.QRScanner.QRScannerActivity.QR_RESULT_MEMBER_KEY;
@@ -148,8 +146,7 @@ public class OQrCodeResultActivity extends BaseActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem mActionSettings = menu.findItem(R.id.action_settings);
-        mActionSettings.setVisible(false);
+        menu.setGroupVisible(R.id.group_setting, false);
         super.onPrepareOptionsMenu(menu);
         return true;
     }

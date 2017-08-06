@@ -4,6 +4,7 @@ import com.tugasakhir.turnamensiamember.Model.API.ConnectionAPI;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Response.AccountProfileResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.NotificationResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.OrganizerTournamentDetailResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.PictureResponse;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
@@ -93,6 +94,36 @@ public class AccountProfilePresenter {
 
             @Override
             public void onFailure(Call<AccountProfileResponse> call, Throwable t) {
+                iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     */
+    public void doGetParticipantSchedule(String token) {
+        ConnectionAPI.getInstance().getAPIModel().doGetParticipantSchedule(token).enqueue(new Callback<OrganizerTournamentDetailResponse>() {
+            @Override
+            public void onResponse(Call<OrganizerTournamentDetailResponse> call, retrofit2.Response<OrganizerTournamentDetailResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iAccountProfileResponse.doSuccess(response.body());
+                    } else {
+                        iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    if (response.body() != null) iAccountProfileResponse.doFail(response.body().getMessage()[0]);
+                    else iAccountProfileResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OrganizerTournamentDetailResponse> call, Throwable t) {
                 iAccountProfileResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }

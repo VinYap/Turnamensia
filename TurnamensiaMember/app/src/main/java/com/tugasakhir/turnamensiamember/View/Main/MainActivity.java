@@ -4,8 +4,8 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
@@ -118,13 +118,33 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem mActionSettings = menu.findItem(R.id.action_settings);
-//        if (member_type == 1) {
-//            mActionSettings.setVisible(true);
-//        } else {
-            mActionSettings.setVisible(false);
-//        }
+        if (member_type == 1) {
+            menu.setGroupVisible(R.id.group_setting, true);
+        } else {
+            menu.setGroupVisible(R.id.group_setting, false);
+        }
         super.onPrepareOptionsMenu(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu);
+        this.mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mProgressDialog.show();
+                mTournamentParticipantPresenter.doGetParticipantTournament(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         return true;
     }
 
@@ -144,7 +164,7 @@ public class MainActivity extends BaseActivity {
         mProgressDialog.show();
         if (member_type == 1) {
             setTitle("List Tournament");
-            mTournamentParticipantPresenter.doGetParticipantTournament();
+            mTournamentParticipantPresenter.doGetParticipantTournament(null);
         } else if (member_type == 2) {
             setTitle("My Tournament");
             mTournamentOrganizerPresenter.doGetOrganizerTournament(token);

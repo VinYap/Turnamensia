@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
@@ -83,8 +82,7 @@ public class TeamActivity extends BaseActivity implements iPresenterResponse {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem mActionSettings = menu.findItem(R.id.action_settings);
-        mActionSettings.setVisible(false);
+        menu.setGroupVisible(R.id.group_setting, false);
         super.onPrepareOptionsMenu(menu);
         return true;
     }

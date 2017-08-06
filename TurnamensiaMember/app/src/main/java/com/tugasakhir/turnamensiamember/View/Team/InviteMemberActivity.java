@@ -1,4 +1,4 @@
-package com.tugasakhir.turnamensiamember.View.MainTeam;
+package com.tugasakhir.turnamensiamember.View.Team;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -9,9 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.tugasakhir.turnamensiamember.Model.Basic.Member;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
-import com.tugasakhir.turnamensiamember.Model.Basic.Team;
-import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.MemberResponse;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
 import com.tugasakhir.turnamensiamember.Presenter.Team.TeamPresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
@@ -20,27 +20,29 @@ import com.tugasakhir.turnamensiamember.View.BaseActivity;
 
 import java.util.List;
 
-public class MainTeamActivity extends BaseActivity implements iPresenterResponse {
-    private RecyclerView mTeamRV;
+import static com.tugasakhir.turnamensiamember.View.Account.AccountTeamViewHolder.TEAM_KEY;
+
+public class InviteMemberActivity extends BaseActivity implements iPresenterResponse {
+    private RecyclerView mMemberRV;
+
+    private List<Member> members;
+    private Long teamId;
+    private String token;
 
     private ProgressDialog mProgressDialog;
     private SessionManager mSessionManager;
     private TeamPresenter mTeamPresenter;
-    private MainTeamAdapter mAdapter;
-
-    private List<Team> teams;
-    private String token;
+    private InviteMemberAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_main_team, mBaseLayout);
+        getLayoutInflater().inflate(R.layout.activity_invite_member, mBaseLayout);
 
         showUpCaretMenu();
 
-        mTeamRV = (RecyclerView) findViewById(R.id.main_team_rv);
-        mTeamRV.setLayoutManager(new LinearLayoutManager(this));
-        mTeamRV.setHasFixedSize(true);
+        setTitle("Invite Member");
+        mMemberRV = (RecyclerView) findViewById(R.id.invite_member_rv);
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
@@ -49,22 +51,24 @@ public class MainTeamActivity extends BaseActivity implements iPresenterResponse
         mSessionManager = new SessionManager(this);
         mTeamPresenter = new TeamPresenter(this);
 
-        mAdapter = new MainTeamAdapter(teams);
-        mTeamRV.setAdapter(mAdapter);
-
-        this.setTitle("List Team");
-
         token = mSessionManager.getTokenLoggedIn();
+        teamId = getIntent().getLongExtra(TEAM_KEY, -1);
+
+        mMemberRV.setLayoutManager(new LinearLayoutManager(this));
+        mMemberRV.setHasFixedSize(true);
+
+        mAdapter = new InviteMemberAdapter(members, teamId);
+        mMemberRV.setAdapter(mAdapter);
 
         mProgressDialog.show();
-        mTeamPresenter.doGetParticipantTeam(token, null);
+        mTeamPresenter.doGetParticipantTeamUninvitedMember(token, teamId, null);
     }
 
     @Override
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
-        teams = ((AccountTeamResponse) response).getTeams();
-        mAdapter.setTeams(teams);
+        members = ((MemberResponse) response).getMembers();
+        mAdapter.setMembers(members);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -96,7 +100,7 @@ public class MainTeamActivity extends BaseActivity implements iPresenterResponse
             @Override
             public boolean onQueryTextSubmit(String query) {
                 mProgressDialog.show();
-                mTeamPresenter.doGetParticipantTeam(token, query);
+                mTeamPresenter.doGetParticipantTeamUninvitedMember(token, teamId, query);
                 return true;
             }
 

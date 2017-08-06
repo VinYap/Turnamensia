@@ -114,6 +114,17 @@
         android:textColor="@color/colorTextLight" />
 
     <Button
+        android:id="@+id/disband_leave"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Disband Team"
+        android:background="@drawable/linear_gradient_orange"
+        android:textColor="@color/colorTextLight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
         android:id="@+id/team_join"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

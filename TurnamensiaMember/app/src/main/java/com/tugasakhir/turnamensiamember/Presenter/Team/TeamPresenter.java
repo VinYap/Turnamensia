@@ -39,9 +39,11 @@ public class TeamPresenter {
      * For Communicating Between Apps and API
      *
      * @param token
+     * @param name
      */
-    public void doGetParticipantTeam(String token) {
-        Map<String, Object> data = new HashMap<>();
+    public void doGetParticipantTeam(String token, String name) {
+        Map<String, String> data = new HashMap<>();
+        if (name != null) data.put("name", name);
 
         ConnectionAPI.getInstance().getAPIModel().doGetParticipantTeam(token, data).enqueue(new Callback<AccountTeamResponse>() {
             @Override
@@ -305,6 +307,68 @@ public class TeamPresenter {
      * @param token
      * @param teamId
      */
+    public void doLeaveParticipantTeam(String token, Long teamId) {
+        ConnectionAPI.getInstance().getAPIModel().doLeaveParticipantTeam(token, teamId).enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iTeamResponse.doSuccess(response.body());
+                    } else {
+                        iTeamResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    if (response.body() != null) iTeamResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+                iTeamResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     * @param teamId
+     */
+    public void doDisbandParticipantTeam(String token, Long teamId) {
+        ConnectionAPI.getInstance().getAPIModel().doDisbandParticipantTeam(token, teamId).enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iTeamResponse.doSuccess(response.body());
+                    } else {
+                        iTeamResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    if (response.body() != null) iTeamResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
+                iTeamResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     * @param teamId
+     */
     public void doGetParticipantTeamMember(String token, Long teamId) {
         ConnectionAPI.getInstance().getAPIModel().doGetParticipantTeamMember(token, teamId).enqueue(new Callback<MemberResponse>() {
             @Override
@@ -421,6 +485,73 @@ public class TeamPresenter {
 
             @Override
             public void onFailure(Call<CountResponse> call, Throwable t) {
+                iTeamResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     * @param teamId
+     * @param searchKey
+     */
+    public void doGetParticipantTeamUninvitedMember(String token, Long teamId, String searchKey) {
+        Map<String, String> data = new HashMap<>();
+        if (searchKey != null) data.put("search_keyword", searchKey);
+
+        ConnectionAPI.getInstance().getAPIModel().doGetParticipantTeamUninvitedMember(token, teamId, data).enqueue(new Callback<MemberResponse>() {
+            @Override
+            public void onResponse(Call<MemberResponse> call, retrofit2.Response<MemberResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iTeamResponse.doSuccess(response.body());
+                    } else {
+                        iTeamResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    if (response.body() != null) iTeamResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MemberResponse> call, Throwable t) {
+                iTeamResponse.doConnectionError(R.string.connection_error);
+                t.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * For Communicating Between Apps and API
+     *
+     * @param token
+     * @param teamId
+     * @param memberId
+     */
+    public void doInviteParticipantTeamMember(String token, Long teamId, Long memberId) {
+        ConnectionAPI.getInstance().getAPIModel().doInviteParticipantTeamMember(token, teamId, memberId).enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        iTeamResponse.doSuccess(response.body());
+                    } else {
+                        iTeamResponse.doFail(response.body().getMessage()[0]);
+                    }
+                }
+                else {
+                    if (response.body() != null) iTeamResponse.doFail(response.body().getMessage()[0]);
+                    else iTeamResponse.doConnectionError(R.string.connection_error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Response> call, Throwable t) {
                 iTeamResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }

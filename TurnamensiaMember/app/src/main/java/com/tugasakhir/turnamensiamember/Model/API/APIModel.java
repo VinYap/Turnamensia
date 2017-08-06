@@ -59,10 +59,13 @@ public interface APIModel {
     Call<TournamentDetailResponse> doGetParticipantTournamentDetail(@Path("id") Long id);
 
     @GET("/api/participant/team")
-    Call<AccountTeamResponse> doGetParticipantTeam(@Header("Authorization") String authorization, @QueryMap Map<String, Object> data);
+    Call<AccountTeamResponse> doGetParticipantTeam(@Header("Authorization") String authorization, @QueryMap Map<String, String> data);
 
     @GET("/api/participant/team/{id}")
     Call<TeamResponse> doGetParticipantTeamSearchDetail(@Header("Authorization") String authorization, @Path("id") Long id);
+
+    @GET("/api/participant/my-schedule")
+    Call<OrganizerTournamentDetailResponse> doGetParticipantSchedule(@Header("Authorization") String authorization);
 
     @GET("/api/participant/profile")
     Call<AccountProfileResponse> doGetParticipantAccountProfile(@Header("Authorization") String authorization);
@@ -115,6 +118,12 @@ public interface APIModel {
     @POST("/api/participant/team/{id}/join")
     Call<CountResponse> doJoinPartcipantTeam(@Header("Authorization") String authorization, @Path("id") Long id, @Body Map<String, String> data);
 
+    @GET("/api/participant/team/{id}/uninvited-member")
+    Call<MemberResponse> doGetParticipantTeamUninvitedMember(@Header("Authorization") String authorization, @Path("id") Long id, @QueryMap Map<String, String> data);
+
+    @PUT("/api/participant/team/{id}/invite-member/{member_id}")
+    Call<Response> doInviteParticipantTeamMember(@Header("Authorization") String authorization, @Path("id") Long id, @Path("member_id") Long memberId);
+
     @POST("/api/participant/team/{id}/accept-invitation")
     Call<CountResponse> doAcceptPartcipantTeam(@Header("Authorization") String authorization, @Path("id") Long id);
 
@@ -123,6 +132,12 @@ public interface APIModel {
 
     @DELETE("/api/participant/team/{id}/kick-member/{member_id}")
     Call<Response> doDeleteParticipantTeamMember(@Header("Authorization") String authorization, @Path("id") Long id, @Path("member_id") Long memberId);
+
+    @POST("/api/participant/team/{id}/leave")
+    Call<Response> doLeaveParticipantTeam(@Header("Authorization") String authorization, @Path("id") Long id);
+
+    @DELETE("/api/participant/team/{id}/disband")
+    Call<Response> doDisbandParticipantTeam(@Header("Authorization") String authorization, @Path("id") Long id);
 
     @GET("/api/participant/team/{id}/member")
     Call<MemberResponse> doGetParticipantTeamMember(@Header("Authorization") String authorization, @Path("id") Long id);

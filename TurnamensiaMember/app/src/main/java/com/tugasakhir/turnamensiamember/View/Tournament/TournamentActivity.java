@@ -8,7 +8,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,8 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.tugasakhir.turnamensiamember.View.Authentication.LoginFragment.MEMBER_TYPE;
-import static com.tugasakhir.turnamensiamember.View.Main.MainOrganizerViewHolder.TOURNAMENT_NAME_KEY;
 import static com.tugasakhir.turnamensiamember.View.Main.MainOrganizerViewHolder.TOURNAMENT_KEY;
+import static com.tugasakhir.turnamensiamember.View.Main.MainOrganizerViewHolder.TOURNAMENT_NAME_KEY;
 import static com.tugasakhir.turnamensiamember.View.Main.MainViewHolder.TOURNAMENT_NAME;
 
 public class TournamentActivity extends BaseActivity implements iPresenterResponse {
@@ -174,8 +173,7 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem mActionSettings = menu.findItem(R.id.action_settings);
-        mActionSettings.setVisible(false);
+        menu.setGroupVisible(R.id.group_setting, false);
         super.onPrepareOptionsMenu(menu);
         return true;
     }

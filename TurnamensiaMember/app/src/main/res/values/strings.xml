@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TurnamensiaMember</string>
+    <string name="app_name">Dota Battleground</string>
     <string name="connection_error">Connection Error. Please Try Again</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

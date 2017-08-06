@@ -37,9 +37,9 @@ public class TournamentPresenter {
     /**
      * For Communicating Between Apps and API
      */
-    public void doGetParticipantTournament() {
+    public void doGetParticipantTournament(String name) {
         Map<String, Object> data = new HashMap<>();
-//        data.put("name", null);
+        if (name != null) data.put("name", name);
 //        data.put("status", null);
 //        data.put("order", null);
 //        data.put("price", null);
