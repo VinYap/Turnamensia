@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -87,17 +88,40 @@ public class MainTeamViewHolder extends RecyclerView.ViewHolder implements iPres
             @Override
             public void onClick(View v) {
                 if (canJoin) {
-                    mProgressDialog.show();
-                    mTeamPresenter.doJoinPartcipantTeam(token, id, null);
+                    AlertDialog.Builder builder;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        builder = new AlertDialog.Builder(itemView.getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        builder = new AlertDialog.Builder(itemView.getContext());
+                    }
+                    builder.setTitle("Join Team")
+                            .setMessage("Do you want to join the team?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mProgressDialog.show();
+                                    mTeamPresenter.doJoinPartcipantTeam(token, id, null);
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .show();
                 }
                 else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+                    AlertDialog.Builder builder;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        builder = new AlertDialog.Builder(itemView.getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        builder = new AlertDialog.Builder(itemView.getContext());
+                    }
                     builder.setTitle("Join Code");
 
                     final EditText input = new EditText(itemView.getContext());
                     builder.setView(input);
 
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("Join", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String joinCode = input.getText().toString();
@@ -125,16 +149,52 @@ public class MainTeamViewHolder extends RecyclerView.ViewHolder implements iPres
         mAcceptedB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressDialog.show();
-                mTeamPresenter.doAcceptPartcipantTeam(token, id);
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(itemView.getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(itemView.getContext());
+                }
+                builder.setTitle("Accept Invitation")
+                        .setMessage("Do you want to accept this invitation?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                mProgressDialog.show();
+                                mTeamPresenter.doAcceptPartcipantTeam(token, id);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
 
         mRejectedB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressDialog.show();
-                mTeamPresenter.doRejectPartcipantTeam(token, id);
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(itemView.getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(itemView.getContext());
+                }
+                builder.setTitle("Reject Invitation")
+                        .setMessage("Do you want to reject this invitation?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                mProgressDialog.show();
+                                mTeamPresenter.doRejectPartcipantTeam(token, id);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
 

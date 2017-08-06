@@ -67,8 +67,9 @@
             android:drawablePadding="@dimen/icon_padding"
             android:drawableStart="@drawable/ic_people_white_24dp"
             android:hint="Team Name"
+            android:inputType="text"
             android:padding="@dimen/text_padding"
-            android:textColor="@color/colorTextLight"/>
+            android:textColor="@color/colorTextLight" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -94,8 +95,9 @@
             android:drawablePadding="@dimen/icon_padding"
             android:drawableStart="@drawable/ic_vpn_key_white_24dp"
             android:hint="Join Code"
+            android:inputType="text"
             android:padding="@dimen/text_padding"
-            android:textColor="@color/colorTextLight"/>
+            android:textColor="@color/colorTextLight" />
     </android.support.design.widget.TextInputLayout>
 
     <Button

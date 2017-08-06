@@ -3,12 +3,15 @@ package com.tugasakhir.turnamensiamember.View.Account;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,10 +105,28 @@ public class AccountProfileFragment extends Fragment implements iPresenterRespon
         mDeleteImageIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressDialog.show();
-                mStatus = 2;
-                String token = mSessionManager.getTokenLoggedIn();
-                mAccountProfilePresenter.doDeleteParticipantProfilePicture(token);
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(getContext());
+                }
+                builder.setTitle("Remove Picture")
+                        .setMessage("Do you want to remove it?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                mProgressDialog.show();
+                                mStatus = 2;
+                                String token = mSessionManager.getTokenLoggedIn();
+                                mAccountProfilePresenter.doDeleteParticipantProfilePicture(token);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
 

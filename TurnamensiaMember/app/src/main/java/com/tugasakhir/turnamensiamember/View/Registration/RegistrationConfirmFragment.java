@@ -2,6 +2,7 @@ package com.tugasakhir.turnamensiamember.View.Registration;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -18,13 +19,17 @@ import com.squareup.picasso.Picasso;
 import com.tugasakhir.turnamensiamember.Model.Basic.Member;
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
 import com.tugasakhir.turnamensiamember.Model.Basic.Team;
+import com.tugasakhir.turnamensiamember.Model.Response.IdResponse;
 import com.tugasakhir.turnamensiamember.Model.SessionManager;
 import com.tugasakhir.turnamensiamember.Presenter.Register.RegisterTournamentPresenter;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
+import com.tugasakhir.turnamensiamember.View.MyRegistration.RegistrationConfirmationActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.tugasakhir.turnamensiamember.View.MyRegistration.MyRegistrationViewHolder.REGISTRATION_KEY;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -107,7 +112,10 @@ public class RegistrationConfirmFragment extends Fragment implements iPresenterR
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
         Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
-        getActivity().finish();
+        Intent intent = new Intent(getContext(), RegistrationConfirmationActivity.class);
+        intent.putExtra(REGISTRATION_KEY, ((IdResponse) response).getId());
+        startActivity(intent);
+        ((RegistrationActivity) getActivity()).finish();
     }
 
     @Override

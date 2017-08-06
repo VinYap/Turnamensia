@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
@@ -90,7 +91,7 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_team_profile, container, false);
@@ -154,11 +155,29 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
         mDeleteImageIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressDialog.show();
-                mStatus = 2;
-                String token = mSessionManager.getTokenLoggedIn();
-                Long id = getArguments().getLong(TEAM_ID);
-                mTeamPresenter.doDeleteParticipantTeamPicture(token, id);
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(getContext());
+                }
+                builder.setTitle("Remove Picture")
+                        .setMessage("Do you want to remove it?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                mProgressDialog.show();
+                                mStatus = 2;
+                                String token = mSessionManager.getTokenLoggedIn();
+                                Long id = getArguments().getLong(TEAM_ID);
+                                mTeamPresenter.doDeleteParticipantTeamPicture(token, id);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
 
@@ -184,12 +203,37 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
         mDisbandLeaveB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(getContext());
+                }
+
                 if (isLeader == true) {
-                    teamPresenter.doDisbandParticipantTeam(token, id);
+                    builder.setTitle("Disband Team")
+                            .setMessage("Do you really want to disband team?");
                 }
                 else {
-                    teamPresenter.doLeaveParticipantTeam(token, id);
+                    builder.setTitle("Leave Team")
+                            .setMessage("Do you really want to leave team?");
                 }
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (isLeader == true) {
+                                    teamPresenter.doDisbandParticipantTeam(token, id);
+                                }
+                                else {
+                                    teamPresenter.doLeaveParticipantTeam(token, id);
+                                }
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
 
@@ -197,17 +241,40 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(team.getJoin_code())) {
-                    mProgressDialog.show();
-                    teamPresenter.doJoinPartcipantTeam(token, id, null);
+                    AlertDialog.Builder builder;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        builder = new AlertDialog.Builder(getContext());
+                    }
+                    builder.setTitle("Join Team")
+                            .setMessage("Do you want to join the team?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mProgressDialog.show();
+                                    mTeamPresenter.doJoinPartcipantTeam(token, id, null);
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .show();
                 }
                 else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    AlertDialog.Builder builder;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        builder = new AlertDialog.Builder(getContext());
+                    }
                     builder.setTitle("Join Code");
 
                     final EditText input = new EditText(getContext());
                     builder.setView(input);
 
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("Join", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String joinCode = input.getText().toString();
@@ -235,16 +302,52 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
         mAcceptB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressDialog.show();
-                teamPresenter.doAcceptPartcipantTeam(token, id);
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(getContext());
+                }
+                builder.setTitle("Accept Invitation")
+                        .setMessage("Do you want to accept this invitation?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                mProgressDialog.show();
+                                mTeamPresenter.doAcceptPartcipantTeam(token, id);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
 
         mRejectB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressDialog.show();
-                teamPresenter.doRejectPartcipantTeam(token, id);
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(getContext());
+                }
+                builder.setTitle("Accept Invitation")
+                        .setMessage("Do you want to accept this invitation?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                mProgressDialog.show();
+                                teamPresenter.doRejectPartcipantTeam(token, id);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
 

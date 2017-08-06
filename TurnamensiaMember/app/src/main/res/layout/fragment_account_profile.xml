@@ -92,8 +92,9 @@
             android:drawablePadding="@dimen/icon_padding"
             android:drawableStart="@drawable/ic_person_white_24dp"
             android:hint="Name"
+            android:inputType="text"
             android:padding="@dimen/text_padding"
-            android:textColor="@color/colorTextLight"/>
+            android:textColor="@color/colorTextLight" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -118,6 +119,7 @@
             android:drawablePadding="@dimen/icon_padding"
             android:drawableStart="@drawable/ic_vpn_key_white_24dp"
             android:hint="Steam Id"
+            android:inputType="text"
             android:padding="@dimen/text_padding"
             android:textColor="@color/colorTextLight" />
     </android.support.design.widget.TextInputLayout>

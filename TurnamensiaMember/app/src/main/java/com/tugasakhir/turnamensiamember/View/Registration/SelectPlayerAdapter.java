@@ -68,7 +68,8 @@ public class SelectPlayerAdapter extends RecyclerView.Adapter<SelectPlayerViewHo
             actionB.setTextColor(ContextCompat.getColor(context, R.color.colorTextLight));
         }
         else {
-            actionB.setText("Player Left : " + cnt);
+            if (cnt > 0) actionB.setText("Player Left  :  " + cnt);
+            else actionB.setText("Player Left  :  (" + cnt*-1 + ")");
             actionB.setEnabled(false);
             actionB.setBackground(ContextCompat.getDrawable(context, R.color.colorBackground));
             actionB.setTextColor(ContextCompat.getColor(context, R.color.colorOrange));

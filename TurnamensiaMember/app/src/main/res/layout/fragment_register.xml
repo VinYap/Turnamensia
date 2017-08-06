@@ -22,6 +22,7 @@
             android:drawablePadding="@dimen/icon_padding"
             android:drawableStart="@drawable/ic_person_white_24dp"
             android:hint="@string/name"
+            android:inputType="text"
             android:padding="@dimen/text_padding"
             android:textColor="@color/colorTextLight" />
     </android.support.design.widget.TextInputLayout>

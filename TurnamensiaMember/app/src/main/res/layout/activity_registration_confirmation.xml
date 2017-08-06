@@ -120,9 +120,10 @@
                 android:drawablePadding="@dimen/icon_padding"
                 android:drawableStart="@drawable/ic_person_white_24dp"
                 android:hint="Transfer Name"
-                android:textSize="16sp"
+                android:inputType="text"
                 android:padding="@dimen/text_padding"
-                android:textColor="@color/colorTextLight"/>
+                android:textColor="@color/colorTextLight"
+                android:textSize="16sp" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout

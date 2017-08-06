@@ -1,6 +1,9 @@
 package com.tugasakhir.turnamensiamember.View.Team;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,8 +40,8 @@ public class TeamMemberViewHolder extends RecyclerView.ViewHolder implements iPr
     private SessionManager mSessionManager;
     private TeamPresenter mTeamPresenter;
 
-    public TeamMemberViewHolder(View itemView, TeamMemberAdapter adapter, final Long teamId, Boolean isLeader) {
-        super(itemView);
+    public TeamMemberViewHolder(View view, TeamMemberAdapter adapter, final Long teamId, Boolean isLeader) {
+        super(view);
 
         this.mAdapter = adapter;
 
@@ -58,9 +61,27 @@ public class TeamMemberViewHolder extends RecyclerView.ViewHolder implements iPr
         mDeleteB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressDialog.show();
-                String token = mSessionManager.getTokenLoggedIn();
-                mTeamPresenter.doDeleteParticipantTeamMember(token, teamId, id);
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(itemView.getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(itemView.getContext());
+                }
+                builder.setTitle("Kick Member")
+                        .setMessage("Do you really want to kick this member from team?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                mProgressDialog.show();
+                                String token = mSessionManager.getTokenLoggedIn();
+                                mTeamPresenter.doDeleteParticipantTeamMember(token, teamId, id);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
 

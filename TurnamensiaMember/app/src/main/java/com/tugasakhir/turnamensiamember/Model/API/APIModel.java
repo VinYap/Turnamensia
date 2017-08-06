@@ -6,6 +6,7 @@ import com.tugasakhir.turnamensiamember.Model.Response.AccountTeamResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.CommentResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.CountResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.Dota2MatchResponse;
+import com.tugasakhir.turnamensiamember.Model.Response.IdResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.LoginResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.MatchTeamAttendanceResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.MemberResponse;
@@ -146,7 +147,7 @@ public interface APIModel {
     Call<RegisterTeamResponse> doGetParticipantRegisterTournamentTeam(@Header("Authorization") String authorization, @Path("id") Long id);
 
     @POST("/api/participant/tournament/{id}/register")
-    Call<Response> doParticipantRegisterTournament(@Header("Authorization") String authorization, @Path("id") Long id, @Body Map<String, Object> data);
+    Call<IdResponse> doParticipantRegisterTournament(@Header("Authorization") String authorization, @Path("id") Long id, @Body Map<String, Object> data);
 
     @GET("/api/participant/tournament/confirm-payment/{id}")
     Call<RegistrationConfirmationResponse> doGetParticipantConfirmPayment(@Header("Authorization") String authorization, @Path("id") Long id);

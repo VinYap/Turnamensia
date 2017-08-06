@@ -176,7 +176,8 @@ public class RegistrationConfirmationActivity extends BaseActivity {
             }
         });
 
-        this.setTitle(getIntent().getStringExtra(TOURNAMENT_NAME) + " Payment Confirmation");
+        String tournamentName = getIntent().getStringExtra(TOURNAMENT_NAME);
+        this.setTitle((tournamentName != null ? tournamentName + " " : "") + "Payment Confirmation");
 
         mProgressDialog.show();
         myGetRegistrationPresenter.doGetParticipantConfirmPayment(token, transferId);

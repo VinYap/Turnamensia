@@ -1,7 +1,7 @@
 package com.tugasakhir.turnamensiamember.Presenter.Register;
 
 import com.tugasakhir.turnamensiamember.Model.API.ConnectionAPI;
-import com.tugasakhir.turnamensiamember.Model.Basic.Response;
+import com.tugasakhir.turnamensiamember.Model.Response.IdResponse;
 import com.tugasakhir.turnamensiamember.Model.Response.RegisterTeamResponse;
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
@@ -73,9 +73,9 @@ public class RegisterTournamentPresenter {
         data.put("team", teamId);
         data.put("members", membersId);
 
-        ConnectionAPI.getInstance().getAPIModel().doParticipantRegisterTournament(token, tournamentId, data).enqueue(new Callback<Response>() {
+        ConnectionAPI.getInstance().getAPIModel().doParticipantRegisterTournament(token, tournamentId, data).enqueue(new Callback<IdResponse>() {
             @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+            public void onResponse(Call<IdResponse> call, retrofit2.Response<IdResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 201) {
                         iRegisterTournamentResponse.doSuccess(response.body());
@@ -90,7 +90,7 @@ public class RegisterTournamentPresenter {
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
+            public void onFailure(Call<IdResponse> call, Throwable t) {
                 iRegisterTournamentResponse.doConnectionError(R.string.connection_error);
                 t.printStackTrace();
             }
