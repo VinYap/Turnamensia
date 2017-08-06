@@ -2,6 +2,7 @@ package com.tugasakhir.turnamensiamember.View.LiveMatch;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -42,6 +43,7 @@ import static com.tugasakhir.turnamensiamember.View.Tournament.TournamentLiveMat
 public class LiveMatchActivity extends BaseActivity {
     public static final String LIVE_MATCH_ID_KEY = "LiveMatchID";
 
+    private TextView mVictoryTV;
     private TextView mMatchIDTV;
     private TextView mMatchGameTV;
     private TextView mRadiantTV;
@@ -62,10 +64,24 @@ public class LiveMatchActivity extends BaseActivity {
 
     private Long match_id;
     private Long duration;
+    private String radiant_name = "Radiant";
+    private String dire_name = "Dire";
 
     final Handler mHandler = new Handler();
-    Timer mTimer;
-    TimerTask mTimerTask;
+    private Timer mTimer = new Timer(false);
+    private TimerTask mTimerTask = new TimerTask() {
+        @Override
+        public void run() {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    duration++;
+                    formatDuration();
+                }
+            });
+        }
+    };
+    private boolean isTick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +92,7 @@ public class LiveMatchActivity extends BaseActivity {
 
         showUpCaretMenu();
 
+        mVictoryTV = (TextView) findViewById(R.id.live_match_victory);
         mMatchIDTV = (TextView) findViewById(R.id.match_id);
         mMatchGameTV = (TextView) findViewById(R.id.match_game);
         mRadiantTV = (TextView) findViewById(R.id.radiant_text);
@@ -117,38 +134,22 @@ public class LiveMatchActivity extends BaseActivity {
                 }
                 mMatchGameTV.setText("Game " + games + "|" + series_type);
                 if (radiant.getTournament_registration() != null) {
-                    mRadiantTV.setText(radiant.getTournament_registration().getTeam().getName());
-                    mPickBanFragment.updateHeader(1, radiant.getTournament_registration().getTeam().getName());
-                    mPlayerStatFragment.updateHeader(1, radiant.getTournament_registration().getTeam().getName());
+                    radiant_name = radiant.getTournament_registration().getTeam().getName();
+                    mRadiantTV.setText(radiant_name);
+                    mPickBanFragment.updateHeader(1, radiant_name);
+                    mPlayerStatFragment.updateHeader(1, radiant_name);
                     if (radiant.getTournament_registration().getTeam().getPicture_file_name() != null) {
                         String radiant_image = ConnectionAPI.getBaseUrl() + "/storage/team/" + radiant.getTournament_registration().getTeam().getPicture_file_name();
                         Picasso.with(getApplicationContext()).load(radiant_image).into(mRadiantIV);
                         mPlayerStatFragment.updateImageHeader(1, radiant_image);
                     }
                 }
-                duration = dota2_live_match.getDuration();
-                formatDuration();
-                if (radiant.getMatches_result() == null && dire.getMatches_result() == null) {
-                    mTimer = new Timer(false);
-                    mTimerTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    duration++;
-                                    formatDuration();
-                                }
-                            });
-                        }
-                    };
-                    mTimer.schedule(mTimerTask, 1000, 1000);
-                }
                 mRadiantScoreTV.setText("" + radiant.getScore());
                 if (dire.getTournament_registration() != null) {
-                    mDireTV.setText(dire.getTournament_registration().getTeam().getName());
-                    mPickBanFragment.updateHeader(2, dire.getTournament_registration().getTeam().getName());
-                    mPlayerStatFragment.updateHeader(2, dire.getTournament_registration().getTeam().getName());
+                    dire_name = dire.getTournament_registration().getTeam().getName();
+                    mDireTV.setText(dire_name);
+                    mPickBanFragment.updateHeader(2, dire_name);
+                    mPlayerStatFragment.updateHeader(2, dire_name);
                     if (dire.getTournament_registration().getTeam().getPicture_file_name() != null) {
                         String dire_image = ConnectionAPI.getBaseUrl() + "/storage/team/" + dire.getTournament_registration().getTeam().getPicture_file_name();
                         Picasso.with(getApplicationContext()).load(dire_image).into(mDireIV);
@@ -156,6 +157,25 @@ public class LiveMatchActivity extends BaseActivity {
                     }
                 }
                 mDireScoreTV.setText("" + dire.getScore());
+
+                duration = dota2_live_match.getDuration();
+                formatDuration();
+                if (radiant.getMatches_result() != null && dire.getMatches_result() != null) {
+                    if (radiant.getMatches_result() == 3) {
+                        mVictoryTV.setText(radiant_name + " Victory");
+                        mVictoryTV.setTextColor(Color.parseColor("#92A525"));
+                        mVictoryTV.setVisibility(View.VISIBLE);
+                    } else if (dire.getMatches_result() == 3) {
+                        mVictoryTV.setText(dire_name + " Victory");
+                        mVictoryTV.setTextColor(Color.parseColor("#C23C2A"));
+                        mVictoryTV.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    if (duration != 0) {
+                        mTimer.schedule(mTimerTask, 1000, 1000);
+                        isTick = true;
+                    }
+                }
 
                 mPickBanFragment.update(1, radiant.getHeroes_pick(), radiant.getHeroes_ban());
                 mPickBanFragment.update(2, dire.getHeroes_pick(), dire.getHeroes_ban());
@@ -198,9 +218,30 @@ public class LiveMatchActivity extends BaseActivity {
                         Dota2LiveMatchTeam dire = data_obj.getDire();
 
                         if (radiant.getMatches_result() != null && dire.getMatches_result() != null) {
+                            if (radiant.getMatches_result() == 3) {
+                                mVictoryTV.setText(radiant_name + " Victory");
+                                mVictoryTV.setTextColor(Color.parseColor("#92A525"));
+                                mVictoryTV.setVisibility(View.VISIBLE);
+                            } else if (dire.getMatches_result() == 3) {
+                                mVictoryTV.setText(dire_name + " Victory");
+                                mVictoryTV.setTextColor(Color.parseColor("#C23C2A"));
+                                mVictoryTV.setVisibility(View.VISIBLE);
+                            }
+
                             duration = match.getDuration();
                             formatDuration();
-                            mTimer.cancel();
+                            if (isTick) {
+                                mTimer.cancel();
+                                isTick = false;
+                            }
+                        } else {
+                            if (!isTick) {
+                                if (match.getDuration() != 0) {
+                                    duration = match.getDuration();
+                                    mTimer.schedule(mTimerTask, 1000, 1000);
+                                    isTick = true;
+                                }
+                            }
                         }
                         mRadiantScoreTV.setText("" + radiant.getScore());
                         mDireScoreTV.setText("" + dire.getScore());
