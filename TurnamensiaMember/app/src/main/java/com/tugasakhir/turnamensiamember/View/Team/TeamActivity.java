@@ -29,6 +29,8 @@ public class TeamActivity extends BaseActivity implements iPresenterResponse {
 
     private boolean isSearch;
     private boolean hasInvitation;
+    private String token;
+    private Long teamId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +49,17 @@ public class TeamActivity extends BaseActivity implements iPresenterResponse {
         mSessionManager = new SessionManager(this);
         mTeamPresenter = new TeamPresenter(this);
 
-        Long teamId = getIntent().getLongExtra(TEAM_KEY, -1);
-        String token = mSessionManager.getTokenLoggedIn();
+        teamId = getIntent().getLongExtra(TEAM_KEY, -1);
+        token = mSessionManager.getTokenLoggedIn();
         isSearch = getIntent().getBooleanExtra(IS_SEARCH, false);
         hasInvitation = getIntent().getBooleanExtra(HAS_INVITATION, false);
 
         this.setTitle("My Team");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         mProgressDialog.show();
         if (isSearch) mTeamPresenter.doGetParticipantTeamSearchDetail(token, teamId);

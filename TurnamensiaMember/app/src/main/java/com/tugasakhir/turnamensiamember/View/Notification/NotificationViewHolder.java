@@ -31,6 +31,7 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder implements V
 
     private String token;
     private Long teamId;
+    private boolean hasInvitation;
     private Long notification_id;
     private Integer post;
 
@@ -53,9 +54,11 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder implements V
         if (notification.getMember_join_team() != null) {
             mNotificationTV.setText(notification.getMember_join_team().getMember().getName() + " is part of the team " + notification.getMember_join_team().getTeam().getName() + " now.");
             this.teamId = notification.getMember_join_team().getTeam().getId();
+            this.hasInvitation = false;
         } else if (notification.getTeam_invitation() != null) {
             mNotificationTV.setText("Team " + notification.getTeam_invitation().getTeam().getName() + " sent you an invitation.");
             this.teamId = notification.getTeam_invitation().getTeam().getId();
+            this.hasInvitation = true;
         }
         mNotificationDateTV.setText(new SimpleDateFormat("dd MMMM yyy, HH:mm").format(new Date(notification.getCreated_at() * 1000)));
         post = 1;
@@ -76,7 +79,7 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder implements V
         Intent intent = new Intent(context, TeamActivity.class);
         intent.putExtra(TEAM_KEY, teamId);
         intent.putExtra(IS_SEARCH, true);
-        intent.putExtra(HAS_INVITATION, true);
+        intent.putExtra(HAS_INVITATION, hasInvitation);
         context.startActivity(intent);
     }
 }

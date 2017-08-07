@@ -23,6 +23,11 @@ public class AccountActivity extends BaseActivity {
         mViewPager = (ViewPager) findViewById(R.id.account_pager);
 
         this.setTitle("My Account");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         AccountPagerAdapter adapter = new AccountPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
