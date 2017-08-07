@@ -3,6 +3,7 @@ package com.tugasakhir.turnamensiamember.View.Tournament;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
@@ -43,6 +44,7 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
     private TextView mOrganizerTV;
     private TextView mDateTV;
     private Button mRegisterB;
+    private ConstraintLayout mBracketCL;
 
     private TournamentPresenter mTournamentPresenter;
     private ProgressDialog mProgressDialog;
@@ -69,6 +71,7 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
         mOrganizerTV = (TextView) findViewById(R.id.team_name);
         mDateTV = (TextView) findViewById(R.id.tournament_date);
         mRegisterB = (Button) findViewById(R.id.register_tournament);
+        mBracketCL = (ConstraintLayout) findViewById(R.id.tournament_card);
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
@@ -103,6 +106,16 @@ public class TournamentActivity extends BaseActivity implements iPresenterRespon
                 else {
                     startActivityForResult(new Intent(getApplicationContext(), AuthActivity.class), REQUEST_CODE);
                 }
+            }
+        });
+
+        mBracketCL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TournamentBracketActivity.class);
+                intent.putExtra(TOURNAMENT_KEY, tournamentId);
+                intent.putExtra(TOURNAMENT_NAME, tournamentName);
+                startActivity(intent);
             }
         });
 

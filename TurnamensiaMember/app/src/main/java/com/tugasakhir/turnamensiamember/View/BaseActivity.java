@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.tugasakhir.turnamensiamember.Model.Basic.User;
@@ -196,6 +197,7 @@ public abstract class BaseActivity extends AppCompatActivity
 //        }
         else if (id == R.id.sign_out) {
             mSessionManager.doClearSession();
+            Toast.makeText(this, "Sign out success", Toast.LENGTH_SHORT).show();
             if (this.getClass() == MainActivity.class) {
                 onResume();
             } else {

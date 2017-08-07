@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Toast;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.MyRegistration;
@@ -16,6 +17,7 @@ import com.tugasakhir.turnamensiamember.Presenter.MyRegistration.MyRegistrationP
 import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
+import com.tugasakhir.turnamensiamember.View.NoDataFragment;
 
 import java.util.List;
 
@@ -61,10 +63,19 @@ public class MyRegistrationActivity extends BaseActivity implements iPresenterRe
         if (myRegistrations != null && myRegistrations.size() <= 2) {
             mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         }
-        MyRegistrationPagerAdapter adapter = new MyRegistrationPagerAdapter(getSupportFragmentManager(), myRegistrations);
-        mViewPager.setAdapter(adapter);
-
-        mTabLayout.setupWithViewPager(mViewPager);
+        if (myRegistrations == null || myRegistrations.size() == 0) {
+            mTabLayout.setVisibility(View.GONE);
+            mViewPager.setVisibility(View.GONE);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.layout_my_registration, NoDataFragment.newInstance())
+                    .commit();
+        }
+        else {
+            MyRegistrationPagerAdapter adapter = new MyRegistrationPagerAdapter(getSupportFragmentManager(), myRegistrations);
+            mViewPager.setAdapter(adapter);
+            mTabLayout.setupWithViewPager(mViewPager);
+        }
     }
 
     @Override

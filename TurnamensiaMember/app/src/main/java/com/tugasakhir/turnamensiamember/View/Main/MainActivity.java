@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.tugasakhir.turnamensiamember.Model.Basic.Response;
@@ -120,6 +121,8 @@ public class MainActivity extends BaseActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (member_type == 1) {
             menu.setGroupVisible(R.id.group_setting, true);
+            MenuItem mFilter = menu.findItem(R.id.filter);
+            mFilter.setVisible(false);
         } else {
             menu.setGroupVisible(R.id.group_setting, false);
         }
