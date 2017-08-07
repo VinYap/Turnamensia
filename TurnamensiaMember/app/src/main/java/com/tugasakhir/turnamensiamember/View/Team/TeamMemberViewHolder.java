@@ -1,5 +1,6 @@
 package com.tugasakhir.turnamensiamember.View.Team;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -106,6 +107,7 @@ public class TeamMemberViewHolder extends RecyclerView.ViewHolder implements iPr
     public void doSuccess(Response response) {
         mProgressDialog.dismiss();
         Toast.makeText(itemView.getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
+        ((TeamActivity) itemView.getContext()).setResult(Activity.RESULT_OK);
         this.mAdapter.removeAt(position);
     }
 

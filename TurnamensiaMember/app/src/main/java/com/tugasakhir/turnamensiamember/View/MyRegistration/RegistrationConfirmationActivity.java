@@ -134,6 +134,7 @@ public class RegistrationConfirmationActivity extends BaseActivity {
             public void doSuccess(Response response) {
                 mProgressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK);
                 finish();
             }
 

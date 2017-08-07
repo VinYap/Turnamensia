@@ -26,6 +26,7 @@ import com.tugasakhir.turnamensiamember.Presenter.iPresenterResponse;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.Team.TeamActivity;
 
+import static com.tugasakhir.turnamensiamember.View.Account.AccountTeamFragment.REQUEST_CODE;
 import static com.tugasakhir.turnamensiamember.View.Account.AccountTeamViewHolder.TEAM_KEY;
 
 /**
@@ -80,7 +81,7 @@ public class MainTeamViewHolder extends RecyclerView.ViewHolder implements iPres
                 intent.putExtra(TEAM_KEY, id);
                 intent.putExtra(IS_SEARCH, true);
                 intent.putExtra(HAS_INVITATION, hasInvitation);
-                context.startActivity(intent);
+                ((MainTeamActivity) context).startActivityForResult(intent, REQUEST_CODE);
             }
         });
 

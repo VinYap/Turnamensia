@@ -23,7 +23,6 @@ import com.tugasakhir.turnamensiamember.R;
 
 import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
 import static com.tugasakhir.turnamensiamember.View.Account.AccountModalActivity.MODAL_NAME;
 import static com.tugasakhir.turnamensiamember.View.Account.AccountModalActivity.MODAL_TYPE;
 
@@ -41,7 +40,7 @@ public class AccountTeamFragment extends Fragment implements iPresenterResponse 
     private AccountTeamPresenter mAccountTeamPresenter;
     private AccountTeamAdapter mAdapter;
 
-    private static final Integer REQUEST_CODE = 0;
+    public static final Integer REQUEST_CODE = 0;
 
     public AccountTeamFragment() {
         // Required empty public constructor
@@ -66,7 +65,7 @@ public class AccountTeamFragment extends Fragment implements iPresenterResponse 
                 Intent intent = new Intent(getContext(), AccountModalActivity.class);
                 intent.putExtra(MODAL_TYPE, 2);
                 intent.putExtra(MODAL_NAME, "Create Team");
-                startActivityForResult(intent, REQUEST_CODE);
+                getActivity().startActivityForResult(intent, REQUEST_CODE);
             }
         });
 
@@ -108,15 +107,5 @@ public class AccountTeamFragment extends Fragment implements iPresenterResponse 
     public void doConnectionError(int message) {
         mProgressDialog.dismiss();
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            mProgressDialog.show();
-            String token = mSessionManager.getTokenLoggedIn();
-            mAccountTeamPresenter.doGetParticipantAccountTeam(token);
-        }
     }
 }

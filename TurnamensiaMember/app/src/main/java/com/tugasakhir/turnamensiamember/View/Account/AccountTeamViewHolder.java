@@ -12,6 +12,8 @@ import com.tugasakhir.turnamensiamember.Model.Basic.Team;
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.Team.TeamActivity;
 
+import static com.tugasakhir.turnamensiamember.View.Account.AccountTeamFragment.REQUEST_CODE;
+
 /**
  * Created by Asus on 02/07/2017.
  */
@@ -47,6 +49,6 @@ public class AccountTeamViewHolder extends RecyclerView.ViewHolder implements Vi
         Context context = itemView.getContext();
         Intent intent = new Intent(context, TeamActivity.class);
         intent.putExtra(TEAM_KEY, id);
-        context.startActivity(intent);
+        ((AccountActivity) context).startActivityForResult(intent, REQUEST_CODE);
     }
 }

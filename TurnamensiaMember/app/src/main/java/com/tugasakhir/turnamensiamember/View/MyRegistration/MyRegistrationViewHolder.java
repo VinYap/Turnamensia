@@ -16,6 +16,8 @@ import com.tugasakhir.turnamensiamember.R;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.tugasakhir.turnamensiamember.View.Account.AccountTeamFragment.REQUEST_CODE;
+
 /**
  * Created by Asus on 29/07/2017.
  */
@@ -51,7 +53,7 @@ public class MyRegistrationViewHolder extends RecyclerView.ViewHolder {
                 Intent intent = new Intent(context, RegistrationConfirmationActivity.class);
                 intent.putExtra(REGISTRATION_KEY, id);
                 intent.putExtra(TOURNAMENT_NAME, name);
-                context.startActivity(intent);
+                ((MyRegistrationActivity) context).startActivityForResult(intent, REQUEST_CODE);
             }
         });
 

@@ -142,7 +142,7 @@ public class TeamPresenter {
     public void doUpdateParticipantTeamProfile(String token, Long teamId, String name, String joinCode) {
         Map<String, Object> data = new HashMap<>();
         data.put("name", name);
-        data.put("with_join_password", !TextUtils.isEmpty(joinCode));
+        data.put("with_join_password", TextUtils.isEmpty(joinCode) ? 0 : 1);
         data.put("join_password", joinCode);
 
         ConnectionAPI.getInstance().getAPIModel().doUpdateParticipantTeamProfile(token, teamId, data).enqueue(new Callback<Response>() {
@@ -242,7 +242,7 @@ public class TeamPresenter {
     public void doCreateParticipantTeam(String token, String name, String joinCode) {
         Map<String, Object> data = new HashMap<>();
         data.put("name", name);
-        data.put("with_join_password", !TextUtils.isEmpty(joinCode));
+        data.put("with_join_password", TextUtils.isEmpty(joinCode) ? 0 : 1);
         data.put("join_password", joinCode);
 
         ConnectionAPI.getInstance().getAPIModel().doCreateParticipantTeam(token, data).enqueue(new Callback<TeamResponse>() {

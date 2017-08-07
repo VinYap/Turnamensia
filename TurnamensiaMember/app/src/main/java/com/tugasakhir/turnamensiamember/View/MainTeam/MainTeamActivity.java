@@ -1,6 +1,7 @@
 package com.tugasakhir.turnamensiamember.View.MainTeam;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,8 @@ import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
 
 import java.util.List;
+
+import static com.tugasakhir.turnamensiamember.View.Account.AccountTeamFragment.REQUEST_CODE;
 
 public class MainTeamActivity extends BaseActivity implements iPresenterResponse {
     private RecyclerView mTeamRV;
@@ -107,5 +110,14 @@ public class MainTeamActivity extends BaseActivity implements iPresenterResponse
         });
 
         return true;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            mProgressDialog.show();
+            mTeamPresenter.doGetParticipantTeam(token, mSearchView.getQuery().toString());
+        }
     }
 }

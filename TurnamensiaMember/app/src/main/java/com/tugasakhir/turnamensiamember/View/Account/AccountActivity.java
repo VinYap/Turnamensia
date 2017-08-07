@@ -1,5 +1,6 @@
 package com.tugasakhir.turnamensiamember.View.Account;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -7,6 +8,8 @@ import android.view.Menu;
 
 import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
+
+import static com.tugasakhir.turnamensiamember.View.Account.AccountTeamFragment.REQUEST_CODE;
 
 public class AccountActivity extends BaseActivity {
     private TabLayout mTabLayout;
@@ -23,11 +26,6 @@ public class AccountActivity extends BaseActivity {
         mViewPager = (ViewPager) findViewById(R.id.account_pager);
 
         this.setTitle("My Account");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
 
         AccountPagerAdapter adapter = new AccountPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
@@ -40,5 +38,16 @@ public class AccountActivity extends BaseActivity {
         menu.setGroupVisible(R.id.group_setting, false);
         super.onPrepareOptionsMenu(menu);
         return true;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            AccountPagerAdapter adapter = new AccountPagerAdapter(getSupportFragmentManager());
+            mViewPager.setAdapter(adapter);
+
+            mTabLayout.setupWithViewPager(mViewPager);
+        }
     }
 }

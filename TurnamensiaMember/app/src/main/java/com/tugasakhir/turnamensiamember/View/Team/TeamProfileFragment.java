@@ -120,6 +120,7 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
             public void doSuccess(Response response) {
                 mProgressDialog.dismiss();
                 Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
+                getActivity().setResult(RESULT_OK);
                 getActivity().finish();
             }
 
@@ -398,6 +399,7 @@ public class TeamProfileFragment extends Fragment implements iPresenterResponse 
         mProgressDialog.dismiss();
         Toast.makeText(getContext(), response.getMessage()[0], Toast.LENGTH_SHORT).show();
         if (mStatus == 2) Picasso.with(getContext()).load(((PictureResponse) response).getFile_path()).into(mImageIV);
+        getActivity().setResult(RESULT_OK);
     }
 
     @Override

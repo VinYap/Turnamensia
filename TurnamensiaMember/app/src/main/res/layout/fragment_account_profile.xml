@@ -1,21 +1,26 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_account_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    android:orientation="vertical"
+    android:fillViewport="true"
     tools:context="com.tugasakhir.turnamensiamember.View.Account.AccountProfileFragment">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginBottom="20dp">
 
             <ImageView
                 android:id="@+id/account_profile_image"
@@ -162,22 +167,22 @@
                 app:layout_constraintBottom_toTopOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
-    </ScrollView>
 
-    <Button
-        android:id="@+id/account_profile_change_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Change Password"
-        android:background="@drawable/linear_gradient_orange"
-        android:textColor="@color/colorTextLight"
-        android:layout_marginBottom="4dp" />
+        <Button
+            android:id="@+id/account_profile_change_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change Password"
+            android:background="@drawable/linear_gradient_orange"
+            android:textColor="@color/colorTextLight"
+            android:layout_marginBottom="4dp" />
 
-    <Button
-        android:id="@+id/account_profile_identity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Identity Card"
-        android:background="@drawable/linear_gradient_orange"
-        android:textColor="@color/colorTextLight" />
-</LinearLayout>
+        <Button
+            android:id="@+id/account_profile_identity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Identity Card"
+            android:background="@drawable/linear_gradient_orange"
+            android:textColor="@color/colorTextLight" />
+    </LinearLayout>
+</ScrollView>

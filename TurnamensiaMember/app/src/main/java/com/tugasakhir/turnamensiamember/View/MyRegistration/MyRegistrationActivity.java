@@ -1,6 +1,7 @@
 package com.tugasakhir.turnamensiamember.View.MyRegistration;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -17,6 +18,8 @@ import com.tugasakhir.turnamensiamember.R;
 import com.tugasakhir.turnamensiamember.View.BaseActivity;
 
 import java.util.List;
+
+import static com.tugasakhir.turnamensiamember.View.Account.AccountTeamFragment.REQUEST_CODE;
 
 public class MyRegistrationActivity extends BaseActivity implements iPresenterResponse {
     private TabLayout mTabLayout;
@@ -83,4 +86,13 @@ public class MyRegistrationActivity extends BaseActivity implements iPresenterRe
         return true;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            mProgressDialog.show();
+            String token = mSessionManager.getTokenLoggedIn();
+            mMyRegistrationPresenter.doGetParticipantMyRegister(token);
+        }
+    }
 }
